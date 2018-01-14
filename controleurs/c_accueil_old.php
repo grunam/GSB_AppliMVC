@@ -15,12 +15,7 @@
  */
 
 if ($estConnecte) {
-    if ($estComptable) {
-        include 'vues/v_accueilComptables.php';
-    } else {
-        include 'vues/v_accueilVisiteursMedicaux.php';
-    }
-    
+    include 'vues/v_accueil.php';
 } else {
     include 'vues/v_connexion.php';
 }

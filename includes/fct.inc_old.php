@@ -25,33 +25,19 @@ function estConnecte()
 }
 
 /**
- * Teste si un quelconque visiteur est un comptable
- *
- * @return vrai ou faux
- */
-function estComptable()
-{   
-   return $_SESSION['comptable'] == 1;  
-}
-
-
-
-/**
  * Enregistre dans une variable session les infos d'un visiteur
  *
  * @param String $idVisiteur ID du visiteur
  * @param String $nom        Nom du visiteur
  * @param String $prenom     Prénom du visiteur
- * @param Boolean $comptable Etat comptable 
  *
  * @return null
  */
-function connecter($idVisiteur, $nom, $prenom, $comptable)
+function connecter($idVisiteur, $nom, $prenom)
 {
     $_SESSION['idVisiteur'] = $idVisiteur;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
-    $_SESSION['comptable'] = $comptable;
 }
 
 /**
@@ -110,36 +96,6 @@ function getMois($date)
     return $annee . $mois;
 }
 
-
-/**
- * Retourne l'avant dernier mois au format aaaamm selon le jour dans le mois
- *
- * @param String $date au format  jj/mm/aaaa
- *
- * @return String Mois au format aaaamm
- */
-function getMoisPrecedent($date)
-{
-    @list($jour, $mois, $annee) = explode('/', $date);
-    unset($jour);
-    
-    if ($mois == 1) {
-        $mois = 12;
-    } else {
-        $mois--;
-    }
-    
-    if (strlen($mois) == 1) {
-        $mois = '0' . $mois;
-    }
-    
-    
-    return $annee . $mois;
-}
-
-
-
-
 /* gestion des erreurs */
 
 /**
@@ -171,22 +127,6 @@ function estTableauEntiers($tabEntiers)
     }
     return $boolReturn;
 }
-
-
-/**
- * Vérifie si le jour de la date donnée en paramètre est entre les bornes données en parmètre 
- *
- * @param String $dateTestee Date à tester
- * @param Integeer $jourMin Borne inférieur de l'intervalle 
- * @param Integeer $jourMax Borne maximum de l'intervalle
- * @return Boolean vrai ou faux
- */
-function estJourComprisDansIntervalle($dateTestee, $jourMin, $jourMax)
-{
-    @list($jourTeste, $moisTeste, $anneeTeste) = explode('/', $dateTestee);
-    return ($jourMin <= $jourTeste && $jourTeste <= $jourMax);
-}
-
 
 /**
  * Vérifie si une date est inférieure d'un an à la date actuelle

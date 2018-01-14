@@ -19,26 +19,12 @@ require_once 'includes/class.pdogsb.inc.php';
 session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
-if ($estConnecte) {
-    $estComptable = estComptable();
-}
-
-if ($estConnecte) {
-    if ($estComptable) {
-        require 'vues/v_enteteComptables.php';    
-    } else {
-        require 'vues/v_enteteVisiteursMedicaux.php';
-    }
-} else {
-    require 'vues/v_enteteConnexion.php';
-}    
-
-
+require 'vues/v_entete.php';
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
 if ($uc && !$estConnecte) {
     $uc = 'connexion';
 } elseif (empty($uc)) {
-    $uc = 'accueil';    
+    $uc = 'accueil';
 }
 switch ($uc) {
 case 'connexion':
@@ -52,12 +38,6 @@ case 'gererFrais':
     break;
 case 'etatFrais':
     include 'controleurs/c_etatFrais.php';
-    break;
-case 'validerFrais':
-    include 'controleurs/c_validerFrais.php';
-    break;
-case 'paiementFrais':
-    include 'controleurs/c_paiementFrais.php';
     break;
 case 'deconnexion':
     include 'controleurs/c_deconnexion.php';
