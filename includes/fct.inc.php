@@ -35,6 +35,37 @@ function estComptable()
 }
 
 
+/**
+ * Teste si un quelconque identifiant passé en paramètre est compris dans la liste des visiteurs passés en paramètres
+ *
+ * @param String $idVisiteur ID du visiteur
+ * @param String $nom        Nom du visiteur
+ * @param String $prenom     Prénom du visiteur
+ * @param Boolean $comptable Etat comptable 
+ * 
+ * @return vrai ou faux
+ */
+
+/**
+ * @assert (EE, 0) == 0
+ * @assert (0, 1) == 1
+ * @assert (1, 0) == 1
+ * @assert (1, 1) == 2
+ * @assert (1, 2) == 4
+ * 
+*/
+function estVisiteur($val, $lesVisiteurs)
+{   
+   foreach ($lesVisiteurs as $unVisiteur) {
+        if ($unVisiteur["id"] == $val) {
+            return true; 
+        }    
+   } 
+   return false;
+}
+
+
+
 
 /**
  * Enregistre dans une variable session les infos d'un visiteur
@@ -137,6 +168,38 @@ function getMoisPrecedent($date)
     return $annee . $mois;
 }
 
+
+
+/**
+ * Retourne le prochain mois au format aaaamm selon le jour dans le mois
+ *
+ * @param String $dateMois au format aaaamm
+ *
+ * @return String Mois au format aaaamm
+ */
+function getMoisSuivant($dateMois)
+{
+    
+    $newMois = substr($dateMois, 0, 4).'/'.substr($dateMois, 4, 2);
+    //return $newMois;
+    
+    @list($annee, $mois) = explode('/', $newMois);
+    //unset($jour);
+    
+    if ($mois == 12) {
+        $mois = 1;
+        $annee++;
+    } else {
+        $mois++;
+    }
+    
+    if (strlen($mois) == 1) {
+        $mois = '0' . $mois;
+    }
+    
+    
+    return $annee . $mois;
+}
 
 
 
@@ -295,6 +358,23 @@ function ajouterErreur($msg)
 }
 
 /**
+ * Ajoute le libellé d'un succès au tableau des succès
+ *
+ * @param String $msg Libellé du succès
+ *
+ * @return null
+ */
+function ajouterSucces($msg)
+{
+    if (!isset($_REQUEST['succes'])) {
+        $_REQUEST['succes'] = array();
+    }
+    $_REQUEST['succes'][] = $msg;
+}
+
+
+
+/**
  * Retoune le nombre de lignes du tableau des erreurs
  *
  * @return Integer le nombre d'erreurs
@@ -306,4 +386,26 @@ function nbErreurs()
     } else {
         return count($_REQUEST['erreurs']);
     }
+}
+
+
+
+/**
+ * Retourne la chaine passé en paramètre avec la mention REFUSE- au début
+ * tronque la chaîne à partir de la fin si elle est d'une longueur supérieure à 100
+ * 
+ * @param String $str Libellé du frais hors forfait
+ * 
+ * @return String la chaîne limitée a 100 caractères avec la mention REFUSE- 
+ * 
+ */
+
+function mentionRefuse($string){
+    
+    $str = "REFUSE-".$string;
+    //$str = "REFUSE-"."Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo incertus omnes incertus ultra cognito milites idem omnes casu perviis agitare quaedam in futuris perviis remoti industria casu futuris Constantius.";
+    if (mb_strlen($str,"UTF8") > 100){
+      $str = substr($str, -(mb_strlen($str,"UTF8")), -(mb_strlen($str,"UTF8")-100));
+    }
+    return $str;
 }

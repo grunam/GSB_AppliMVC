@@ -14,10 +14,17 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 
+//header( 'content-type: text/html; charset=utf-8' );
+
+
+
 require_once 'includes/fct.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
 session_start();
 $pdo = PdoGsb::getPdoGsb();
+
+
+
 $estConnecte = estConnecte();
 if ($estConnecte) {
     $estComptable = estComptable();
@@ -33,10 +40,19 @@ if ($estConnecte) {
     require 'vues/v_enteteConnexion.php';
 }    
 
+require_once 'includes/verifieUrl.inc.php';
+
+$errorUrl = false;
+if (isset($_SESSION['idVisiteur'])){
+    $errorUrl = verifieUrl($_SESSION['idVisiteur'], $pdo);
+}
 
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
+
 if ($uc && !$estConnecte) {
     $uc = 'connexion';
+} elseif($errorUrl) {
+     $uc = 'erreur';    
 } elseif (empty($uc)) {
     $uc = 'accueil';    
 }
@@ -44,6 +60,11 @@ switch ($uc) {
 case 'connexion':
     include 'controleurs/c_connexion.php';
     break;
+case 'erreur':
+    include 'controleurs/c_erreurUrl.php';
+    break;
+
+
 case 'accueil':
     include 'controleurs/c_accueil.php';
     break;

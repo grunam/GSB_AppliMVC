@@ -33,13 +33,13 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <a href="index.php?uc=validerFrais&action=saisirFrais"
+                        <a href="index.php?uc=validerFrais&action=selectionnerVisiteursMois"
                            class="btn btn-success btn-lg" role="button">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-ok"></span>
                             <br>Valider la fiche de frais</a>
-                        <a href="index.php?uc=paiementFrais&action=selectionnerMois"
+                        <a href="index.php?uc=paiementFrais&action=selectionnerVisiteursMois"
                            class="btn btn-primary btn-lg" role="button">
-                            <span class="glyphicon glyphicon-list-alt"></span>
+                            <span class="glyphicon glyphicon-euro"></span>
                             <br>Suivre le paiement des fiches de frais</a>
                     </div>
                 </div>

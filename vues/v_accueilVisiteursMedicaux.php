@@ -1,12 +1,13 @@
 <?php
 /**
- * Vue Accueil
+ * Vue Valider fiche de Frais
  *
  * PHP Version 7
  *
  * @category  PPE
  * @package   GSB
- * @author    Namik TIAB <tiabnamik@gmail.com>
+ * @author    Réseau CERTA <contact@reseaucerta.org>
+ * @author    José GIL <jgil@ac-nice.fr>
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
