@@ -74,8 +74,15 @@ case 'consulterFrais':
     $libEtat = $lesInfosFicheFrais['libEtat'];
     $montantValide = $lesInfosFicheFrais['montantValide'];
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-    $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
-         
+    $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
+     
+    $nbFraisHorsForfait = 0;
+    foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+        $refus = $unFraisHorsForfait['refuse'];
+        if(!$refus){
+            $nbFraisHorsForfait++;
+        }
+    }
     
     include 'vues/v_majFraisForfait.php';
     
@@ -108,20 +115,20 @@ case 'paiementFrais' :
         $pdo->majEtatFicheFrais($idVisiteur, $leMois, $nouvelEtat); 
         
         if($etat == 'VA'){
-            ajouterSucces('La fiche de frais est mise en paiement.');
+            Utils::ajouterSucces('La fiche de frais est mise en paiement.');
         } else if($etat == 'MP'){
-            ajouterSucces('La fiche de frais est remboursée.');
+            Utils::ajouterSucces('La fiche de frais est remboursée.');
         }  
         
         array_push($include_array, 'vues/v_succes.php');
        
     }catch(Exception $e){
-        ajouterErreur($e->getMessage());
+        Utils::ajouterErreur($e->getMessage());
         array_push($include_array, 'vues/v_erreurs.php');
     }
 
-    if(!estJourComprisDansIntervalle(date('d/m/Y'), 20, 20) && $etat == 'VA') {
-        ajouterErreur('La mise en paiement doit être faite au 20 du mois suivant la saisie par les visiteurs !');
+    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 20, 20) && $etat == 'VA') {
+        Utils::ajouterErreur('La mise en paiement doit être faite au 20 du mois suivant la saisie par les visiteurs !');
         array_push($include_array, 'vues/v_erreurs.php');
     }
     
@@ -144,10 +151,21 @@ case 'paiementFrais' :
     $libEtat = $lesInfosFicheFrais['libEtat'];
     $montantValide = $lesInfosFicheFrais['montantValide'];
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-    $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
+    $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
 
 
     include 'vues/v_majFraisForfait.php';
+    
+    $nbFraisHorsForfait = 0;
+    foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+        $refus = $unFraisHorsForfait['refuse'];
+        if(!$refus){
+            $nbFraisHorsForfait++;
+        }
+    }
+    
+    //echo 'frais hors forfait : '.$nbFraisHorsForfait;
+    
     
     if(count($lesFraisHorsForfait) > 0){
         include 'vues/v_majFraisHorsForfait.php';

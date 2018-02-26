@@ -1,13 +1,13 @@
 <?php
 /**
- * Vue Valider fiche de Frais
+ * Vue Valider les fiches de Frais
  *
  * PHP Version 7
  *
  * @category  PPE
  * @package   GSB
  * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Namik TIAB <tiabnamik@gmail.com>
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -31,10 +31,10 @@
                 ?>
                     
                 <tr>
-                    <th class="col-md-4">Nombre de justificatifs des frais hors forfaits reçus</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th class="col-sm-1">Nombre de justificatifs des frais hors forfaits reçus</th>
+                    <th class="col-sm-1"></th>
+                    <th class="col-sm-1"></th>
+                    <th class="col-sm-1"></th>
                 </tr>
                 
                 <tr>

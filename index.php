@@ -18,16 +18,16 @@
 
 
 
-require_once 'includes/fct.inc.php';
+require_once 'includes/class.utils.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
 session_start();
 $pdo = PdoGsb::getPdoGsb();
 
 
 
-$estConnecte = estConnecte();
+$estConnecte = Utils::estConnecte();
 if ($estConnecte) {
-    $estComptable = estComptable();
+    $estComptable = Utils::estComptable();
 }
 
 if ($estConnecte) {
@@ -40,11 +40,11 @@ if ($estConnecte) {
     require 'vues/v_enteteConnexion.php';
 }    
 
-require_once 'includes/verifieUrl.inc.php';
+require_once 'includes/class.urlchecker.inc.php';
 
 $errorUrl = false;
 if (isset($_SESSION['idVisiteur'])){
-    $errorUrl = verifieUrl($_SESSION['idVisiteur'], $pdo);
+    $errorUrl = Urlchecker::paramChecker($_SESSION['idVisiteur'], $pdo);
 }
 
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
@@ -63,8 +63,6 @@ case 'connexion':
 case 'erreur':
     include 'controleurs/c_erreurUrl.php';
     break;
-
-
 case 'accueil':
     include 'controleurs/c_accueil.php';
     break;

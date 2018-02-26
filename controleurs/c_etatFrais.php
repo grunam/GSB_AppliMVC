@@ -39,6 +39,6 @@ case 'voirEtatFrais':
     $libEtat = $lesInfosFicheFrais['libEtat'];
     $montantValide = $lesInfosFicheFrais['montantValide'];
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-    $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
+    $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
     include 'vues/v_etatFrais.php';
 }

@@ -1,13 +1,13 @@
 <?php
 /**
- * Vue Valider fiche de Frais
+ * Vue modifier les frais forfaitaires
  *
  * PHP Version 7
  *
  * @category  PPE
  * @package   GSB
  * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Namik TIAB <tiabnamik@gmail.com>
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -16,23 +16,7 @@
 ?>
 <hr>
 <div class="panel panel-primary">
-    <div class="panel-heading">Fiche de frais 
-        
-        <?php
-        /*
-        if($monControleur == 'validerFrais'){
-            if($idEtat != 'CL'){
-            ?><u><b><?php       
-                echo 'non validable';
-            ?></b></u><?php          
-            } else {
-            ?><u><b><?php     
-                echo 'validable';
-            ?></b></u><?php      
-            }
-        } 
-         */   
-        ?> du mois 
+    <div class="panel-heading">Fiche de frais du mois 
         <?php echo $numMois . '-' . $numAnnee ?> : </div>
     <div class="panel-body">
         <strong><u>Etat :</u></strong> <?php echo $libEtat ?>
@@ -82,7 +66,7 @@
                     <!--<label for="idFrais"><?php /*echo $libelle*/ ?></label>-->
                     <input type="number" id="idFrais" 
                                name="lesFrais[<?php echo $idFrais ?>]"
-                               size="10" maxlength="5" 
+                               size="10" maxlength="5" min="0" step="1"
                                value="<?php echo $quantite ?>" 
                                class="form-control">
                 </div>

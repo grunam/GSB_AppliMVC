@@ -15,7 +15,7 @@
  */
 
 $idVisiteur = $_SESSION['idVisiteur'];
-$mois = getMois(date('d/m/Y'));
+$mois = Utils::getMois(date('d/m/Y'));
 $numAnnee = substr($mois, 0, 4);
 $numMois = substr($mois, 4, 2);
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
@@ -40,13 +40,13 @@ case 'validerMajFraisForfait':
     break;
 case 'validerCreationFrais':
     
-    $dateFrais = dateAnglaisVersFrancais($_POST['dateFrais']); 
+    $dateFrais = Utils::dateAnglaisVersFrancais($_POST['dateFrais']); 
     $libelle = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
     $montant = filter_input(INPUT_POST, 'montant', FILTER_VALIDATE_FLOAT);
    
    
-    valideInfosFrais($dateFrais, $libelle, $montant);
-    if (nbErreurs() != 0) {
+    Utils::valideInfosFrais($dateFrais, $libelle, $montant);
+    if (Utils::nbErreurs() != 0) {
         include 'vues/v_erreurs.php';
     } else {
         $pdo->creeNouveauFraisHorsForfait(

@@ -2,21 +2,6 @@
 /**
  * Classe d'accès aux données.
  *
- * PHP Version 7
- *
- * @category  PPE
- * @package   GSB
- * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL - CNED <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
- */
-
-/**
- * Classe d'accès aux données.
- *
  * Utilise les services de la classe PDO
  * pour l'application GSB
  * Les attributs sont tous statiques,
@@ -117,7 +102,7 @@ class PdoGsb
     
     /**
      * Teste si un visiteur existe pour un id,
-     * passé en argument
+     * passé en paramètre
      *
      * @param String $idVisiteur ID du visiteur
      *
@@ -143,7 +128,7 @@ class PdoGsb
     
     /**
      * Teste si un frais hors forfait existe pour un id, 
-     * un visiteur et un mois  passés en arguments
+     * un visiteur et un mois  passés en paramètres
      *
      * @param String $idFrais ID du frais hors forfait
      * @param String $idVisiteur ID du visiteur
@@ -175,7 +160,7 @@ class PdoGsb
     
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais
-     * hors forfait concernées par les deux arguments.
+     * hors forfait concernées par les deux paramètres.
      * La boucle foreach ne peut être utilisée ici car on procède
      * à une modification de la structure itérée - transformation du champ date-
      *
@@ -198,7 +183,7 @@ class PdoGsb
         $lesLignes = $requetePrepare->fetchAll();
         for ($i = 0; $i < count($lesLignes); $i++) {
             $date = $lesLignes[$i]['date'];
-            $lesLignes[$i]['date'] = dateAnglaisVersFrancais($date);
+            $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
         }
         return $lesLignes;
     }
@@ -227,7 +212,7 @@ class PdoGsb
 
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais
-     * au forfait concernées par les deux arguments
+     * au forfait concernées par les deux paramètres
      *
      * @param String $idVisiteur ID du visiteur
      * @param String $mois       Mois sous la forme aaaamm
@@ -301,15 +286,45 @@ class PdoGsb
         }
     }
     
+    
+    
     /**
-     * Met à jour d'une ligneFraisHorsForfait avec le nouveau label et le champ refuse changé à true
+     * Met à jour d'une ligneFraisHorsForfait dont l'id est passé en paramètre
+     *  avec le mois passé en paramètre  
+     *
+     * @param String $id ID du frais hors forfait
+     * @param String $mois       Mois sous la forme aaaamm
+     *
+     * @return null
+     */
+    public function reporterUnFraisHorsForfait($id, $mois)
+    {
+       
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+            'UPDATE lignefraishorsforfait '
+            . 'SET lignefraishorsforfait.mois = :unMois '    
+            . 'WHERE lignefraishorsforfait.id = :unId '
+
+        );
+        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
+        $requetePrepare->execute();
+        
+    }
+    
+    
+    
+    
+    /**
+     * Met à jour d'une ligneFraisHorsForfait dont l'id est passé en paramètre avec le nouveau libelle introduit par 'REFUSE-'  
+     * et le champ refuse changé à true
      *
      * @param String $id ID du frais hors forfait
      * @param String $libelle libelle du frais hors forfait
      *
      * @return null
      */
-    public function majFraisHorsForfait($id, $libelle)
+    public function refuserUnFraisHorsForfait($id, $libelle)
     {
        
         $requetePrepare = PdoGSB::$monPdo->prepare(
@@ -355,7 +370,7 @@ class PdoGsb
     }
 
     /**
-     * Teste si un visiteur possède une fiche de frais pour le mois passé en argument
+     * Teste si un visiteur possède une fiche de frais pour le mois passé en paramètre
      *
      * @param String $idVisiteur ID du visiteur
      * @param String $mois       Mois sous la forme aaaamm
@@ -460,7 +475,7 @@ class PdoGsb
 
     /**
      * Crée un nouveau frais hors forfait pour un visiteur un mois donné
-     * à partir des informations fournies en paramètre
+     * à partir des informations fournies en paramètres
      *
      * @param String $idVisiteur ID du visiteur
      * @param String $mois       Mois sous la forme aaaamm
@@ -486,7 +501,7 @@ class PdoGsb
         $montant
     ) {
         
-        $dateFr = dateFrancaisVersAnglais($date);
+        $dateFr = Utils::dateFrancaisVersAnglais($date);
            
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'INSERT INTO lignefraishorsforfait '
@@ -503,7 +518,7 @@ class PdoGsb
     }
 
     /**
-     * Supprime le frais hors forfait dont l'id est passé en argument
+     * Supprime le frais hors forfait dont l'id est passé en paramètre
      *
      * @param String $idFrais ID du frais
      *
@@ -520,16 +535,51 @@ class PdoGsb
     }
     
     
+    
     /**
-     * Insère dans le label 'REFUSE' du(des) frais hors forfait dont l'id est ou les ids sont passé(s) en argument
-     * Déplace le frais hors forfait dont l'id est ou les ids sont passé(s) en argument dans la fiche du mois suivant, 
-     * créé la fiche si elle n'existe pas.
+     * Refuse un ou des frais hors forfait dont l'id est ou les ids sont passé(s) en paramètre(s)
      *
      * @param Array $lesFrais tableau associatif de clé idFrais
      *
      * @return null
      */
-    public function refuserLesFraisHorsForfait($lesFrais, $mois)
+    public function refuserLesFraisHorsForfait($lesFrais)
+    {
+        
+        //return $lesFrais;
+        foreach ($lesFrais as $unIdFrais) {
+        
+            $requetePrepare = PdoGSB::$monPdo->prepare(
+                'SELECT * FROM lignefraishorsforfait '
+                . 'WHERE lignefraishorsforfait.id = :unIdFrais'
+            );
+            $requetePrepare->bindParam(':unIdFrais', $unIdFrais, PDO::PARAM_INT);
+            $requetePrepare->execute();
+            $laLigne = $requetePrepare->fetch();
+            
+           
+            if($laLigne['refuse']==null){
+                
+                $this->refuserUnFraisHorsForfait($laLigne['id'], Utils::mentionRefuse($laLigne['libelle']));
+         
+            }
+        } 
+        
+       
+    }
+    
+    
+    
+    /**
+     * Reporte le frais hors forfait dont l'id est ou les ids sont passé(s) en paramètre dans la fiche du mois suivant, 
+     * créé la fiche si elle n'existe pas.
+     *
+     * @param Array $lesFrais tableau associatif de clé idFrais
+     * @param String $mois       Mois sous la forme aaaamm
+     * 
+     * @return null
+     */
+    public function reporterLesFraisHorsForfait($lesFrais, $mois)
     {
         
         //return $lesFrais;
@@ -546,19 +596,14 @@ class PdoGsb
            
             if($laLigne['refuse']==null){
                 if ($this->estPremierFraisMois($laLigne['idvisiteur'], $mois)){       
-                        
+                    
                     $this->creeNouvellesLignesFrais($laLigne['idvisiteur'], $mois);    
-                    $this->creeNouveauFraisHorsForfait($laLigne['idvisiteur'], $mois, $laLigne['libelle'], dateAnglaisVersFrancais($laLigne['date']), $laLigne['montant'] );        
-                            
+                    $this->reporterUnFraisHorsForfait($laLigne['id'], $mois);
+           
                 } else {
-                       
-                    $this->creeNouveauFraisHorsForfait($laLigne['idvisiteur'], $mois, $laLigne['libelle'], dateAnglaisVersFrancais($laLigne['date']), $laLigne['montant'] );        
-
+                     $this->reporterUnFraisHorsForfait($laLigne['id'], $mois);
                 }
                
-            
-                $this->majFraisHorsForfait($laLigne['id'], mentionRefuse($laLigne['libelle']));
-                
                     
             }
         } 
@@ -980,3 +1025,6 @@ class PdoGsb
     
     
 }
+
+
+?>

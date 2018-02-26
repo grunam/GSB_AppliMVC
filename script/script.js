@@ -13,6 +13,12 @@ $(document).ready(function() {
     var $ok = $('#okVisiteursMois');
     var $annuler = $('#annulerVisiteursMois');
     
+    var $reporter = $('#reporterFraisHorsForfait');
+    var $supprimer = $('#supprimerFraisHorsForfait');
+    var $modFraisHorsForfait = $('#modFraisHorsForfait');
+    
+    
+    
     $lesVisiteurs.on('change', function() {
         
         $lesVisiteurs.attr('disabled','disabled');
@@ -26,6 +32,23 @@ $(document).ready(function() {
       
      });
      
+     
+     $reporter.on('click', function() {
+         if($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
+            console.log("zezez");
+             $modFraisHorsForfait.attr('value', 'reporter');
+            $('#FormFraisHorsForfait').submit();
+         }    
+     });
+ 
+    $supprimer.on('click', function() {
+        if($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
+            console.log("zazazaza");
+            $modFraisHorsForfait.attr('value', 'supprimer');
+            $('#FormFraisHorsForfait').submit();
+        }    
+     });
+    
    
 });
      

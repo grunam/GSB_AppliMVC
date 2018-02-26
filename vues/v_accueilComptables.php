@@ -1,6 +1,6 @@
 <?php
 /**
- * Vue Accueil
+ * Vue Accueil comptables
  *
  * PHP Version 7
  *

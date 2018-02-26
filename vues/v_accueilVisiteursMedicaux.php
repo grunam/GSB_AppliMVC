@@ -1,6 +1,6 @@
 <?php
 /**
- * Vue Valider fiche de Frais
+ * Vue accueil visiteurs médicaux
  *
  * PHP Version 7
  *

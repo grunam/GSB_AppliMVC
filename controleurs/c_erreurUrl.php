@@ -15,7 +15,7 @@
  */
 
 
-ajouterErreur('Une erreur est survenue, la chaîne de paramètres passés dans l\'url est incorrecte !');
+Utils::ajouterErreur('Une erreur est survenue, la chaîne de paramètres passés dans l\'url est incorrecte !');
 include 'vues/v_erreurs.php';
 
 
