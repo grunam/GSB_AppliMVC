@@ -146,7 +146,6 @@ case 'validerMajFraisForfait':
     
    // if (lesQteFraisValides($lesFrais)) {
         
-        
         $lesVisiteurs = $pdo->getLesVisiteursValidationFichesFrais();
         $idVisiteur = $visiteurASelectionner; 
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
@@ -154,7 +153,6 @@ case 'validerMajFraisForfait':
         $include_array = array();        
         
         include 'vues/v_listeVisiteursMois.php';
-        
         
         try {
             $pdo->majFraisForfait($visiteurASelectionner, $leMois, $lesFrais);
@@ -178,6 +176,9 @@ case 'validerMajFraisForfait':
         
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+        
+        print_r($lesFraisForfait);
+        
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
         $numAnnee = substr($leMois, 0, 4);
         $numMois = substr($leMois, 4, 2);
