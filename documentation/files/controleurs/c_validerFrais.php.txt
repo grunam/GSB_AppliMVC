@@ -78,6 +78,13 @@ case 'selectionnerVisiteur':
     $moisASelectionner = $lesCles[0];
     include 'vues/v_listeVisiteursMois.php';
 
+    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+      
+        Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+        include 'vues/v_erreurs.php';     
+    }
+    
+    
     break;
 
 case 'consulterFrais':
@@ -146,7 +153,6 @@ case 'validerMajFraisForfait':
     
    // if (lesQteFraisValides($lesFrais)) {
         
-        
         $lesVisiteurs = $pdo->getLesVisiteursValidationFichesFrais();
         $idVisiteur = $visiteurASelectionner; 
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
@@ -154,7 +160,6 @@ case 'validerMajFraisForfait':
         $include_array = array();        
         
         include 'vues/v_listeVisiteursMois.php';
-        
         
         try {
             $pdo->majFraisForfait($visiteurASelectionner, $leMois, $lesFrais);
@@ -178,6 +183,7 @@ case 'validerMajFraisForfait':
         
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+        
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
         $numAnnee = substr($leMois, 0, 4);
         $numMois = substr($leMois, 4, 2);
@@ -388,8 +394,10 @@ case 'validerFrais' :
     
     if($nbJustif >= $nbFraisHorsForfait) {
         
+        $montantTotalFrais='';
+        
         try {
-            $pdo->montantTotalFrais($visiteurASelectionner, $leMois); 
+            $montantTotalFrais = $pdo->montantTotalFrais($visiteurASelectionner, $leMois);
         }catch(Exception $e){
            Utils::ajouterErreur($e->getMessage());
            array_push($include_array, 'vues/v_erreurs.php');
@@ -428,7 +436,7 @@ case 'validerFrais' :
         } else if($nbJustif >= $nbFraisHorsForfait) {
             
              $pdo->majEtatFicheFrais($idVisiteur, $leMois, 'VA', $justificatif);
-             Utils::ajouterSucces('La fiche de frais est validée.');
+             Utils::ajouterSucces('La fiche de frais d\'un montant de '.$montantTotalFrais.'€ est validée.');
              array_push($include_array, 'vues/v_succes.php');
              
         }
