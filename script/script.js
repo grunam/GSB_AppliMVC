@@ -35,7 +35,7 @@ $(document).ready(function() {
      
      $reporter.on('click', function() {
          if($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
-            console.log("zezez");
+            
              $modFraisHorsForfait.attr('value', 'reporter');
             $('#FormFraisHorsForfait').submit();
          }    
@@ -43,7 +43,7 @@ $(document).ready(function() {
  
     $supprimer.on('click', function() {
         if($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
-            console.log("zazazaza");
+            
             $modFraisHorsForfait.attr('value', 'supprimer');
             $('#FormFraisHorsForfait').submit();
         }    
