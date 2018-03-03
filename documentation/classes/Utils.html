@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">66</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">61</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">19</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">9</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1411664223"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-522888661"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1411664223" class="accordion-body collapse in">
+            <div id="namespace-522888661" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -418,11 +418,10 @@ Les fonctions sont toutes statiques,</p>
                             assert
                         </th>
                         <td>
-                                                                                            <p>(array(&quot;toto&quot;, &quot;zozo&quot;), &quot;toto&quot;) == true</p>
-                                                                                            <p>(array(&quot;toto&quot;, &quot;zozo&quot;), &quot;coco&quot;) == false</p>
-                                                                                            <p>(array(&quot;toto&quot;, &quot;zozo&quot;), 0) == false</p>
-                                                                                            <p>(&quot;coco&quot;, &quot;toto&quot;) == false</p>
-                                                                                            <p>(1, 1) == false</p>
+                                                                                            <p>('toto', array(array('id'=&gt;'toto'))) == true</p>
+                                                                                            <p>(&quot;coco&quot;, array(array('id'=&gt;'toto'))) == false</p>
+                                                                                            <p>(2, array(array('id'=&gt;'toto'))) == false</p>
+                                                                                            <p>(&quot;toto&quot;, array(array('id'=&gt;3))) == false</p>
                                                     </td>
                     </tr>
                             </table>
@@ -588,7 +587,7 @@ français jj/mm/aaaa</em></p>
                             assert
                         </th>
                         <td>
-                                                                                            <p>('2018-02-26') == '26/02/26'</p>
+                                                                                            <p>('2018-02-26') == '26/02/2018'</p>
                                                                                             <p>('1999-11-09') == '09/11/1999'</p>
                                                                                             <p>('1999') == '//1999'</p>
                                                                                             <p>(02) == '//2'</p>
@@ -631,7 +630,15 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('26/02/2018') == '201802'</p>
+                                                                                            <p>('09/11/1999') == '199911'</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -669,7 +676,15 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('18/01/2007') == '200612'</p>
+                                                                                            <p>('20/12/2017') == '201711'</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -707,7 +722,15 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('200701') == '200702'</p>
+                                                                                            <p>('200712') == '200801'</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -719,7 +742,7 @@ français jj/mm/aaaa</em></p>
                 <h3 class="public ">estEntierPositif()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">estEntierPositif(Integer  <span class="argument">$valeur</span>) : Boolean</pre>
-                <p><em>Indique si une valeur est un entier positif ou nul</em></p>
+                <p><em>Indique si la valeur est un entier positif ou nul</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -745,7 +768,18 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>(14.123) == false</p>
+                                                                                            <p>(1554) == true</p>
+                                                                                            <p>(-5) == false</p>
+                                                                                            <p>(-554.544) == false</p>
+                                                                                            <p>(0) == true</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -783,7 +817,17 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>(array(0, 4, 2, 486, 5164)) == true</p>
+                                                                                            <p>(array(0, 4, 2, 486, -465)) == false</p>
+                                                                                            <p>(array(875, 4, 3.45, 4, 1221)) == false</p>
+                                                                                            <p>(array(0, 4, 2, -54,87, 154)) == false</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -803,17 +847,17 @@ français jj/mm/aaaa</em></p>
                                                     <tr>
                                 <td>String</td>
                                 <td>$dateTestee </td>
-                                <td><p>Date à tester</p></td>
+                                <td><p>Date à tester au format  jj/mm/aaaa</p></td>
                             </tr>
                                                     <tr>
                                 <td>\Integeer</td>
                                 <td>$jourMin </td>
-                                <td><p>Borne inférieur de l'intervalle</p></td>
+                                <td><p>Borne inférieur de l'intervalle pour le jour de dateTestee</p></td>
                             </tr>
                                                     <tr>
                                 <td>\Integeer</td>
                                 <td>$jourMax </td>
-                                <td><p>Borne maximum de l'intervalle</p></td>
+                                <td><p>Borne maximum de l'intervalle pour le jour de dateTestee</p></td>
                             </tr>
                                             </table>
                 
@@ -831,7 +875,19 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('18/04/2016', 10, 20) == true</p>
+                                                                                            <p>('14/08/2017', 15, 20) == false</p>
+                                                                                            <p>('20/12/2015', 10, 20) == true</p>
+                                                                                            <p>('10/09/2013', 10, 20) == true</p>
+                                                                                            <p>('21/07/2006', 10, 20) == false</p>
+                                                                                            <p>('09/06/2011', 10, 20) == false</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -851,7 +907,7 @@ français jj/mm/aaaa</em></p>
                                                     <tr>
                                 <td>String</td>
                                 <td>$dateTestee </td>
-                                <td><p>Date à tester</p></td>
+                                <td><p>Date à tester au format  jj/mm/aaaa</p></td>
                             </tr>
                                             </table>
                 
@@ -869,7 +925,17 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('18/01/2017') == true</p>
+                                                                                            <p>('02/02/2017') == true</p>
+                                                                                            <p>('30/10/2017') == false</p>
+                                                                                            <p>('18/12/2018') == false</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -907,7 +973,19 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('02/10/2017') == true</p>
+                                                                                            <p>('2/06/2015') == true</p>
+                                                                                            <p>('30-10-2017') == false</p>
+                                                                                            <p>('10/4.5/2001') == false</p>
+                                                                                            <p>('20/12/-04') == false</p>
+                                                                                            <p>('02/08/zeze') == false</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -945,7 +1023,17 @@ français jj/mm/aaaa</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>(array(155, 887, 65, 12, 01)) == true</p>
+                                                                                            <p>(array('zeze', 887, 65, 12, 01)) == false</p>
+                                                                                            <p>(array(1, 2, 3.5, 6, 88)) == false</p>
+                                                                                            <p>(array(-4, 2, 18, 21, 13)) == false</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -983,6 +1071,7 @@ et le montant</em></p>
                 
                                     <h4>Returns</h4>
                     null
+                                            &mdash; <p>@backupGlobals enabled</p>
                                     				
                             </article>
         </div>
@@ -1030,7 +1119,14 @@ et le montant</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            backupGlobals
+                        </th>
+                        <td>
+                                                                                            <p>enabled</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -1067,7 +1163,14 @@ et le montant</em></p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            backupGlobals
+                        </th>
+                        <td>
+                                                                                            <p>enabled</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -1087,6 +1190,7 @@ et le montant</em></p>
                                     <h4>Returns</h4>
                     Integer
                                             &mdash; <p>le nombre d'erreurs</p>
+<p>@backupGlobals enabled</p>
                                     				
                             </article>
         </div>
@@ -1136,7 +1240,16 @@ tronque la chaîne à partir de la fin si elle est d&#039;une longueur supérieu
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo') == 'REFUSE-Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Const'</p>
+                                                                                            <p>('Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica') == 'REFUSE-Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica'</p>
+                                                                                            <p>('On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Telle pourrait être la devise du pouvoir exécutif. Déterminé à engager une réforme en profondeur de la SNCF, il procède comme il l’a fait à l’automne 2017 sur le dossier réputé hautement inflammable du droit du travail,') == 'REFUSE-On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Tell'</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -1190,7 +1303,7 @@ tronque la chaîne à partir de la fin si elle est d&#039;une longueur supérieu
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on February 26th, 2018 at 15:26.
+                    on March 3rd, 2018 at 13:56.
                 </section>
             </section>
         </section>

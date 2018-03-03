@@ -17,6 +17,9 @@
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
+// use PHPUnit\Framework\TestCase;
+//extends TestCase
+
 class Utils
 {
 
@@ -52,12 +55,10 @@ class Utils
      * 
      * @return vrai ou faux
      *
-     * 
-     * @assert (array("toto", "zozo"), "toto") == true
-     * @assert (array("toto", "zozo"), "coco") == false
-     * @assert (array("toto", "zozo"), 0) == false
-     * @assert ("coco", "toto") == false
-     * @assert (1, 1) == false
+     * @assert ('toto', array(array('id'=>'toto'))) == true
+     * @assert ("coco", array(array('id'=>'toto'))) == false
+     * @assert (2, array(array('id'=>'toto'))) == false
+     * @assert ("toto", array(array('id'=>3))) == false
      * 
     */
     public static function estVisiteur($val, $lesVisiteurs)
@@ -124,16 +125,18 @@ class Utils
      * @return Date au format format français jj/mm/aaaa
      * 
      * 
-     * @assert ('2018-02-26') == '26/02/26'
+     * @assert ('2018-02-26') == '26/02/2018'
      * @assert ('1999-11-09') == '09/11/1999'
      * @assert ('1999') == '//1999'
-     * @assert (02) == '//2'  
+     * @assert (02) == '//2' 
+     *
     */
     public static function dateAnglaisVersFrancais($maDate)
     {
         @list($annee, $mois, $jour) = explode('-', $maDate);
         $date = $jour . '/' . $mois . '/' . $annee;
         return $date;
+        
     }
 
     /**
@@ -142,6 +145,10 @@ class Utils
      * @param String $date au format  jj/mm/aaaa
      *
      * @return String Mois au format aaaamm
+     * 
+     * @assert ('26/02/2018') == '201802'
+     * @assert ('09/11/1999') == '199911'
+     *  
      */
     public static function getMois($date)
     {
@@ -150,7 +157,9 @@ class Utils
         if (strlen($mois) == 1) {
             $mois = '0' . $mois;
         }
+        
         return $annee . $mois;
+       
     }
 
 
@@ -160,6 +169,10 @@ class Utils
      * @param String $date au format  jj/mm/aaaa
      *
      * @return String Mois au format aaaamm
+     * 
+     * @assert ('18/01/2007') == '200612'
+     * @assert ('20/12/2017') == '201711'
+     *   
      */
     public static function getMoisPrecedent($date)
     {
@@ -168,6 +181,7 @@ class Utils
 
         if ($mois == 1) {
             $mois = 12;
+            $annee--;
         } else {
             $mois--;
         }
@@ -188,6 +202,9 @@ class Utils
      * @param String $dateMois au format aaaamm
      *
      * @return String Mois au format aaaamm
+     * 
+     * @assert ('200701') == '200702'
+     * @assert ('200712') == '200801'
      */
     public static function getMoisSuivant($dateMois)
     {
@@ -218,11 +235,18 @@ class Utils
     /* gestion des erreurs */
 
     /**
-     * Indique si une valeur est un entier positif ou nul
+     * Indique si la valeur est un entier positif ou nul
      *
      * @param Integer $valeur Valeur
      *
      * @return Boolean vrai ou faux
+     * 
+     * @assert (14.123) == false
+     * @assert (1554) == true
+     * @assert (-5) == false
+     * @assert (-554.544) == false
+     * @assert (0) == true
+     * 
      */
     public static function estEntierPositif($valeur)
     {
@@ -235,6 +259,14 @@ class Utils
      * @param Array $tabEntiers Un tableau d'entier
      *
      * @return Boolean vrai ou faux
+     * 
+     * 
+     * @assert (array(0, 4, 2, 486, 5164)) == true
+     * @assert (array(0, 4, 2, 486, -465)) == false
+     * @assert (array(875, 4, 3.45, 4, 1221)) == false
+     * @assert (array(0, 4, 2, -54,87, 154)) == false
+     * 
+     * 
      */
     public static function estTableauEntiers($tabEntiers)
     {
@@ -251,10 +283,20 @@ class Utils
     /**
      * Vérifie si le jour de la date donnée en paramètre est entre les bornes données en parmètre 
      *
-     * @param String $dateTestee Date à tester
-     * @param Integeer $jourMin Borne inférieur de l'intervalle 
-     * @param Integeer $jourMax Borne maximum de l'intervalle
+     * @param String $dateTestee Date à tester au format  jj/mm/aaaa
+     * @param Integeer $jourMin Borne inférieur de l'intervalle pour le jour de dateTestee 
+     * @param Integeer $jourMax Borne maximum de l'intervalle pour le jour de dateTestee
+     * 
      * @return Boolean vrai ou faux
+     * 
+     * @assert ('18/04/2016', 10, 20) == true
+     * @assert ('14/08/2017', 15, 20) == false
+     * @assert ('20/12/2015', 10, 20) == true
+     * @assert ('10/09/2013', 10, 20) == true
+     * @assert ('21/07/2006', 10, 20) == false
+     * @assert ('09/06/2011', 10, 20) == false
+     * 
+     * 
      */
     public static function estJourComprisDansIntervalle($dateTestee, $jourMin, $jourMax)
     {
@@ -266,9 +308,16 @@ class Utils
     /**
      * Vérifie si une date est inférieure d'un an à la date actuelle
      *
-     * @param String $dateTestee Date à tester
+     * @param String $dateTestee Date à tester au format  jj/mm/aaaa
      *
      * @return Boolean vrai ou faux
+     * 
+     * 
+     * @assert ('18/01/2017') == true
+     * @assert ('02/02/2017') == true
+     * @assert ('30/10/2017') == false
+     * @assert ('18/12/2018') == false
+     * 
      */
     public static function estDateDepassee($dateTestee)
     {
@@ -286,6 +335,15 @@ class Utils
      * @param String $date Date à tester
      *
      * @return Boolean vrai ou faux
+     * 
+     * 
+     * @assert ('02/10/2017') == true
+     * @assert ('2/06/2015') == true
+     * @assert ('30-10-2017') == false
+     * @assert ('10/4.5/2001') == false
+     * @assert ('20/12/-04') == false
+     * @assert ('02/08/zeze') == false
+     * 
      */
     public static function estDateValide($date)
     {
@@ -311,6 +369,13 @@ class Utils
      * @param Array $lesFrais Tableau d'entier
      *
      * @return Boolean vrai ou faux
+     * 
+     * 
+     * @assert (array(155, 887, 65, 12, 01)) == true
+     * @assert (array('zeze', 887, 65, 12, 01)) == false
+     * @assert (array(1, 2, 3.5, 6, 88)) == false
+     * @assert (array(-4, 2, 18, 21, 13)) == false
+     * 
      */
     public static function lesQteFraisValides($lesFrais)
     {
@@ -328,6 +393,9 @@ class Utils
      * @param Float  $montant   Montant des frais
      *
      * @return null
+     * 
+     *  @backupGlobals enabled
+     * 
      */
     public static function valideInfosFrais($dateFrais, $libelle, $montant)
     {
@@ -360,6 +428,9 @@ class Utils
      * @param String $msg Libellé de l'erreur
      *
      * @return null
+     * 
+     * @backupGlobals enabled
+     * 
      */
     public static function ajouterErreur($msg)
     {
@@ -375,6 +446,9 @@ class Utils
      * @param String $msg Libellé du succès
      *
      * @return null
+     * 
+     * @backupGlobals enabled
+     * 
      */
     public static function ajouterSucces($msg)
     {
@@ -390,6 +464,9 @@ class Utils
      * Retoune le nombre de lignes du tableau des erreurs
      *
      * @return Integer le nombre d'erreurs
+     * 
+     *  @backupGlobals enabled
+     * 
      */
     public static function nbErreurs()
     {
@@ -410,15 +487,21 @@ class Utils
      * 
      * @return String la chaîne limitée a 100 caractères avec la mention REFUSE- 
      * 
+     * 
+     * @assert ('Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo') == 'REFUSE-Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Const'
+     * @assert ('Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica') == 'REFUSE-Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica'
+     * @assert ('On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Telle pourrait être la devise du pouvoir exécutif. Déterminé à engager une réforme en profondeur de la SNCF, il procède comme il l’a fait à l’automne 2017 sur le dossier réputé hautement inflammable du droit du travail,') == 'REFUSE-On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Tell'
+     * 
      */
 
     public static function mentionRefuse($string){
 
         $str = "REFUSE-".$string;
-        //$str = "REFUSE-"."Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo incertus omnes incertus ultra cognito milites idem omnes casu perviis agitare quaedam in futuris perviis remoti industria casu futuris Constantius.";
-        if (mb_strlen($str,"UTF8") > 100){
-          $str = substr($str, -(mb_strlen($str,"UTF8")), -(mb_strlen($str,"UTF8")-100));
+        
+        if (mb_strlen($str) > 100){
+          $str = mb_substr($str, 0, 100);
         }
+        
         return $str;
     }
     
