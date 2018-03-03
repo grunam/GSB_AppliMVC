@@ -9,8 +9,7 @@
  *
  * @category  PPE
  * @package   GSB
- * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Namik TIAB <tiabnamik@gmail.com>
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   Release: 1.0

@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion de l'affichage des frais
+ * Gestion affichage de la vue en cas d'erreur de paramètre d'url
  *
  * PHP Version 7
  *

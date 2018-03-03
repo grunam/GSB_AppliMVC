@@ -6,6 +6,7 @@
  *
  * @category  PPE
  * @package   GSB
+ * @author    Réseau CERTA <contact@reseaucerta.org>
  * @author    Namik TIAB <tiabnamik@gmail.com>
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
