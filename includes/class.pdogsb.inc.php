@@ -520,13 +520,7 @@ class PdoGsb
      * @return null
      */
     
-    /*
-    $this->creeNouveauFraisHorsForfait(
-            $laLigne['idvisiteur'], 
-            $mois, $laLigne['libelle'], 
-            dateAnglaisVersFrancais($laLigne['date']), 
-            $laLigne['montant'] );        
-    */
+   
     public function creeNouveauFraisHorsForfait(
         $idVisiteur,
         $mois,
