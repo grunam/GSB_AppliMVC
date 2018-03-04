@@ -85,6 +85,7 @@ case 'consulterFrais':
         }
     }
     
+    include 'vues/v_etatFicheFrais.php';
     include 'vues/v_majFraisForfait.php';
     
     if(count($lesFraisHorsForfait) > 0){
@@ -154,7 +155,7 @@ case 'paiementFrais' :
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
     $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
 
-
+    include 'vues/v_etatFicheFrais.php';
     include 'vues/v_majFraisForfait.php';
     
     $nbFraisHorsForfait = 0;

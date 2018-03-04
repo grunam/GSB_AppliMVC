@@ -25,12 +25,10 @@ class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
    
-    
     private static $bdd = 'dbname=gsb_frais';
     private static $user = 'userGsb';
     private static $mdp = 'secret';
-    
-    
+   
     /*
     private static $bdd = 'dbname=wh1l2sdy_gsb_frais';
     private static $user = 'wh1l2sdy_grunam';
@@ -290,6 +288,41 @@ class PdoGsb
     
     
     /**
+     * Met à jour la table ligneFraisHorsForfait
+     * Met à jour la table ligneFraisHorsForfait pour un id
+     *  donné en enregistrant les nouveaux montants
+     *
+     * @param Int $id ID du frais hors forfait
+     * @param Array  $lesFrais   tableau associatif de clé idFrais et
+     *                           de valeur pour ce frais
+     *
+     * @return null
+     */
+    public function majFraisHorsForfait($lesFrais)
+    {
+        
+        foreach ($lesFrais as $unFrais) {
+            
+            $requetePrepare = PdoGSB::$monPdo->prepare(
+                'UPDATE lignefraishorsforfait '
+                . 'SET lignefraishorsforfait.libelle = :unLibelle, '
+                . 'lignefraishorsforfait.date = :uneDate, '
+                . 'lignefraishorsforfait.montant = :unMontant '
+                . 'WHERE lignefraishorsforfait.id = :idFrais'
+            );
+           
+            $requetePrepare->bindParam(':unLibelle', $unFrais['libelle'], PDO::PARAM_INT);
+            $requetePrepare->bindParam(':uneDate', $unFrais['date'], PDO::PARAM_STR); 
+            $requetePrepare->bindParam(':unMontant', $unFrais['montant'], PDO::PARAM_STR);
+            $requetePrepare->bindParam(':idFrais', $unFrais['id'], PDO::PARAM_STR);
+            $requetePrepare->execute();
+        }
+    }
+    
+    
+    
+    
+    /**
      * Met à jour d'une ligneFraisHorsForfait dont l'id est passé en paramètre
      *  avec le mois passé en paramètre  
      *
@@ -504,19 +537,6 @@ class PdoGsb
         
         $dateFr = Utils::dateFrancaisVersAnglais($date);
          
-        
-        echo $idVisiteur;
-        echo '<br>';
-        echo $mois;
-        echo '<br>';
-        echo  $libelle;
-        echo '<br>';
-        echo  $dateFr;
-        echo '<br>';
-        echo  $montant;
-        
-        
-        
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'INSERT INTO lignefraishorsforfait '
             . 'VALUES (null, :unIdVisiteur,:unMois, :unLibelle, :uneDateFr,'
@@ -561,8 +581,13 @@ class PdoGsb
     {
         
         //return $lesFrais;
+        
+        
+        
         foreach ($lesFrais as $unIdFrais) {
         
+           //print_r($unIdFrais);
+            
             $requetePrepare = PdoGSB::$monPdo->prepare(
                 'SELECT * FROM lignefraishorsforfait '
                 . 'WHERE lignefraishorsforfait.id = :unIdFrais'
@@ -572,7 +597,9 @@ class PdoGsb
             $laLigne = $requetePrepare->fetch();
             
            
-            if($laLigne['refuse']==null){
+            if($laLigne['refuse']!= 1){
+                
+                 //print_r($laLigne['id']);
                 
                 $this->refuserUnFraisHorsForfait($laLigne['id'], Utils::mentionRefuse($laLigne['libelle']));
          
@@ -608,7 +635,7 @@ class PdoGsb
             $laLigne = $requetePrepare->fetch();
             
            
-            if($laLigne['refuse']==null){
+            if($laLigne['refuse'] != 1){
                 if ($this->estPremierFraisMois($laLigne['idvisiteur'], $mois)){       
                     
                     $this->creeNouvellesLignesFrais($laLigne['idvisiteur'], $mois);    

@@ -114,6 +114,17 @@ case 'consulterFrais':
     }
 
     $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+    
+    foreach($lesFraisHorsForfait as $k => $v){
+    
+        if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
+
+            $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
+
+        }
+    }
+    
+    
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
     $numAnnee = substr($leMois, 0, 4);
@@ -133,7 +144,7 @@ case 'consulterFrais':
         }
     }
     
-  
+    include 'vues/v_etatFicheFrais.php';
     include 'vues/v_majFraisForfait.php';
     
     if(count($lesFraisHorsForfait) > 0){
@@ -183,6 +194,17 @@ case 'validerMajFraisForfait':
         
         
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+        
+       foreach($lesFraisHorsForfait as $k => $v){
+        
+            if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
+
+                $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
+
+            }
+        }
+        
+       
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
@@ -194,7 +216,7 @@ case 'validerMajFraisForfait':
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
         $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
         
-        
+        include 'vues/v_etatFicheFrais.php';
         include 'vues/v_majFraisForfait.php';
         
         $nbFraisHorsForfait = 0;
@@ -227,45 +249,48 @@ case 'modifierFraisHorsForfait':
     
     $visiteurASelectionner = filter_input(INPUT_POST, 'leVisiteur', FILTER_SANITIZE_STRING);
     $leMois = filter_input(INPUT_POST, 'leMois', FILTER_SANITIZE_STRING);
-    $FraisHorsForfait = filter_input(INPUT_POST, 'lesFraisHorsForfait', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
-    $modFraisHorsForfait = filter_input(INPUT_POST, 'modFraisHorsForfait', FILTER_SANITIZE_STRING);
+    $FraisHorsForfait = filter_input(INPUT_POST, 'FraisHorsForfait', FILTER_DEFAULT, FILTER_SANITIZE_STRING);
+    $modFraisHorsForfait = filter_input(INPUT_POST, 'valModFraisHorsForfait', FILTER_SANITIZE_STRING);
      
     $idVisiteur = $visiteurASelectionner; 
     $include_array = array();
     $moisASelectionner = $leMois;
     
     
-    $nbre = (count($FraisHorsForfait) > 1)?'s':'';
-    $atc = (count($FraisHorsForfait) > 1)?'des':'du';
+    $parseFraisHorsForfait = json_decode($FraisHorsForfait, true);
     
-   if($modFraisHorsForfait=='reporter'){
+    
+    $nbre = (count($parseFraisHorsForfait) > 1)?'s':'';
+    $atc = (count($parseFraisHorsForfait) > 1)?'des':'du';
+    
+    
+    
+    
+    
+    if($modFraisHorsForfait == 'modifier'){
+    
+        try {
+
+            $pdo->majFraisHorsForfait($parseFraisHorsForfait); 
+            Utils::ajouterSucces('Modification '.$atc.' frais hors forfait'.$nbre.' effectuée.');
+            array_push($include_array, 'vues/v_succes.php');
+                
+        }catch(Exception $e){
+            Utils::ajouterErreur($e->getMessage());
+            array_push($include_array, 'vues/v_erreurs.php');
+        }
+    
+    } else if($modFraisHorsForfait == 'reporter'){
+        
         
         try {
 
 
-           /*
-            $pdo->creeNouveauFraisHorsForfait(
-            'a17',
-            '201711',
-            'Location salle conférence',
-            '15/11/2017',
-            320
-            );
-           */
-
-            //vol aller-retour Paris-Bordeaux
-            //restaurant gastronomique
-            //garagiste
-
-            //$pdo->creeNouveauFraisHorsForfait($idVisiteur, $leMois, 'garagiste', '31/10/2017', '150' );        
-
-            //echo getMoisSuivant($leMois);
-
             $lesInfosFicheFraisMoisSuivant = $pdo->getLesInfosFicheFrais($idVisiteur, Utils::getMoisSuivant($leMois));
     
-            if(isset($FraisHorsForfait)){
+            if(isset($parseFraisHorsForfait)){
                 if(empty($lesInfosFicheFraisMoisSuivant['idEtat']) || $lesInfosFicheFraisMoisSuivant['idEtat']=='CR' || $lesInfosFicheFraisMoisSuivant['idEtat']=='CL'){
-                    $pdo->reporterLesFraisHorsForfait($FraisHorsForfait, Utils::getMoisSuivant($leMois)); 
+                    $pdo->reporterLesFraisHorsForfait($parseFraisHorsForfait, Utils::getMoisSuivant($leMois)); 
                     Utils::ajouterSucces('Report '.$atc.' frais hors forfait'.$nbre.' effectuée.');
                     array_push($include_array, 'vues/v_succes.php');
                 } else {
@@ -275,39 +300,19 @@ case 'modifierFraisHorsForfait':
             }
 
 
-        /*    
-        $lesInfosFicheFraisMoisSuivant = $pdo->getLesInfosFicheFraisPremierMoisSuivant($idVisiteur, $leMois);
-
-        try {
-
-
-            $nbre = (count($FraisHorsForfait) > 1)?'s':'';
-            $atc = (count($FraisHorsForfait) > 1)?'des':'du';
-
-            $moisValide = (isset($lesInfosFicheFraisMoisSuivant['mois']))?$lesInfosFicheFraisMoisSuivant['mois']:getMoisSuivant($leMois);
-
-            if(isset($FraisHorsForfait)){
-                if(empty($lesInfosFicheFraisMoisSuivant['idEtat']) || $lesInfosFicheFraisMoisSuivant['idEtat']=='CR' || $lesInfosFicheFraisMoisSuivant['idEtat']=='CL'){
-                    $pdo->refuserLesFraisHorsForfait($FraisHorsForfait, $moisValide); 
-                    ajouterSucces('Suppression '.$atc.' frais hors forfait'.$nbre.' effectuée.');
-                    array_push($include_array, 'vues/v_succes.php');
-                } else {
-                    ajouterErreur('Suppression '.$atc.' frais hors forfait'.$nbre.' impossible, la fiche de frais du mois suivant a déjà été validé !');
-                    array_push($include_array, 'vues/v_erreurs.php');
-                }
-            }
-         */
-
         }catch(Exception $e){
             Utils::ajouterErreur($e->getMessage());
             array_push($include_array, 'vues/v_erreurs.php');
         }
         
-    } else if($modFraisHorsForfait=="supprimer"){
+    } else if($modFraisHorsForfait == "supprimer"){
+        
+        
+        
         
         try {
 
-            $pdo->refuserLesFraisHorsForfait($FraisHorsForfait, Utils::getMoisSuivant($leMois)); 
+            $pdo->refuserLesFraisHorsForfait($parseFraisHorsForfait, Utils::getMoisSuivant($leMois)); 
             Utils::ajouterSucces('Suppression '.$atc.' frais hors forfait'.$nbre.' effectuée.');
             array_push($include_array, 'vues/v_succes.php');
                 
@@ -335,6 +340,19 @@ case 'modifierFraisHorsForfait':
     
     
     $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+    
+    
+    foreach($lesFraisHorsForfait as $k => $v){
+        
+        if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
+            
+            $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
+
+        }
+    }
+    
+    
+    
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
     $numAnnee = substr($leMois, 0, 4);
@@ -345,7 +363,7 @@ case 'modifierFraisHorsForfait':
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
     $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
 
-
+    include 'vues/v_etatFicheFrais.php';
     include 'vues/v_majFraisForfait.php';
     
     $nbFraisHorsForfait = 0;
@@ -408,23 +426,6 @@ case 'validerFrais' :
     try {
      
         
-      /*  
-        $pdo->creeNouveauFraisHorsForfait(
-        'b25',
-        '201710',
-        'Location salle de conférence',
-        '28/10/2017',
-        300
-        );
-      */
-        
-        //vol aller-retour Paris-Bordeaux
-        //restaurant gastronomique
-        //garagiste
-        
-        //$pdo->creeNouveauFraisHorsForfait($idVisiteur, $leMois, 'garagiste', '31/10/2017', '150' );        
-
-        //echo getMoisSuivant($leMois);
         
         ($nbFraisHorsForfait > 1)?$nbre='s':$nbre='';
         
@@ -443,10 +444,6 @@ case 'validerFrais' :
         }
    
        
-        //include 'vues/v_succes.php';
-
-        
-
     }catch(Exception $e){
         Utils::ajouterErreur($e->getMessage());
         array_push($include_array, 'vues/v_erreurs.php');
@@ -469,7 +466,18 @@ case 'validerFrais' :
         include_once $include;
     }
 
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois); 
+    
+    
+    foreach($lesFraisHorsForfait as $k => $v){
+
+            if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
+                 
+                    $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
+                
+            }
+        }
+    
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
     $numAnnee = substr($leMois, 0, 4);
@@ -480,6 +488,7 @@ case 'validerFrais' :
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
     $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
 
+    include 'vues/v_etatFicheFrais.php';    
     include 'vues/v_majFraisForfait.php';
    
     $nbFraisHorsForfait = 0;

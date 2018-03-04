@@ -23,7 +23,10 @@
      
     <input type="hidden" name="leVisiteur" value="<?php echo $idVisiteur ?>">
     <input type="hidden" name="leMois" value="<?php echo $moisASelectionner ?>">
-    <input id="modFraisHorsForfait" type="hidden" name="modFraisHorsForfait" value="">
+    <input id="valModFraisHorsForfait" type="hidden" name="valModFraisHorsForfait" value="">
+    <input id="FraisHorsForfait" type="hidden" name="FraisHorsForfait" value="">
+    
+    
     
     <table class="table table-bordered table-responsive">
         <tr>
@@ -42,17 +45,51 @@
         
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
             
-            $date = $unFraisHorsForfait['date'];
+           
+            $date = date($unFraisHorsForfait['date']);
+            
             $libelle = $unFraisHorsForfait['libelle'];
             $montant = $unFraisHorsForfait['montant'];
             $idFrais = $unFraisHorsForfait['id'];
             $refus = $unFraisHorsForfait['refuse'];
             ?>
             <tr>
+                <?php   
+                if($idEtat == 'CL' && $refus == 0){
+                    //mb_convert_encoding($libelle, 'latin1_swedish_ci', 'UTF-8')
+                ?>
+                
+                <td>
+                
+                    <input type="date" 
+                               name="txtDateHF<?php echo $idFrais ?>"
+                               id="txtDateHF<?php echo $idFrais ?>"
+                               value="<?php echo $date ?>" 
+                               class="form-control" required>
+                
+                </td>
+                <td>
+                    <input type="text" id="txtLibelleHF<?php echo $idFrais ?>" name="txtLibelleHF<?php echo $idFrais ?>" 
+                       class="form-control" value="<?php echo $libelle ?>" required>
+                
+                </td>
+                <td>
+                    <input id="txtMontantHF<?php echo $idFrais ?>" type="number" step="0.05" name="txtMontantHF<?php echo $idFrais ?>" 
+                           class="form-control" value="<?php echo $montant ?>" required>    
+                
+                </td>
+               
+                <?php 
+                  } else {
+                ?>  
+                
                 <td><?php echo $date ?></td>
                 <td><?php echo $libelle ?></td>
                 <td><?php echo $montant ?></td>
-                <?php   
+                
+                <?php 
+                  } 
+                 
                 if($idEtat == 'CL'){
                     //mb_convert_encoding($libelle, 'latin1_swedish_ci', 'UTF-8')
                 ?>
@@ -81,6 +118,8 @@
       
             <tr>
                 <td class="text-center" colspan="4">
+                    
+                    <button id="modifierFraisHorsForfait" class="btn btn-success" type="button">Modifier</button>
                     <button id="reporterFraisHorsForfait" class="btn btn-success" type="button">Reporter</button>    
                     <button id="supprimerFraisHorsForfait" class="btn btn-success" type="button">Supprimer</button>
                     <button class="btn btn-danger" type="reset">Effacer</button> 

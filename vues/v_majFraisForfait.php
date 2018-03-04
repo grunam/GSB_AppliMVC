@@ -38,7 +38,6 @@
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {
                 $idFrais = $unFraisForfait['idfrais'];
-                //$libelle = htmlspecialchars($unFraisForfait['libelle']);
                 $quantite = $unFraisForfait['quantite'];
                 ?>
        
