@@ -98,7 +98,7 @@
                   if(!$refus){
                       
                 ?>
-                    <input type="checkbox" name="lesFraisHorsForfait[]" value="<?php echo $idFrais ?>" onclick="javascript:if(this.checked){return confirm('Voulez-vous vraiment modifier ce frais?')};">
+                    <input type="checkbox" name="lesFraisHorsForfait[]" value="<?php echo $idFrais ?>">
                 <?php 
                   } 
                 ?>  
@@ -119,9 +119,9 @@
             <tr>
                 <td class="text-center" colspan="4">
                     
-                    <button id="modifierFraisHorsForfait" class="btn btn-success" type="button">Modifier</button>
-                    <button id="reporterFraisHorsForfait" class="btn btn-success" type="button">Reporter</button>    
-                    <button id="supprimerFraisHorsForfait" class="btn btn-success" type="button">Supprimer</button>
+                    <button onclick="javascript:return confirm('Voulez-vous vraiment modifier ce(s) frais?');" id="modifierFraisHorsForfait" class="btn btn-success" type="button">Modifier</button>
+                    <button onclick="javascript:return confirm('Voulez-vous vraiment reporter ce(s) frais?');" id="reporterFraisHorsForfait" class="btn btn-success" type="button">Reporter</button>    
+                    <button onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce(s) frais?');" id="supprimerFraisHorsForfait" class="btn btn-success" type="button">Supprimer</button>
                     <button class="btn btn-danger" type="reset">Effacer</button> 
                     
                 </td>

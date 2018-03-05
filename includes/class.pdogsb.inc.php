@@ -169,7 +169,7 @@ class PdoGsb
      * @return tous les champs des lignes de frais hors forfait sous la forme
      * d'un tableau associatif
      */
-    public function getLesFraisHorsForfait($idVisiteur, $mois)
+    public function getLesFraisHorsForfait($idVisiteur, $mois, $convertDate=1)
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT * FROM lignefraishorsforfait '
@@ -180,10 +180,13 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $lesLignes = $requetePrepare->fetchAll();
-        for ($i = 0; $i < count($lesLignes); $i++) {
-            $date = $lesLignes[$i]['date'];
-            $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
-        }
+        
+        if($convertDate == 1){
+            for ($i = 0; $i < count($lesLignes); $i++) {
+                $date = $lesLignes[$i]['date'];
+                $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
+            }
+        }    
         return $lesLignes;
     }
 
@@ -462,20 +465,20 @@ class PdoGsb
      *
      * @return null
      */
-    public function creeNouvellesLignesFrais($idVisiteur, $moisSuivant)
+    public function creeNouvellesLignesFrais($idVisiteur, $mois)
     {   
         
         $dernierMois = $this->dernierMoisSaisi($idVisiteur);
         $laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur, $dernierMois);
        
         
-        if ($moisSuivant >= Utils::getMois(date('d/m/Y'))) {
+        if ($mois > $dernierMois && $mois >= Utils::getMois(date('d/m/Y'))) {
            $idEtat = 'CR'; 
         }else{
            $idEtat = 'CL';
         }
          
-        if ($laDerniereFiche['idEtat'] == 'CR' && $dernierMois < $moisSuivant) {
+        if ($laDerniereFiche['idEtat'] == 'CR' &&  $mois > $dernierMois) {
             $this->majEtatFicheFrais($idVisiteur, $dernierMois, 'CL'); 
         }  
         
@@ -486,7 +489,7 @@ class PdoGsb
             . "VALUES (:unIdVisiteur,:unMois,0,0,now(),:unEtat)"
         );
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
-        $requetePrepare->bindParam(':unMois', $moisSuivant, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unEtat', $idEtat, PDO::PARAM_STR);
         $requetePrepare->execute();
         $lesIdFrais = $this->getLesIdFrais();
@@ -497,7 +500,7 @@ class PdoGsb
                 . 'VALUES(:unIdVisiteur, :unMois, :idFrais, 0)'
             );
             $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
-            $requetePrepare->bindParam(':unMois', $moisSuivant, PDO::PARAM_STR);
+            $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
             $requetePrepare->bindParam(
                 ':idFrais',
                 $unIdFrais['idfrais'],
@@ -1015,7 +1018,7 @@ class PdoGsb
     public function majEtatFicheFrais($idVisiteur, $mois, $etat, $nbJustificatif=false)
     {
         
-        $req = 'UPDATE ficheFrais SET idetat = :unEtat, datemodif = now() ';
+        $req = 'UPDATE fichefrais SET idetat = :unEtat, datemodif = now() ';
            if($nbJustificatif){
                 $req .=  ', nbjustificatifs = :unNbJustificatifs ';
             }

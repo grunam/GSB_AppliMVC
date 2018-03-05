@@ -113,8 +113,9 @@ case 'consulterFrais':
             include 'vues/v_erreurs.php';  
     }
 
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
     
+    /*
     foreach($lesFraisHorsForfait as $k => $v){
     
         if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
@@ -123,7 +124,7 @@ case 'consulterFrais':
 
         }
     }
-    
+    */
     
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
@@ -193,8 +194,9 @@ case 'validerMajFraisForfait':
         }
         
         
-        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-        
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
+       
+       /*
        foreach($lesFraisHorsForfait as $k => $v){
         
             if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
@@ -203,7 +205,7 @@ case 'validerMajFraisForfait':
 
             }
         }
-        
+        */
        
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         
@@ -333,15 +335,14 @@ case 'modifierFraisHorsForfait':
     include 'vues/v_listeVisiteursMois.php'; 
   
     
-    
     foreach ($include_array as $include) {
         include_once $include;
     }
     
     
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
     
-    
+    /*
     foreach($lesFraisHorsForfait as $k => $v){
         
         if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
@@ -350,7 +351,7 @@ case 'modifierFraisHorsForfait':
 
         }
     }
-    
+    */
     
     
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
@@ -466,9 +467,9 @@ case 'validerFrais' :
         include_once $include;
     }
 
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois); 
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0); 
     
-    
+    /*
     foreach($lesFraisHorsForfait as $k => $v){
 
             if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
@@ -477,6 +478,8 @@ case 'validerFrais' :
                 
             }
         }
+     * 
+    */
     
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);

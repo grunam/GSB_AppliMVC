@@ -28,7 +28,7 @@
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {
                 $libelle = $unFraisForfait['libelle']; ?>
-                <th> <?php echo htmlspecialchars($libelle) ?></th>
+                <th> <?php echo $libelle ?></th>
                 <?php
             }
             ?>

@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">65</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">61</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-78803175"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1377458263"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-78803175" class="accordion-body collapse in">
+            <div id="namespace-1377458263" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -685,7 +685,7 @@ un visiteur et un mois  passés en paramètres</em></p>
             <article class="method">
                 <h3 class="public ">getLesFraisHorsForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getLesFraisHorsForfait(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>) : \tous</pre>
+                <pre class="signature" style="margin-right: 54px;">getLesFraisHorsForfait(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>,   <span class="argument">$convertDate = 1</span>) : \tous</pre>
                 <p><em>Retourne sous forme d&#039;un tableau associatif toutes les lignes de frais
 hors forfait concernées par les deux paramètres.</em></p>
                 <p>La boucle foreach ne peut être utilisée ici car on procède
@@ -702,6 +702,11 @@ hors forfait concernées par les deux paramètres.</em></p>
                                 <td>String</td>
                                 <td>$mois </td>
                                 <td><p>Mois sous la forme aaaamm</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$convertDate </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
@@ -1187,41 +1192,44 @@ les lignes de frais forfait de quantités nulles</p>
             <article class="method">
                 <h3 class="public ">creeNouveauFraisHorsForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">creeNouveauFraisHorsForfait(  <span class="argument">$idVisiteur</span>,   <span class="argument">$mois</span>,   <span class="argument">$libelle</span>,   <span class="argument">$date</span>,   <span class="argument">$montant</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">creeNouveauFraisHorsForfait(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>, String  <span class="argument">$libelle</span>, String  <span class="argument">$date</span>, Float  <span class="argument">$montant</span>) : null</pre>
+                <p><em>Crée un nouveau frais hors forfait pour un visiteur un mois donné
+à partir des informations fournies en paramètres</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>String</td>
                                 <td>$idVisiteur </td>
-                                <td></td>
+                                <td><p>ID du visiteur</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>String</td>
                                 <td>$mois </td>
-                                <td></td>
+                                <td><p>Mois sous la forme aaaamm</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>String</td>
                                 <td>$libelle </td>
-                                <td></td>
+                                <td><p>Libellé du frais</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>String</td>
                                 <td>$date </td>
-                                <td></td>
+                                <td><p>Date du frais au format français jj/mm/aaaa</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>Float</td>
                                 <td>$montant </td>
-                                <td></td>
+                                <td><p>Montant du frais</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    null
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2105,7 +2113,7 @@ pour toutes les méthodes de la classe</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on March 4th, 2018 at 18:00.
+                    on March 5th, 2018 at 07:29.
                 </section>
             </section>
         </section>

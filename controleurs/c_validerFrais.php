@@ -98,33 +98,15 @@ case 'consulterFrais':
 
     $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
     $moisASelectionner = $leMois;
-    
-    /*
-    $montant = $pdo->getLeMontantTotalFrais($visiteurASelectionner, $leMois);
-    
-    echo $montant;
-    */
-    
+   
     include 'vues/v_listeVisiteursMois.php';
-    
     
     if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
             Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
             include 'vues/v_erreurs.php';  
     }
 
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-    
-    foreach($lesFraisHorsForfait as $k => $v){
-    
-        if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
-
-            $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
-
-        }
-    }
-    
-    
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
     $numAnnee = substr($leMois, 0, 4);
@@ -163,86 +145,66 @@ case 'validerMajFraisForfait':
     $leMois = filter_input(INPUT_POST, 'leMois', FILTER_SANITIZE_STRING);
     $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
     
-   // if (lesQteFraisValides($lesFrais)) {
-        
-        $lesVisiteurs = $pdo->getLesVisiteursValidationFichesFrais();
-        $idVisiteur = $visiteurASelectionner; 
-        $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
-        $moisASelectionner = $leMois;
-        $include_array = array();        
-        
-        include 'vues/v_listeVisiteursMois.php';
-        
-        try {
-            $pdo->majFraisForfait($visiteurASelectionner, $leMois, $lesFrais);
-            Utils::ajouterSucces('Mise à jour des frais forfaitaires effectuée.');
-            array_push($include_array, 'vues/v_succes.php');
-          
-        }catch(Exception $e){
-            Utils::ajouterErreur($e->getMessage());
-            array_push($include_array, 'vues/v_erreurs.php');
-        }
+    $lesVisiteurs = $pdo->getLesVisiteursValidationFichesFrais();
+    $idVisiteur = $visiteurASelectionner; 
+    $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
+    $moisASelectionner = $leMois;
+    $include_array = array();        
 
-        if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
-            Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
-            array_push($include_array, 'vues/v_erreurs.php');  
-        }
-        
-        foreach ($include_array as $include) {
-            include_once $include;
-        }
-        
-        
-        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-        
-       foreach($lesFraisHorsForfait as $k => $v){
-        
-            if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
+    include 'vues/v_listeVisiteursMois.php';
 
-                $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
+    try {
+        $pdo->majFraisForfait($visiteurASelectionner, $leMois, $lesFrais);
+        Utils::ajouterSucces('Mise à jour des frais forfaitaires effectuée.');
+        array_push($include_array, 'vues/v_succes.php');
 
-            }
+    }catch(Exception $e){
+        Utils::ajouterErreur($e->getMessage());
+        array_push($include_array, 'vues/v_erreurs.php');
+    }
+
+    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+        Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+        array_push($include_array, 'vues/v_erreurs.php');  
+    }
+
+    foreach ($include_array as $include) {
+        include_once $include;
+    }
+
+
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
+    $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+    $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+    $numAnnee = substr($leMois, 0, 4);
+    $numMois = substr($leMois, 4, 2);
+    $idEtat = $lesInfosFicheFrais['idEtat'];
+    $libEtat = $lesInfosFicheFrais['libEtat'];
+    $montantValide = $lesInfosFicheFrais['montantValide'];
+    $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+    $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
+
+    include 'vues/v_etatFicheFrais.php';
+    include 'vues/v_majFraisForfait.php';
+
+    $nbFraisHorsForfait = 0;
+    foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+        $refus = $unFraisHorsForfait['refuse'];
+        if(!$refus){
+            $nbFraisHorsForfait++;
         }
-        
-       
-        $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-        
-        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
-        $numAnnee = substr($leMois, 0, 4);
-        $numMois = substr($leMois, 4, 2);
-        $idEtat = $lesInfosFicheFrais['idEtat'];
-        $libEtat = $lesInfosFicheFrais['libEtat'];
-        $montantValide = $lesInfosFicheFrais['montantValide'];
-        $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-        $dateModif = Utils::dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
-        
-        include 'vues/v_etatFicheFrais.php';
-        include 'vues/v_majFraisForfait.php';
-        
-        $nbFraisHorsForfait = 0;
-        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-            $refus = $unFraisHorsForfait['refuse'];
-            if(!$refus){
-                $nbFraisHorsForfait++;
-            }
-        }
+    }
+
+
+    if(count($lesFraisHorsForfait) > 0){
+        include 'vues/v_majFraisHorsForfait.php';
+    }
+
+    if($idEtat == 'CL'){
+        include 'vues/v_validerFrais.php';
+    }
     
-        
-        if(count($lesFraisHorsForfait) > 0){
-            include 'vues/v_majFraisHorsForfait.php';
-        }
-        
-        if($idEtat == 'CL'){
-            include 'vues/v_validerFrais.php';
-        }
     
-    /*    
-    } else {
-        
-        ajouterErreur('Les valeurs des frais doivent être numériques');
-        include 'vues/v_erreurs.php';
-        
-    }*/
     break;
 
 case 'modifierFraisHorsForfait':
@@ -256,16 +218,10 @@ case 'modifierFraisHorsForfait':
     $include_array = array();
     $moisASelectionner = $leMois;
     
-    
     $parseFraisHorsForfait = json_decode($FraisHorsForfait, true);
-    
     
     $nbre = (count($parseFraisHorsForfait) > 1)?'s':'';
     $atc = (count($parseFraisHorsForfait) > 1)?'des':'du';
-    
-    
-    
-    
     
     if($modFraisHorsForfait == 'modifier'){
     
@@ -282,10 +238,8 @@ case 'modifierFraisHorsForfait':
     
     } else if($modFraisHorsForfait == 'reporter'){
         
-        
         try {
-
-
+            
             $lesInfosFicheFraisMoisSuivant = $pdo->getLesInfosFicheFrais($idVisiteur, Utils::getMoisSuivant($leMois));
     
             if(isset($parseFraisHorsForfait)){
@@ -333,26 +287,12 @@ case 'modifierFraisHorsForfait':
     include 'vues/v_listeVisiteursMois.php'; 
   
     
-    
     foreach ($include_array as $include) {
         include_once $include;
     }
     
     
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-    
-    
-    foreach($lesFraisHorsForfait as $k => $v){
-        
-        if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
-            
-            $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
-
-        }
-    }
-    
-    
-    
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
     $numAnnee = substr($leMois, 0, 4);
@@ -389,27 +329,12 @@ case 'validerFrais' :
     $leMois = filter_input(INPUT_POST, 'leMois', FILTER_SANITIZE_STRING);
     $justificatif = filter_input(INPUT_POST, 'nbJustificatif', FILTER_SANITIZE_STRING);
     $nbFraisHorsForfait = filter_input(INPUT_POST, 'leNbFraisHorsForfait', FILTER_SANITIZE_STRING);
-    
-    
-    //$actionFraisHorsForfait = filter_input(INPUT_POST, 'actionFraisHorsForfait', FILTER_SANITIZE_STRING);
-   
-    //echo json_encode($actionFraisHorsForfait);    
-    //$lesCles = array_keys($idsFrais);
-    /*
-    foreach($idsFrais as $valeur)
-    {
-        echo "La checkbox $valeur a été cochée<br>";
-    }
-    */
-    
     $lesVisiteurs = $pdo->getLesVisiteursValidationFichesFrais();
     $idVisiteur = $visiteurASelectionner; 
-    //$montantTotalFraisHorsForfait = $pdo->getLeMontantTotalFraisHorsForfait($idVisiteur, $leMois);
+    
     $include_array = array();
     
     $nbJustif = (empty($justificatif))?0:$justificatif;
-    
-    
     
     if($nbJustif >= $nbFraisHorsForfait) {
         
@@ -425,10 +350,7 @@ case 'validerFrais' :
     
     try {
      
-        
-        
         ($nbFraisHorsForfait > 1)?$nbre='s':$nbre='';
-        
         
         if($nbJustif < $nbFraisHorsForfait) {
            
@@ -466,18 +388,7 @@ case 'validerFrais' :
         include_once $include;
     }
 
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois); 
-    
-    
-    foreach($lesFraisHorsForfait as $k => $v){
-
-            if($lesFraisHorsForfait[$k]['date'] && $lesFraisHorsForfait[$k]['refuse'] != 1){
-                 
-                    $lesFraisHorsForfait[$k]['date'] = Utils::dateFrancaisVersAnglais($lesFraisHorsForfait[$k]['date']);
-                
-            }
-        }
-    
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
     $numAnnee = substr($leMois, 0, 4);

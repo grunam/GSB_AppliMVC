@@ -169,7 +169,7 @@ class PdoGsb
      * @return tous les champs des lignes de frais hors forfait sous la forme
      * d'un tableau associatif
      */
-    public function getLesFraisHorsForfait($idVisiteur, $mois)
+    public function getLesFraisHorsForfait($idVisiteur, $mois, $convertDate=1)
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT * FROM lignefraishorsforfait '
@@ -180,10 +180,13 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $lesLignes = $requetePrepare->fetchAll();
-        for ($i = 0; $i < count($lesLignes); $i++) {
-            $date = $lesLignes[$i]['date'];
-            $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
-        }
+        
+        if($convertDate == 1){
+            for ($i = 0; $i < count($lesLignes); $i++) {
+                $date = $lesLignes[$i]['date'];
+                $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
+            }
+        }    
         return $lesLignes;
     }
 
@@ -469,13 +472,14 @@ class PdoGsb
         $laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur, $dernierMois);
        
         
-        if ($moisSuivant >= Utils::getMois(date('d/m/Y'))) {
+        //if ($moisSuivant > Utils::getMois(date('d/m/Y'))) {
+        if ($moisSuivant > $dernierMois) {
            $idEtat = 'CR'; 
         }else{
            $idEtat = 'CL';
         }
          
-        if ($laDerniereFiche['idEtat'] == 'CR' && $dernierMois < $moisSuivant) {
+        if ($laDerniereFiche['idEtat'] == 'CR' &&  $moisSuivant < $dernierMois) {
             $this->majEtatFicheFrais($idVisiteur, $dernierMois, 'CL'); 
         }  
         
@@ -520,13 +524,7 @@ class PdoGsb
      * @return null
      */
     
-    /*
-    $this->creeNouveauFraisHorsForfait(
-            $laLigne['idvisiteur'], 
-            $mois, $laLigne['libelle'], 
-            dateAnglaisVersFrancais($laLigne['date']), 
-            $laLigne['montant'] );        
-    */
+   
     public function creeNouveauFraisHorsForfait(
         $idVisiteur,
         $mois,
@@ -1021,7 +1019,7 @@ class PdoGsb
     public function majEtatFicheFrais($idVisiteur, $mois, $etat, $nbJustificatif=false)
     {
         
-        $req = 'UPDATE ficheFrais SET idetat = :unEtat, datemodif = now() ';
+        $req = 'UPDATE fichefrais SET idetat = :unEtat, datemodif = now() ';
            if($nbJustificatif){
                 $req .=  ', nbjustificatifs = :unNbJustificatifs ';
             }
