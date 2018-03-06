@@ -28,15 +28,25 @@ case 'saisirFrais':
 case 'validerMajFraisForfait':
     $lesFrais
         = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
-    //if (lesQteFraisValides($lesFrais)) {
-        $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
     
-    /*    
-    } else {
-        ajouterErreur('Les valeurs des frais doivent être numériques');
-        include 'vues/v_erreurs.php';
+    try {    
+    
+        if (Utils::lesQteFraisValides($lesFrais)) {
+            $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
+            Utils::ajouterSucces('Mise à jour des frais forfaitaires effectuée.');
+            include 'vues/v_succes.php';
+
+        } else {
+            Utils::ajouterErreur('Les valeurs des frais doivent être numériques');
+            include 'vues/v_erreurs.php';
+        }
+    
+    } catch(Exception $e) {
+        
+        Utils::ajouterErreur($e->getMessage());
+        include 'vues/v_erreurs.php';   
     }
-    */
+    
     break;
 case 'validerCreationFrais':
     
@@ -46,17 +56,37 @@ case 'validerCreationFrais':
    
    
     Utils::valideInfosFrais($dateFrais, $libelle, $montant);
-    if (Utils::nbErreurs() != 0) {
-        include 'vues/v_erreurs.php';
-    } else {
-        $pdo->creeNouveauFraisHorsForfait(
-            $idVisiteur,
-            $mois,
-            $libelle,
-            $dateFrais,
-            $montant
-        );
+    
+    try {
+        
+        if (Utils::nbErreurs() != 0) {
+            
+            include 'vues/v_erreurs.php';
+            
+        } else {
+            
+            $pdo->creeNouveauFraisHorsForfait(
+                $idVisiteur,
+                $mois,
+                $libelle,
+                $dateFrais,
+                $montant
+            );
+                
+            Utils::ajouterSucces('Validetion de la fiche de frais effectuée.');
+            include 'vues/v_succes.php';
+        
+        }
+        
+    } catch(Exception $e) {
+        
+        Utils::ajouterErreur($e->getMessage());
+        include 'vues/v_erreurs.php';   
     }
+    
+    
+    
+    
     break;
 case 'supprimerFrais':
     $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_STRING);

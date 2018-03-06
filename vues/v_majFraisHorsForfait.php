@@ -74,7 +74,7 @@
                 
                 </td>
                 <td>
-                    <input id="txtMontantHF<?php echo $idFrais ?>" type="number" step="0.05" name="txtMontantHF<?php echo $idFrais ?>" 
+                    <input id="txtMontantHF<?php echo $idFrais ?>" type="number" step="0.01" name="txtMontantHF<?php echo $idFrais ?>" 
                            class="form-control" value="<?php echo $montant ?>" required>    
                 
                 </td>
@@ -119,11 +119,11 @@
             <tr>
                 <td class="text-center" colspan="4">
                     
-                    <button onclick="javascript:return confirm('Voulez-vous vraiment modifier ce(s) frais?');" id="modifierFraisHorsForfait" class="btn btn-success" type="button">Modifier</button>
-                    <button onclick="javascript:return confirm('Voulez-vous vraiment reporter ce(s) frais?');" id="reporterFraisHorsForfait" class="btn btn-success" type="button">Reporter</button>    
-                    <button onclick="javascript:return confirm('Voulez-vous vraiment supprimer ce(s) frais?');" id="supprimerFraisHorsForfait" class="btn btn-success" type="button">Supprimer</button>
+                    <button id="modifierFraisHorsForfait" class="btn btn-success" type="submit">Modifier</button>
+                    <button id="reporterFraisHorsForfait" class="btn btn-success" type="submit">Reporter</button>    
+                    <button id="supprimerFraisHorsForfait" class="btn btn-success" type="submit">Supprimer</button>
                     <button class="btn btn-danger" type="reset">Effacer</button> 
-                    
+                  
                 </td>
             </tr>
             

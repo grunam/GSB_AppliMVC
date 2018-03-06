@@ -20,7 +20,8 @@ class Urlchecker
 {
 
 /**
- * Vérifie si les paramètres passés en url sont corrects
+ * Vérifie si les paramètres passés en url sont correctes, c'est à dire
+ * qu'ils correspondent à ceux enregistrés dans un tableau multidimensionnel.
  *
  *  
  * 

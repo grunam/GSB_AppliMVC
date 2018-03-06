@@ -35,97 +35,59 @@ $(document).ready(function() {
      });
      
      
-     $reporter.on('click', function() {
-         
-         var tabHF = [];
-         
-         if($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
-            
-             $("input[name='lesFraisHorsForfait[]']:checked").each(function () {
-               /*
-               var $dateSelector = (("#txtDateHF"+$(this).val()).toString());
-               var $libelleSelector = (("#txtLibelleHF"+$(this).val()).toString());
-               var $montantSelector = (("#txtMontantHF"+$(this).val()).toString());
-               */
-                tabHF.push($(this).val());
-                
-               
-            });
-            
-            $FraisHorsForfait.val( JSON.stringify(tabHF) );
-           
-            $valModFraisHorsForfait.attr('value', 'reporter');
-            $('#FormFraisHorsForfait').submit();
-         }  
-          
-     });
+    var btn; 
+     
+    $reporter.on('click', function() { 
+       btn = 'reporter';
+    });
      
  
     $supprimer.on('click', function() {
-        
-        var tabHF = [];
-        
-        if($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
-            
-            $("input[name='lesFraisHorsForfait[]']:checked").each(function () {
-               /*
-               var $dateSelector = (("#txtDateHF"+$(this).val()).toString());
-               var $libelleSelector = (("#txtLibelleHF"+$(this).val()).toString());
-               var $montantSelector = (("#txtMontantHF"+$(this).val()).toString());
-               */
-                tabHF.push($(this).val());
-                
-               
-            });
-            
-            $FraisHorsForfait.val( JSON.stringify(tabHF) );
-           
-            $valModFraisHorsForfait.attr('value', 'supprimer');
-            $('#FormFraisHorsForfait').submit();
-        }    
+        btn = 'supprimer';
     });
     
    
     $modifier.on('click', function() {
+        btn = 'modifier';  
+    }); 
+     
+    $('#FormFraisHorsForfait').on('submit', function() {
         
-        /*
-        "txtMontantHF"
-        
-        "txtLibelleHF"
-        
-        "txtDateHF"
-        
-        "cbHF"
-        */
-        
+        //console.log(btn);
+        //event.preventDefault();
+
         var tabHF = [];
-        if($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
+         
+        if ($("input[name='lesFraisHorsForfait[]']:checked").length > 0){
             
-            
-            $("input[name='lesFraisHorsForfait[]']:checked").each(function () {
-               
-               var $dateSelector = (("#txtDateHF"+$(this).val()).toString());
-               var $libelleSelector = (("#txtLibelleHF"+$(this).val()).toString());
-               var $montantSelector = (("#txtMontantHF"+$(this).val()).toString());
-               
-                tabHF.push({id : $(this).val(), date : $($dateSelector).val(), libelle : $($libelleSelector).val(), montant : $($montantSelector).val() });
+             $("input[name='lesFraisHorsForfait[]']:checked").each(function () {
                 
-               
+                if (btn == "reporter" || btn =="supprimer") { 
+                    tabHF.push($(this).val());
+                } else if (btn == "modifier") {
+                   
+                   var $dateSelector = (("#txtDateHF"+$(this).val()).toString());
+                   var $libelleSelector = (("#txtLibelleHF"+$(this).val()).toString());
+                   var $montantSelector = (("#txtMontantHF"+$(this).val()).toString());
+                   tabHF.push({id : $(this).val(), date : $($dateSelector).val(), libelle : $($libelleSelector).val(), montant : $($montantSelector).val() });
+  
+                }
             });
             
             $FraisHorsForfait.val( JSON.stringify(tabHF) );
-            $valModFraisHorsForfait.attr('value', 'modifier');
             
-            //console.log($FraisHorsForfait.val());
-            $('#FormFraisHorsForfait').submit();
+            $valModFraisHorsForfait.attr('value', btn);
+          
+         
+        } else {
             
-           
-        }    
+            event.preventDefault();
+            alert('Veuillez sélectionner au moins un frais hors forfait.');
+         
+         }
+         
     });
-   
-   
-      
-       
+    
    
    
 });

@@ -58,7 +58,7 @@
                                name="lesFrais[<?php echo $idFrais ?>]"
                                size="10" maxlength="5" min="0" step="1"
                                value="<?php echo $quantite ?>" 
-                               class="form-control">
+                               class="form-control" required>
                 </div>
 
                 <?php

@@ -24,11 +24,12 @@
 class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
-   
+  
     private static $bdd = 'dbname=gsb_frais';
     private static $user = 'userGsb';
     private static $mdp = 'secret';
    
+    
     /*
     private static $bdd = 'dbname=wh1l2sdy_gsb_frais';
     private static $user = 'wh1l2sdy_grunam';
@@ -186,7 +187,15 @@ class PdoGsb
                 $date = $lesLignes[$i]['date'];
                 $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
             }
-        }    
+        } else if($convertDate == 0){    
+            for ($i = 0; $i < count($lesLignes); $i++) {
+                $date = $lesLignes[$i]['date'];
+                $refus = $lesLignes[$i]['refuse'];
+                if ($refus == 1) {    
+                    $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
+                }    
+            }
+        }
         return $lesLignes;
     }
 
