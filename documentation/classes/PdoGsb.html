@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">79</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">81</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">29</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">31</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1866335784"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2078545733"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1866335784" class="accordion-body collapse in">
+            <div id="namespace-2078545733" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -747,7 +747,7 @@ un visiteur et un mois  passés en paramètres</em></p>
                 <p><em>Retourne sous forme d&#039;un tableau associatif toutes les lignes de frais
 hors forfait concernées par les deux paramètres.</em></p>
                 <p>La boucle foreach ne peut être utilisée ici car on procède
-à une modification de la structure itérée - transformation du champ date-</p>
+à une modification de la structure itérée - transformation du champ date et libelle -</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -908,7 +908,7 @@ associatif</p>
                 <h3 class="public ">getLesIdFrais()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getLesIdFrais() : \un</pre>
-                <p><em>Retourne tous les id de la table FraisForfait</em></p>
+                <p><em>Retourne tous les id des frais forfaitaires</em></p>
                 
 
                 
@@ -945,9 +945,8 @@ associatif</p>
                 <h3 class="public ">majFraisForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">majFraisForfait(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>, Array  <span class="argument">$lesFrais</span>) : null</pre>
-                <p><em>Met à jour la table ligneFraisForfait
-Met à jour la table ligneFraisForfait pour un visiteur et
-un mois donné en enregistrant les nouveaux montants</em></p>
+                <p><em>Met à jour la table ligneFraisForfait pour un visiteur,
+un mois et les frais donnés</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -994,9 +993,8 @@ de valeur la quantité pour ce frais</p></td>
                 <h3 class="public ">majFraisHorsForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">majFraisHorsForfait(Array  <span class="argument">$lesFrais</span>) : null</pre>
-                <p><em>Met à jour la table ligneFraisHorsForfait
-Met à jour la table ligneFraisHorsForfait pour un id
- donné en enregistrant les nouveaux montants</em></p>
+                <p><em>Met à jour la table ligneFraisHorsForfait pour les frais
+donnés</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1033,8 +1031,8 @@ de valeur pour ce frais</p></td>
                 <h3 class="public ">reporterUnFraisHorsForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">reporterUnFraisHorsForfait(String  <span class="argument">$id</span>, String  <span class="argument">$mois</span>) : null</pre>
-                <p><em>Met à jour d&#039;une ligneFraisHorsForfait dont l&#039;id est passé en paramètre
- avec le mois passé en paramètre</em></p>
+                <p><em>Reporte un frais de ligneFraisHorsForfait dont l&#039;id
+avec le mois sont  passés en paramètres</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1075,7 +1073,8 @@ de valeur pour ce frais</p></td>
                 <h3 class="public ">refuserUnFraisHorsForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">refuserUnFraisHorsForfait(String  <span class="argument">$id</span>, String  <span class="argument">$libelle</span>) : null</pre>
-                <p><em>Met à jour une ligneFraisHorsForfait dont l&#039;id est passé en paramètre avec le nouveau libelle introduit par &#039;REFUSE-&#039;
+                <p><em>Met à jour unfrais de ligneFraisHorsForfait, dont l&#039;id
+est passé en paramètre, avec le nouveau libelle introduit par &#039;REFUSE-&#039;
 et le champ refuse changé à true</em></p>
                 
 
@@ -1117,7 +1116,7 @@ et le champ refuse changé à true</em></p>
                 <h3 class="public ">majNbJustificatifs()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">majNbJustificatifs(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>, Integer  <span class="argument">$nbJustificatifs</span>) : null</pre>
-                <p><em>Met à jour le nombre de justificatifs de la table ficheFrais
+                <p><em>Met à jour le nombre de justificatifs de la table fichefrais
 pour le mois et le visiteur concerné</em></p>
                 
 
@@ -1164,7 +1163,8 @@ pour le mois et le visiteur concerné</em></p>
                 <h3 class="public ">estPremierFraisMois()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">estPremierFraisMois(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>) : \vrai</pre>
-                <p><em>Teste si un visiteur possède une fiche de frais pour le mois passé en paramètre</em></p>
+                <p><em>Teste si un visiteur possède une fiche de frais
+pour le mois et l&#039;id passés en paramètres</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1217,7 +1217,8 @@ pour le mois et le visiteur concerné</em></p>
                 <h3 class="public ">dernierMoisSaisi()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">dernierMoisSaisi(String  <span class="argument">$idVisiteur</span>) : \le</pre>
-                <p><em>Retourne le dernier mois en cours d&#039;un visiteur</em></p>
+                <p><em>Retourne le dernier mois saisi
+d&#039;une fiche de frais pour un visiteur donné</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1307,7 +1308,7 @@ les lignes de frais forfait de quantités nulles</p>
                 <h3 class="public ">creeNouveauFraisHorsForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">creeNouveauFraisHorsForfait(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>, String  <span class="argument">$libelle</span>, String  <span class="argument">$date</span>, Float  <span class="argument">$montant</span>) : null</pre>
-                <p><em>Crée un nouveau frais hors forfait pour un visiteur un mois donné
+                <p><em>Crée un nouveau frais hors forfait pour un visiteur et un mois donnés
 à partir des informations fournies en paramètres</em></p>
                 
 
@@ -1436,7 +1437,7 @@ les lignes de frais forfait de quantités nulles</p>
                 <h3 class="public ">reporterLesFraisHorsForfait()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">reporterLesFraisHorsForfait(Array  <span class="argument">$lesFrais</span>, String  <span class="argument">$mois</span>) : null</pre>
-                <p><em>Reporte le frais hors forfait dont l&#039;id est ou les ids sont passé(s) en paramètre dans la fiche du mois suivant,
+                <p><em>Reporte le frais hors forfait dont l&#039;id est ou les ids sont passé(s) en paramètre(s) vers la fiche du mois suivant,
 créé la fiche si elle n&#039;existe pas.</em></p>
                 
 
@@ -1846,7 +1847,7 @@ et la ligne d'état</p>
                 <h3 class="public ">montantTotalFrais()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">montantTotalFrais(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$mois</span>) : \un</pre>
-                <p><em>Retourne les le montant total des frais forfaitaires et hors forfait d&#039;un visiteur pour un
+                <p><em>Retourne le montant total des frais forfaitaires et hors forfait d&#039;un visiteur pour un
 mois donné et met à jour le montant validé d&#039;un fiche de frais</em></p>
                 
 
@@ -2115,7 +2116,7 @@ d'un tableau associatif</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">accepterUnFraisHorsForfait(String  <span class="argument">$id</span>, String  <span class="argument">$libelle</span>) : null</pre>
                 <p><em>Fonction pour tests unitaires</em></p>
-                <p>Met à jour d'une ligneFraisHorsForfait dont l'id est passé en paramètre avec le nouveau libelle non introduit par 'REFUSE-'
+                <p>Met à jour un frais de ligneFraisHorsForfait dont l'id est passé en paramètre avec le nouveau libelle non introduit par 'REFUSE-'
 et le champ refuse changé à false</p>
 
                                     <h4>Parameters</h4>
@@ -2240,7 +2241,7 @@ pour un visiteur et un mois donnés</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on March 7th, 2018 at 13:35.
+                    on March 7th, 2018 at 19:22.
                 </section>
             </section>
         </section>

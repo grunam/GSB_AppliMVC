@@ -22,9 +22,9 @@
 <h2>
      <?php
             
-        if($monControleur == 'validerFrais'){
+        if ($monControleur == 'validerFrais') {
             echo 'Valider une fiche de frais'; 
-        } else if($monControleur == 'paiementFrais'){
+        } else if ($monControleur == 'paiementFrais') {
             echo 'Suivre le paiement des fiches de frais'; 
         }
      ?>

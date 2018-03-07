@@ -23,12 +23,9 @@ $numMois = substr($mois, 4, 2);
 */
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-
 $monControleur = 'paiementFrais';
 
 
-
-    
 switch ($action) {
 
 case 'selectionnerVisiteursMois':    
@@ -80,7 +77,7 @@ case 'consulterFrais':
     $nbFraisHorsForfait = 0;
     foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
         $refus = $unFraisHorsForfait['refuse'];
-        if(!$refus){
+        if (!$refus) {
             $nbFraisHorsForfait++;
         }
     }
@@ -88,7 +85,7 @@ case 'consulterFrais':
     include 'vues/v_etatFicheFrais.php';
     include 'vues/v_majFraisForfait.php';
     
-    if(count($lesFraisHorsForfait) > 0){
+    if (count($lesFraisHorsForfait) > 0) {
         include 'vues/v_majFraisHorsForfait.php';
     }
     
@@ -106,9 +103,9 @@ case 'paiementFrais' :
     $include_array = array();
     
     
-    if($etat == 'VA'){
+    if ($etat == 'VA') {
         $nouvelEtat = 'MP';
-    } else if($etat == 'MP'){
+    } else if ($etat == 'MP') {
         $nouvelEtat = 'RB';
     }  
      
@@ -116,20 +113,20 @@ case 'paiementFrais' :
 
         $pdo->majEtatFicheFrais($idVisiteur, $leMois, $nouvelEtat); 
         
-        if($etat == 'VA'){
+        if ($etat == 'VA') {
             Utils::ajouterSucces('La fiche de frais est mise en paiement.');
-        } else if($etat == 'MP'){
+        } else if ($etat == 'MP') {
             Utils::ajouterSucces('La fiche de frais est remboursée.');
         }  
         
         array_push($include_array, 'vues/v_succes.php');
        
-    }catch(Exception $e){
+    } catch (Exception $e) {
         Utils::ajouterErreur($e->getMessage());
         array_push($include_array, 'vues/v_erreurs.php');
     }
 
-    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 20, 20) && $etat == 'VA') {
+    if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 20, 20) && $etat == 'VA') {
         Utils::ajouterErreur('La mise en paiement doit être faite au 20 du mois suivant la saisie par les visiteurs !');
         array_push($include_array, 'vues/v_erreurs.php');
     }
@@ -161,7 +158,7 @@ case 'paiementFrais' :
     $nbFraisHorsForfait = 0;
     foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
         $refus = $unFraisHorsForfait['refuse'];
-        if(!$refus){
+        if (!$refus) {
             $nbFraisHorsForfait++;
         }
     }
@@ -169,14 +166,14 @@ case 'paiementFrais' :
     //echo 'frais hors forfait : '.$nbFraisHorsForfait;
     
     
-    if(count($lesFraisHorsForfait) > 0){
+    if (count($lesFraisHorsForfait) > 0) {
         include 'vues/v_majFraisHorsForfait.php';
     }
     
-    if($idEtat == 'VA' || $idEtat == 'MP'){
+    if ($idEtat == 'VA' || $idEtat == 'MP') {
         include 'vues/v_paiementFrais.php';
     }
     
-    //break;
+    break;
     
 }

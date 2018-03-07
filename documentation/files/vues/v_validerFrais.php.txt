@@ -26,8 +26,7 @@
                 <table class="table table-bordered table-responsive">
                 
                 <?php
-                if($nbFraisHorsForfait > 0)
-                {
+                if ($nbFraisHorsForfait > 0) {
                 ?>
                     
                 <tr>
