@@ -62,19 +62,19 @@ $(document).ready(function() {
             
              $("input[name='lesFraisHorsForfait[]']:checked").each(function () {
                 
-                if (btn == "reporter" || btn =="supprimer") { 
+                if (btn == 'reporter' || btn =='supprimer') { 
                     tabHF.push($(this).val());
-                } else if (btn == "modifier") {
+                } else if (btn == 'modifier') {
                    
-                   var $dateSelector = (("#txtDateHF"+$(this).val()).toString());
-                   var $libelleSelector = (("#txtLibelleHF"+$(this).val()).toString());
-                   var $montantSelector = (("#txtMontantHF"+$(this).val()).toString());
+                   var $dateSelector = (('#txtDateHF'+$(this).val()).toString());
+                   var $libelleSelector = (('#txtLibelleHF'+$(this).val()).toString());
+                   var $montantSelector = (('#txtMontantHF'+$(this).val()).toString());
                    tabHF.push({id : $(this).val(), date : $($dateSelector).val(), libelle : $($libelleSelector).val(), montant : $($montantSelector).val() });
   
                 }
             });
             
-            $FraisHorsForfait.val( JSON.stringify(tabHF) );
+            $FraisHorsForfait.val(JSON.stringify(tabHF));
             
             $valModFraisHorsForfait.attr('value', btn);
           

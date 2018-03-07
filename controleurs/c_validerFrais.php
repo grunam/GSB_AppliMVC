@@ -17,10 +17,9 @@
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 
-$monControleur = "validerFrais";
+$monControleur = 'validerFrais';
 
 
-    
 switch ($action) {
 
 case 'selectionnerVisiteursMois':    
@@ -36,7 +35,7 @@ case 'selectionnerVisiteursMois':
       
             $numAnneePrecedente = substr($mois, 0, 4);
             $numMoisPrecedent = substr($mois, 4, 2);
-            $labelMois = $numMoisPrecedent."-".$numAnneePrecedente; 
+            $labelMois = $numMoisPrecedent.'-'.$numAnneePrecedente; 
             $labelCloturation = 'Les fiches du mois précédent du '.$labelMois.' sont cloturées.';
             
             Utils::ajouterSucces($labelCloturation);
@@ -269,7 +268,7 @@ case 'modifierFraisHorsForfait':
             array_push($include_array, 'vues/v_erreurs.php');
         }
         
-    } else if($modFraisHorsForfait == "supprimer"){
+    } else if($modFraisHorsForfait == 'supprimer'){
         
         
         

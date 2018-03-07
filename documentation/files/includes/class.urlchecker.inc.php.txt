@@ -34,10 +34,18 @@ class Urlchecker
         $datas = array();
         $datas['uc'] = array();
 
+        $datas['uc']['connexion'] = array();
+        $datas['uc']['connexion']['action'] = array();
+        $datas['uc']['connexion']['action']['valideConnexion'] = '';
+        $datas['uc']['connexion']['action']['demandeConnexion'] = '';
+        
         $datas['uc']['deconnexion'] = array();
         $datas['uc']['deconnexion']['action'] = array();
         $datas['uc']['deconnexion']['action']['demandeDeconnexion'] = '';
-
+        $datas['uc']['deconnexion']['action']['valideDeconnexion'] = '';
+        
+        $datas['uc']['erreur'] = '';
+        
         $datas['uc']['gererFrais'] = array();
         $datas['uc']['gererFrais']['action'] = array();
         $datas['uc']['gererFrais']['action']['saisirFrais'] = '';
@@ -69,24 +77,12 @@ class Urlchecker
         $datas['uc']['paiementFrais']['action']['consulterFrais'] = ''; 
         $datas['uc']['paiementFrais']['action']['paiementFrais'] = '';
         
-        $datas['uc']['deconnexion'] = array();
-        $datas['uc']['deconnexion']['action'] = array();
-        $datas['uc']['deconnexion']['action']['demandeDeconnexion'] = '';
-        
-        $datas['uc']['demandeconnexion'] = array();
-        $datas['uc']['demandeconnexion']['action'] = array();
-        $datas['uc']['demandeconnexion']['action']['demandeConnexion'] = '';
-        $datas['uc']['demandeconnexion']['action']['valideConnexion'] = '';
-        
-        $datas['uc']['erreur'] = '';
-        
         
         $params = null;
         $requestUri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         parse_str(parse_url($requestUri, PHP_URL_QUERY), $params);
 
         $errorUrl = false;
-
 
          if(!empty($params)){
 

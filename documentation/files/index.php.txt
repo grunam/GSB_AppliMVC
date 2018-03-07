@@ -14,10 +14,6 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 
-//header( 'content-type: text/html; charset=utf-8' );
-
-
-
 require_once 'includes/class.utils.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
 session_start();
@@ -45,22 +41,6 @@ $errorUrl = false;
 if (isset($_SESSION['idVisiteur'])){
     $errorUrl = Urlchecker::paramChecker($_SESSION['idVisiteur'], $pdo);
 }
-
-//echo "zeze == 2 : ".Utils::estVisiteur(2, array(array("id"=>"zeze")));
-/*
-echo "get date en->fr : ".Utils::dateAnglaisVersFrancais('zezez-bolob-glip');
-
-echo "<br>get mois : ".Utils::getMoisPrecedent('18/01/2007');
-echo "<br>get mois : ".Utils::getMoisPrecedent('20/12/2017');
-echo "<br>get mois : ".Utils::getMoisPrecedent('02/2016');
-echo "<br>get mois : ".Utils::getMoisPrecedent('2000');
-*/
-//echo mb_strlen('On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Telle pourrait être la devise du pouvoir exécutif. Déterminé à engager une réforme en profondeur de la SNCF, il procède comme il l’a fait à l’automne 2017 sur le dossier réputé hautement inflammable du droit du travail,', "UTF8");
-//echo '<br>';
-//echo  Utils::mentionRefuse('On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Telle pourrait être la devise du pouvoir exécutif. Déterminé à engager une réforme en profondeur de la SNCF, il procède comme il l’a fait à l’automne 2017 sur le dossier réputé hautement inflammable du droit du travail,');
-
-
-
 
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
 

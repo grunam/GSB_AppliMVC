@@ -60,7 +60,7 @@
                         $cpVisiteur = $unVisiteur['cp'];
                         
                         
-                        $LigneVisiteurMedical = $unVisiteur['prenom']." ".$unVisiteur['nom']." ".$unVisiteur['adresse']." ".$unVisiteur['cp']." ".$unVisiteur['ville'];
+                        $LigneVisiteurMedical = $unVisiteur['nom']." ".$unVisiteur['prenom']." ".$unVisiteur['adresse']." ".$unVisiteur['cp']." ".$unVisiteur['ville'];
                         
                         if ($unVisiteur["id"] == $visiteurASelectionner) {
                             ?>

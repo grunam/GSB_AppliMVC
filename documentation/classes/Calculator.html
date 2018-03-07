@@ -12,9 +12,9 @@
     <link href="../css/prism.css" rel="stylesheet" media="all"/>
     <link href="../css/template.css" rel="stylesheet" media="all"/>
     
-    <!--[if lt IE 9]>
+    <!--'if lt IE 9]>
     <script src="../js/html5.js"></script>
-    <![endif]-->
+    <!'endif]-->
     <script src="../js/jquery-1.11.0.min.js"></script>
     <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -23,9 +23,9 @@
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
-        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+        Array.prototype.slice.call(document.querySelectorAll('pre'data-src]')).forEach(function (pre) {
             var src = pre.getAttribute('data-src');
-            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var extension = (src.match(/\.(\w+)$/) || ', ''])'1];
             var language = 'php';
 
             var code = document.createElement('code');

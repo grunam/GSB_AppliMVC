@@ -7,5 +7,6 @@
  */
 
 require "C:\wamp\www\GSB_AppliMVC\www\includes\class.utils.inc.php";
+require "C:\wamp\www\GSB_AppliMVC\www\includes\class.pdogsb.inc.php";
 
 ?>
