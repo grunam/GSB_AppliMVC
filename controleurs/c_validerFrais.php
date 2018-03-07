@@ -108,11 +108,13 @@ case 'consulterFrais':
     include 'vues/v_listeVisiteursMois.php';
     
     if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+
             Utils::ajouterErreur(
                 'La campagne de validation doit être réalisée'
                 . ' entre le 10 et le 20 du mois suivant '
                 . 'la saisie par les visiteurs !'
             );
+
             include 'vues/v_erreurs.php';  
     }
 
@@ -301,11 +303,13 @@ case 'modifierFraisHorsForfait':
     }
     
     if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+
         Utils::ajouterErreur(
             'La campagne de validation doit être réalisée'
             . ' entre le 10 et le 20 du mois suivant '
             . 'la saisie par les visiteurs !'
         );
+
         array_push($include_array, 'vues/v_erreurs.php');    
     }
     
@@ -402,11 +406,13 @@ case 'validerFrais' :
     
      if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20) 
              && (Utils::getMoisSuivant($leMois) != Utils::getMois(date('d/m/Y')))) {
+
            Utils::ajouterErreur(
                 'La campagne de validation doit être réalisée'
                 . ' entre le 10 et le 20 du mois suivant '
                 . 'la saisie par les visiteurs !'
             );
+
            array_push($include_array, 'vues/v_erreurs.php');
      }
     

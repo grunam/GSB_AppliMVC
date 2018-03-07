@@ -120,10 +120,12 @@ case 'paiementFrais' :
     }
 
     if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 20, 20) && $etat == 'VA') {
+
         Utils::ajouterErreur(
             'La mise en paiement doit être faite au 20'
             . ' du mois suivant la saisie par les visiteurs !'
         );
+
         array_push($include_array, 'vues/v_erreurs.php');
     }
     
