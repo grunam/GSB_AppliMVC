@@ -30,7 +30,7 @@ $(document).ready(function() {
         
         var idLstVisiteur = $lesVisiteurs.val();
         var leControleur = $monControleur.val();
-        window.location.href = 'index.php?uc='+leControleur+'&action=selectionnerVisiteur&idLstVisiteur='+idLstVisiteur;
+        window.location.href = 'index.php?uc=' + leControleur + '&action=selectionnerVisiteur&idLstVisiteur=' + idLstVisiteur;
       
      });
      
@@ -63,13 +63,15 @@ $(document).ready(function() {
              $("input[name='lesFraisHorsForfait[]']:checked").each(function () {
                 
                 if (btn == 'reporter' || btn =='supprimer') { 
+                    
                     tabHF.push($(this).val());
+                    
                 } else if (btn == 'modifier') {
                    
-                   var $dateSelector = (('#txtDateHF'+$(this).val()).toString());
-                   var $libelleSelector = (('#txtLibelleHF'+$(this).val()).toString());
-                   var $montantSelector = (('#txtMontantHF'+$(this).val()).toString());
-                   tabHF.push({id : $(this).val(), date : $($dateSelector).val(), libelle : $($libelleSelector).val(), montant : $($montantSelector).val() });
+                   var $dateSelector = (('#txtDateHF' + $(this).val()).toString());
+                   var $libelleSelector = (('#txtLibelleHF' + $(this).val()).toString());
+                   var $montantSelector = (('#txtMontantHF' + $(this).val()).toString());
+                   tabHF.push({id : $(this).val(), date : $($dateSelector).val(), libelle : $($libelleSelector).val(), montant : $($montantSelector).val()});
   
                 }
             });

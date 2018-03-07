@@ -102,6 +102,53 @@ class Utils
         session_destroy();
     }
 
+    
+    
+    /**
+     * Echappe les caractères spéciaux d'une chaîne.
+
+     * Envoie la chaîne $str échappée, càd avec les caractères considérés 
+     * spéciaux par MySql (tq la quote simple) précédés d'un \, ce qui annule 
+     * leur effet spécial
+
+     * @param string $str chaîne à échapper
+     *
+     * @return string 
+     * 
+     *  
+     */    
+    public static function filtrerChainePourBD($str) 
+    {
+      if (!get_magic_quotes_gpc()) { 
+          $str = addslashes($str);
+      }
+      return $str;
+    }
+
+    
+    /**
+     * Retire les échappements d'une chaîne.
+
+     * Envoie la chaîne $str non échappée, càd avec les caractères considérés 
+     * spéciaux par MySql (tq la quote simple) non précédé d'un \, ce qui valide  
+     * leur effet spécial
+
+     * @param string $str chaîne échappée
+     *
+     * @return string 
+     * 
+     */    
+    public static function filtrerChainePourVue($str) 
+    {
+      if (!get_magic_quotes_gpc()) { 
+          $str = stripslashes($str);
+      }
+      return $str;
+    }
+    
+    
+    
+    
     /**
      * Transforme une date au format français jj/mm/aaaa vers le format anglais
      * aaaa-mm-jj
@@ -164,7 +211,7 @@ class Utils
 
 
     /**
-     * Retourne l'avant dernier mois au format aaaamm selon le jour dans le mois
+     * Retourne le précédent mois au format aaaamm selon une date
      *
      * @param String $date au format  jj/mm/aaaa
      *
@@ -197,7 +244,7 @@ class Utils
 
 
     /**
-     * Retourne le prochain mois au format aaaamm selon le jour dans le mois
+     * Retourne le prochain mois au format aaaamm selon une date
      *
      * @param String $dateMois au format aaaamm
      *
@@ -480,8 +527,8 @@ class Utils
 
 
     /**
-     * Retourne la chaine passé en paramètre avec la mention REFUSE- au début
-     * tronque la chaîne à partir de la fin si elle est d'une longueur supérieure à 100
+     * Retourne la chaine passé en paramètre avec la mention REFUSE- au début,
+     *  tronque la chaîne si elle est d'une longueur supérieure à 100
      * 
      * @param String $str Libellé du frais hors forfait
      * 

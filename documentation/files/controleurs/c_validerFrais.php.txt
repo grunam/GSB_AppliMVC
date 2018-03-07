@@ -16,7 +16,6 @@
 
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-
 $monControleur = 'validerFrais';
 
 
@@ -26,7 +25,7 @@ case 'selectionnerVisiteursMois':
     
     $include_array = array();
     
-    if(Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)){
+    if (Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
         
         try {   
              //cloturation des fiches de frais du mois en cours
@@ -41,7 +40,7 @@ case 'selectionnerVisiteursMois':
             Utils::ajouterSucces($labelCloturation);
             array_push($include_array, 'vues/v_succes.php');
         
-         }catch(Exception $e){
+         } catch(Exception $e) {
             Utils::ajouterErreur($e->getMessage());
             array_push($include_array, 'vues/v_erreurs.php');
          }    
@@ -56,9 +55,13 @@ case 'selectionnerVisiteursMois':
    
     include 'vues/v_listeVisiteursMois.php';
 
-    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+    if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
       
-        Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+        Utils::ajouterErreur(
+            'La campagne de validation doit être réalisée'
+            . ' entre le 10 et le 20 du mois suivant '
+            . 'la saisie par les visiteurs !'
+        );
         array_push($include_array, 'vues/v_erreurs.php');     
     }
     
@@ -78,9 +81,13 @@ case 'selectionnerVisiteur':
     $moisASelectionner = $lesCles[0];
     include 'vues/v_listeVisiteursMois.php';
 
-    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+    if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
       
-        Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+        Utils::ajouterErreur(
+            'La campagne de validation doit être réalisée'
+            . ' entre le 10 et le 20 du mois suivant '
+            . 'la saisie par les visiteurs !'
+        );
         include 'vues/v_erreurs.php';     
     }
     
@@ -100,8 +107,12 @@ case 'consulterFrais':
    
     include 'vues/v_listeVisiteursMois.php';
     
-    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
-            Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+    if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+            Utils::ajouterErreur(
+                'La campagne de validation doit être réalisée'
+                . ' entre le 10 et le 20 du mois suivant '
+                . 'la saisie par les visiteurs !'
+            );
             include 'vues/v_erreurs.php';  
     }
 
@@ -120,7 +131,7 @@ case 'consulterFrais':
     $nbFraisHorsForfait = 0;
     foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
         $refus = $unFraisHorsForfait['refuse'];
-        if(!$refus){
+        if (!$refus) {
             $nbFraisHorsForfait++;
         }
     }
@@ -128,7 +139,7 @@ case 'consulterFrais':
     include 'vues/v_etatFicheFrais.php';
     include 'vues/v_majFraisForfait.php';
     
-    if(count($lesFraisHorsForfait) > 0){
+    if (count($lesFraisHorsForfait) > 0) {
         include 'vues/v_majFraisHorsForfait.php';
     }
     
@@ -173,7 +184,11 @@ case 'validerMajFraisForfait':
     }
 
     if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
-        Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+        Utils::ajouterErreur(
+            'La campagne de validation doit être réalisée'
+            . ' entre le 10 et le 20 du mois suivant '
+            . 'la saisie par les visiteurs !'
+        );
         array_push($include_array, 'vues/v_erreurs.php');  
     }
 
@@ -199,17 +214,17 @@ case 'validerMajFraisForfait':
     $nbFraisHorsForfait = 0;
     foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
         $refus = $unFraisHorsForfait['refuse'];
-        if(!$refus){
+        if (!$refus) {
             $nbFraisHorsForfait++;
         }
     }
 
 
-    if(count($lesFraisHorsForfait) > 0){
+    if (count($lesFraisHorsForfait) > 0) {
         include 'vues/v_majFraisHorsForfait.php';
     }
 
-    if($idEtat == 'CL'){
+    if ($idEtat == 'CL') {
         include 'vues/v_validerFrais.php';
     }
     
@@ -229,49 +244,48 @@ case 'modifierFraisHorsForfait':
     
     $parseFraisHorsForfait = json_decode($FraisHorsForfait, true);
     
-    $nbre = (count($parseFraisHorsForfait) > 1)?'s':'';
-    $atc = (count($parseFraisHorsForfait) > 1)?'des':'du';
+    $nbre = (count($parseFraisHorsForfait) > 1)? 's' : '';
+    $atc = (count($parseFraisHorsForfait) > 1)? 'des' : 'du';
     
-    if($modFraisHorsForfait == 'modifier'){
+    if ($modFraisHorsForfait == 'modifier') {
     
         try {
-
+            
             $pdo->majFraisHorsForfait($parseFraisHorsForfait); 
             Utils::ajouterSucces('Modification '.$atc.' frais hors forfait'.$nbre.' effectuée.');
             array_push($include_array, 'vues/v_succes.php');
                 
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Utils::ajouterErreur($e->getMessage());
             array_push($include_array, 'vues/v_erreurs.php');
         }
     
-    } else if($modFraisHorsForfait == 'reporter'){
+    } else if ($modFraisHorsForfait == 'reporter') {
         
         try {
             
             $lesInfosFicheFraisMoisSuivant = $pdo->getLesInfosFicheFrais($idVisiteur, Utils::getMoisSuivant($leMois));
     
-            if(isset($parseFraisHorsForfait)){
-                if(empty($lesInfosFicheFraisMoisSuivant['idEtat']) || $lesInfosFicheFraisMoisSuivant['idEtat']=='CR' || $lesInfosFicheFraisMoisSuivant['idEtat']=='CL'){
+            if (isset($parseFraisHorsForfait)) {
+                if (empty($lesInfosFicheFraisMoisSuivant['idEtat']) || $lesInfosFicheFraisMoisSuivant['idEtat']=='CR' 
+                        || $lesInfosFicheFraisMoisSuivant['idEtat']=='CL') {
                     $pdo->reporterLesFraisHorsForfait($parseFraisHorsForfait, Utils::getMoisSuivant($leMois)); 
                     Utils::ajouterSucces('Report '.$atc.' frais hors forfait'.$nbre.' effectuée.');
                     array_push($include_array, 'vues/v_succes.php');
                 } else {
-                    Utils::ajouterErreur('Report '.$atc.' frais hors forfait'.$nbre.' impossible, la fiche de frais du mois suivant a déjà été validé !');
+                    Utils::ajouterErreur('Report '.$atc.' frais hors forfait'.$nbre
+                            .' impossible, la fiche de frais du mois suivant a déjà été validé !');
                     array_push($include_array, 'vues/v_erreurs.php');
                 }
             }
 
 
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Utils::ajouterErreur($e->getMessage());
             array_push($include_array, 'vues/v_erreurs.php');
         }
         
-    } else if($modFraisHorsForfait == 'supprimer'){
-        
-        
-        
+    } else if ($modFraisHorsForfait == 'supprimer') {
         
         try {
 
@@ -279,15 +293,19 @@ case 'modifierFraisHorsForfait':
             Utils::ajouterSucces('Suppression '.$atc.' frais hors forfait'.$nbre.' effectuée.');
             array_push($include_array, 'vues/v_succes.php');
                 
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Utils::ajouterErreur($e->getMessage());
             array_push($include_array, 'vues/v_erreurs.php');
         }
         
     }
     
-    if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
-        Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+    if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
+        Utils::ajouterErreur(
+            'La campagne de validation doit être réalisée'
+            . ' entre le 10 et le 20 du mois suivant '
+            . 'la saisie par les visiteurs !'
+        );
         array_push($include_array, 'vues/v_erreurs.php');    
     }
     
@@ -318,7 +336,7 @@ case 'modifierFraisHorsForfait':
     $nbFraisHorsForfait = 0;
     foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
         $refus = $unFraisHorsForfait['refuse'];
-        if(!$refus){
+        if (!$refus) {
             $nbFraisHorsForfait++;
         }
     }
@@ -326,7 +344,7 @@ case 'modifierFraisHorsForfait':
     
     include 'vues/v_majFraisHorsForfait.php';
     
-    if($idEtat == 'CL'){
+    if ($idEtat == 'CL') {
         include 'vues/v_validerFrais.php';
     }
     
@@ -343,15 +361,15 @@ case 'validerFrais' :
     
     $include_array = array();
     
-    $nbJustif = (empty($justificatif))?0:$justificatif;
+    $nbJustif = (empty($justificatif))? 0 : $justificatif;
     
-    if($nbJustif >= $nbFraisHorsForfait) {
+    if ($nbJustif >= $nbFraisHorsForfait) {
         
-        $montantTotalFrais='';
+        $montantTotalFrais = '';
         
         try {
             $montantTotalFrais = $pdo->montantTotalFrais($visiteurASelectionner, $leMois);
-        }catch(Exception $e){
+        } catch (Exception $e) {
            Utils::ajouterErreur($e->getMessage());
            array_push($include_array, 'vues/v_erreurs.php');
         }
@@ -359,14 +377,15 @@ case 'validerFrais' :
     
     try {
      
-        ($nbFraisHorsForfait > 1)?$nbre='s':$nbre='';
+        $nbre = ($nbFraisHorsForfait > 1)? 's' : '';
         
-        if($nbJustif < $nbFraisHorsForfait) {
+        if ($nbJustif < $nbFraisHorsForfait) {
            
-             Utils::ajouterErreur('Veuillez indiquer au moins '.$nbFraisHorsForfait.' justificatif'.$nbre.' pour le'.$nbre.' frais hors forfait !');
+             Utils::ajouterErreur('Veuillez indiquer au moins '.$nbFraisHorsForfait.' justificatif'
+                     .$nbre.' pour le'.$nbre.' frais hors forfait !');
              array_push($include_array, 'vues/v_erreurs.php');
              
-        } else if($nbJustif >= $nbFraisHorsForfait) {
+        } else if ($nbJustif >= $nbFraisHorsForfait) {
             
              $pdo->majEtatFicheFrais($idVisiteur, $leMois, 'VA', $justificatif);
              Utils::ajouterSucces('La fiche de frais d\'un montant de '.$montantTotalFrais.'€ est validée.');
@@ -375,14 +394,19 @@ case 'validerFrais' :
         }
    
        
-    }catch(Exception $e){
+    } catch (Exception $e) {
         Utils::ajouterErreur($e->getMessage());
         array_push($include_array, 'vues/v_erreurs.php');
     }
 
     
-     if(!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20) && (Utils::getMoisSuivant($leMois) != Utils::getMois(date('d/m/Y')))) {
-           Utils::ajouterErreur('La campagne de validation doit être réalisée entre le 10 et le 20 du mois suivant la saisie par les visiteurs !');
+     if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20) 
+             && (Utils::getMoisSuivant($leMois) != Utils::getMois(date('d/m/Y')))) {
+           Utils::ajouterErreur(
+                'La campagne de validation doit être réalisée'
+                . ' entre le 10 et le 20 du mois suivant '
+                . 'la saisie par les visiteurs !'
+            );
            array_push($include_array, 'vues/v_erreurs.php');
      }
     
@@ -414,20 +438,20 @@ case 'validerFrais' :
     $nbFraisHorsForfait = 0;
     foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
         $refus = $unFraisHorsForfait['refuse'];
-        if(!$refus){
+        if (!$refus) {
             $nbFraisHorsForfait++;
         }
     }
     
     
-    if(count($lesFraisHorsForfait) > 0){
+    if (count($lesFraisHorsForfait) > 0) {
         include 'vues/v_majFraisHorsForfait.php';
     }
     if($idEtat == 'CL'){
         include 'vues/v_validerFrais.php';
     }
     
-    //break;
+    break;
     
 }
 

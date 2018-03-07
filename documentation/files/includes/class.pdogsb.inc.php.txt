@@ -189,7 +189,7 @@ class PdoGsb
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais
      * hors forfait concernées par les deux paramètres.
      * La boucle foreach ne peut être utilisée ici car on procède
-     * à une modification de la structure itérée - transformation du champ date-
+     * à une modification de la structure itérée - transformation du champ date et libelle -
      *
      * @param String $idVisiteur ID du visiteur
      * @param String $mois       Mois sous la forme aaaamm
@@ -216,18 +216,22 @@ class PdoGsb
         $requetePrepare->execute();
         $lesLignes = $requetePrepare->fetchAll();
         
-        if($convertDate == 1){
+        if ($convertDate == 1) {
             for ($i = 0; $i < count($lesLignes); $i++) {
                 $date = $lesLignes[$i]['date'];
                 $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
+                $libelle = $lesLignes[$i]['libelle'];
+                $lesLignes[$i]['libelle'] = Utils::filtrerChainePourVue($libelle);
             }
-        } else if($convertDate == 0){    
+        } else if ($convertDate == 0) {    
             for ($i = 0; $i < count($lesLignes); $i++) {
                 $date = $lesLignes[$i]['date'];
                 $refus = $lesLignes[$i]['refuse'];
                 if ($refus == 1) {    
                     $lesLignes[$i]['date'] = Utils::dateAnglaisVersFrancais($date);
-                }    
+                }  
+                $libelle = $lesLignes[$i]['libelle'];
+                $lesLignes[$i]['libelle'] = Utils::filtrerChainePourVue($libelle);
             }
         }
         return $lesLignes;
@@ -295,7 +299,7 @@ class PdoGsb
     }
 
     /**
-     * Retourne tous les id de la table FraisForfait
+     * Retourne tous les id des frais forfaitaires
      *
      * @return un tableau associatif
      * 
@@ -314,9 +318,8 @@ class PdoGsb
     }
 
     /**
-     * Met à jour la table ligneFraisForfait
-     * Met à jour la table ligneFraisForfait pour un visiteur et
-     * un mois donné en enregistrant les nouveaux montants
+     * Met à jour la table ligneFraisForfait pour un visiteur,
+     * un mois et les frais donnés 
      *
      * @param String $idVisiteur ID du visiteur
      * @param String $mois       Mois sous la forme aaaamm
@@ -348,9 +351,8 @@ class PdoGsb
     
     
     /**
-     * Met à jour la table ligneFraisHorsForfait
-     * Met à jour la table ligneFraisHorsForfait pour un id
-     *  donné en enregistrant les nouveaux montants
+     * Met à jour la table ligneFraisHorsForfait pour les frais
+     * donnés
      *
      * @param Int $id ID du frais hors forfait
      * @param Array  $lesFrais   tableau associatif de clé idFrais et
@@ -361,8 +363,11 @@ class PdoGsb
     public function majFraisHorsForfait($lesFrais)
     {
         
+         
         foreach ($lesFrais as $unFrais) {
             
+            $libelleFiltre = Utils::filtrerChainePourBD($unFrais['libelle']);
+        
             $requetePrepare = PdoGSB::$monPdo->prepare(
                 'UPDATE lignefraishorsforfait '
                 . 'SET lignefraishorsforfait.libelle = :unLibelle, '
@@ -371,7 +376,7 @@ class PdoGsb
                 . 'WHERE lignefraishorsforfait.id = :idFrais'
             );
            
-            $requetePrepare->bindParam(':unLibelle', $unFrais['libelle'], PDO::PARAM_INT);
+            $requetePrepare->bindParam(':unLibelle', $libelleFiltre, PDO::PARAM_INT);
             $requetePrepare->bindParam(':uneDate', $unFrais['date'], PDO::PARAM_STR); 
             $requetePrepare->bindParam(':unMontant', $unFrais['montant'], PDO::PARAM_STR);
             $requetePrepare->bindParam(':idFrais', $unFrais['id'], PDO::PARAM_STR);
@@ -383,8 +388,8 @@ class PdoGsb
     
     
     /**
-     * Met à jour d'une ligneFraisHorsForfait dont l'id est passé en paramètre
-     *  avec le mois passé en paramètre  
+     * Reporte un frais de ligneFraisHorsForfait dont l'id
+     * avec le mois sont  passés en paramètres  
      *
      * @param String $id ID du frais hors forfait
      * @param String $mois       Mois sous la forme aaaamm
@@ -410,7 +415,8 @@ class PdoGsb
     
     
     /**
-     * Met à jour une ligneFraisHorsForfait dont l'id est passé en paramètre avec le nouveau libelle introduit par 'REFUSE-'  
+     * Met à jour unfrais de ligneFraisHorsForfait, dont l'id 
+     * est passé en paramètre, avec le nouveau libelle introduit par 'REFUSE-'  
      * et le champ refuse changé à true
      *
      * @param String $id ID du frais hors forfait
@@ -421,6 +427,8 @@ class PdoGsb
     public function refuserUnFraisHorsForfait($id, $libelle)
     {
        
+        $libelleFiltre = Utils::filtrerChainePourBD($libelle);
+        
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'UPDATE lignefraishorsforfait '
             . 'SET lignefraishorsforfait.libelle = :unLibelle, '
@@ -428,7 +436,7 @@ class PdoGsb
             . 'WHERE lignefraishorsforfait.id = :unId '
 
         );
-        $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unLibelle', $libelleFiltre, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
         
@@ -436,7 +444,7 @@ class PdoGsb
     
 
     /**
-     * Met à jour le nombre de justificatifs de la table ficheFrais
+     * Met à jour le nombre de justificatifs de la table fichefrais
      * pour le mois et le visiteur concerné
      *
      * @param String  $idVisiteur      ID du visiteur
@@ -464,7 +472,8 @@ class PdoGsb
     }
 
     /**
-     * Teste si un visiteur possède une fiche de frais pour le mois passé en paramètre
+     * Teste si un visiteur possède une fiche de frais 
+     * pour le mois et l'id passés en paramètres
      *
      * @param String $idVisiteur ID du visiteur
      * @param String $mois       Mois sous la forme aaaamm
@@ -496,7 +505,8 @@ class PdoGsb
     }
 
     /**
-     * Retourne le dernier mois en cours d'un visiteur
+     * Retourne le dernier mois saisi 
+     * d'une fiche de frais pour un visiteur donné
      *
      * @param String $idVisiteur ID du visiteur
      *
@@ -543,7 +553,7 @@ class PdoGsb
         
         if ($mois > $dernierMois && $mois >= Utils::getMois(date('d/m/Y'))) {
            $idEtat = 'CR'; 
-        }else{
+        } else {
            $idEtat = 'CL';
         }
          
@@ -580,7 +590,7 @@ class PdoGsb
     }
 
     /**
-     * Crée un nouveau frais hors forfait pour un visiteur un mois donné
+     * Crée un nouveau frais hors forfait pour un visiteur et un mois donnés
      * à partir des informations fournies en paramètres
      *
      * @param String $idVisiteur ID du visiteur
@@ -602,7 +612,8 @@ class PdoGsb
     ) {
         
         $dateFr = Utils::dateFrancaisVersAnglais($date);
-         
+        $libelleFiltre = Utils::filtrerChainePourBD($libelle); 
+        
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'INSERT INTO lignefraishorsforfait '
             . 'VALUES (null, :unIdVisiteur,:unMois, :unLibelle, :uneDateFr,'
@@ -610,7 +621,7 @@ class PdoGsb
         );
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
-        $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unLibelle', $libelleFiltre, PDO::PARAM_STR);
         $requetePrepare->bindParam(':uneDateFr', $dateFr, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_STR);
         $requetePrepare->execute();
@@ -655,7 +666,7 @@ class PdoGsb
             $requetePrepare->execute();
             $laLigne = $requetePrepare->fetch();
             
-            if($laLigne['refuse']!= 1){
+            if ($laLigne['refuse']!= 1) {
                 
                 $this->refuserUnFraisHorsForfait($laLigne['id'], Utils::mentionRefuse($laLigne['libelle']));
          
@@ -667,7 +678,7 @@ class PdoGsb
     
     
     /**
-     * Reporte le frais hors forfait dont l'id est ou les ids sont passé(s) en paramètre dans la fiche du mois suivant, 
+     * Reporte le frais hors forfait dont l'id est ou les ids sont passé(s) en paramètre(s) vers la fiche du mois suivant, 
      * créé la fiche si elle n'existe pas.
      *
      * @param Array $lesFrais tableau associatif de clé idFrais
@@ -690,8 +701,8 @@ class PdoGsb
             $laLigne = $requetePrepare->fetch();
             
            
-            if($laLigne['refuse'] != 1){
-                if ($this->estPremierFraisMois($laLigne['idvisiteur'], $mois)){       
+            if ($laLigne['refuse'] != 1) {
+                if ($this->estPremierFraisMois($laLigne['idvisiteur'], $mois)) {       
                     
                     $this->creeNouvellesLignesFrais($laLigne['idvisiteur'], $mois);    
                     $this->reporterUnFraisHorsForfait($laLigne['id'], $mois);
@@ -822,8 +833,8 @@ class PdoGsb
      * @return un tableau associatif de clé un mois -aaaamm- et de valeurs
      *         l'année et le mois correspondant
      * 
-     * @assert ('a131') == Array ( 0 => Array ( 'mois' => '201802', 'numAnnee' => '2018', 'numMois' => '02' ), 1 => Array ( 'mois' => '201710', 'numAnnee' => '2017', 'numMois' => '10' ), 2 => Array ( 'mois' => '201709', 'numAnnee' => '2017', 'numMois' => '09' ), 3 => Array ( 'mois' => '201708', 'numAnnee' => '2017', 'numMois' => '08' ), 4 => Array ( 'mois' => '201707', 'numAnnee' => '2017', 'numMois' => '07' ), 5 => Array ( 'mois' => '201706', 'numAnnee' => '2017', 'numMois' => '06' ), 6 => Array ( 'mois' => '201705', 'numAnnee' => '2017', 'numMois' => '05' ), 7 => Array ( 'mois' => '201704', 'numAnnee' => '2017', 'numMois' => '04' ), 8 => Array ( 'mois' => '201703', 'numAnnee' => '2017', 'numMois' => '03' ), 9 => Array ( 'mois' => '201702', 'numAnnee' => '2017', 'numMois' => '02' ), 10 => Array ( 'mois' => '201701', 'numAnnee' => '2017', 'numMois' => '01' ), 11 => Array ( 'mois' => '201612', 'numAnnee' => '2016', 'numMois' => '12' ), 12 => Array ( 'mois' => '201611', 'numAnnee' => '2016', 'numMois' => '11' ), 13 => Array ( 'mois' => '201610', 'numAnnee' => '2016', 'numMois' => '10' ), 14 => Array ( 'mois' => '201609', 'numAnnee' => '2016', 'numMois' => '09' ) )
-     * @assert ('a131') != Array ( 0 => Array ( 'mois' => '210002', 'numAnnee' => '2018', 'numMois' => '02' ), 1 => Array ( 'mois' => '201710', 'numAnnee' => '2017', 'numMois' => '10' ), 2 => Array ( 'mois' => '201709', 'numAnnee' => '2017', 'numMois' => '09' ), 3 => Array ( 'mois' => '201708', 'numAnnee' => '2017', 'numMois' => '08' ), 4 => Array ( 'mois' => '201707', 'numAnnee' => '2017', 'numMois' => '07' ), 5 => Array ( 'mois' => '201706', 'numAnnee' => '2017', 'numMois' => '06' ), 6 => Array ( 'mois' => '201705', 'numAnnee' => '2017', 'numMois' => '05' ), 7 => Array ( 'mois' => '201704', 'numAnnee' => '2017', 'numMois' => '04' ), 8 => Array ( 'mois' => '201703', 'numAnnee' => '2017', 'numMois' => '03' ), 9 => Array ( 'mois' => '201702', 'numAnnee' => '2017', 'numMois' => '02' ), 10 => Array ( 'mois' => '201701', 'numAnnee' => '2017', 'numMois' => '01' ), 11 => Array ( 'mois' => '201612', 'numAnnee' => '2016', 'numMois' => '12' ), 12 => Array ( 'mois' => '201611', 'numAnnee' => '2016', 'numMois' => '11' ), 13 => Array ( 'mois' => '201610', 'numAnnee' => '2016', 'numMois' => '10' ), 14 => Array ( 'mois' => '201609', 'numAnnee' => '2016', 'numMois' => '09' ) )
+     * @assert ('a131') == Array ( 0 => Array ( 'mois' => '201803', 'numAnnee' => '2018', 'numMois' => '03' ), 1 => Array ( 'mois' => '201802', 'numAnnee' => '2018', 'numMois' => '02' ), 2 => Array ( 'mois' => '201710', 'numAnnee' => '2017', 'numMois' => '10' ), 3 => Array ( 'mois' => '201709', 'numAnnee' => '2017', 'numMois' => '09' ), 4 => Array ( 'mois' => '201708', 'numAnnee' => '2017', 'numMois' => '08' ), 5 => Array ( 'mois' => '201707', 'numAnnee' => '2017', 'numMois' => '07' ), 6 => Array ( 'mois' => '201706', 'numAnnee' => '2017', 'numMois' => '06' ), 7 => Array ( 'mois' => '201705', 'numAnnee' => '2017', 'numMois' => '05' ), 8 => Array ( 'mois' => '201704', 'numAnnee' => '2017', 'numMois' => '04' ), 9 => Array ( 'mois' => '201703', 'numAnnee' => '2017', 'numMois' => '03' ), 10 => Array ( 'mois' => '201702', 'numAnnee' => '2017', 'numMois' => '02' ), 11 => Array ( 'mois' => '201701', 'numAnnee' => '2017', 'numMois' => '01' ), 12 => Array ( 'mois' => '201612', 'numAnnee' => '2016', 'numMois' => '12' ), 13 => Array ( 'mois' => '201611', 'numAnnee' => '2016', 'numMois' => '11' ), 14 => Array ( 'mois' => '201610', 'numAnnee' => '2016', 'numMois' => '10' ), 15 => Array ( 'mois' => '201609', 'numAnnee' => '2016', 'numMois' => '09' ) )
+     * @assert ('a131') != Array ( 0 => Array ( 'mois' => '202503', 'numAnnee' => '2025', 'numMois' => '03' ), 1 => Array ( 'mois' => '201802', 'numAnnee' => '2018', 'numMois' => '02' ), 2 => Array ( 'mois' => '201710', 'numAnnee' => '2017', 'numMois' => '10' ), 3 => Array ( 'mois' => '201709', 'numAnnee' => '2017', 'numMois' => '09' ), 4 => Array ( 'mois' => '201708', 'numAnnee' => '2017', 'numMois' => '08' ), 5 => Array ( 'mois' => '201707', 'numAnnee' => '2017', 'numMois' => '07' ), 6 => Array ( 'mois' => '201706', 'numAnnee' => '2017', 'numMois' => '06' ), 7 => Array ( 'mois' => '201705', 'numAnnee' => '2017', 'numMois' => '05' ), 8 => Array ( 'mois' => '201704', 'numAnnee' => '2017', 'numMois' => '04' ), 9 => Array ( 'mois' => '201703', 'numAnnee' => '2017', 'numMois' => '03' ), 10 => Array ( 'mois' => '201702', 'numAnnee' => '2017', 'numMois' => '02' ), 11 => Array ( 'mois' => '201701', 'numAnnee' => '2017', 'numMois' => '01' ), 12 => Array ( 'mois' => '201612', 'numAnnee' => '2016', 'numMois' => '12' ), 13 => Array ( 'mois' => '201611', 'numAnnee' => '2016', 'numMois' => '11' ), 14 => Array ( 'mois' => '201610', 'numAnnee' => '2016', 'numMois' => '10' ), 15 => Array ( 'mois' => '201609', 'numAnnee' => '2016', 'numMois' => '09' ) )
      * @assert ('a131') != array()
      *     
      */
@@ -904,8 +915,8 @@ class PdoGsb
      * @return un tableau associatif de clé un mois -aaaamm- et de valeurs
      *         l'année et le mois correspondant
      * 
-     * @assert ('a131') == Array ( 0 => Array ( 'mois' => '201710', 'numAnnee' => '2017', 'numMois' => '10' ) )
-     * @assert ('a131') != Array ( 0 => Array ( 'mois' => '202509', 'numAnnee' => '2025', 'numMois' => '10' ) )
+     * @assert ('a131') == Array ( 0 => Array ( 'mois' => '201802', 'numAnnee' => '2018', 'numMois' => '02' ), 1 => Array ( 'mois' => '201710', 'numAnnee' => '2017', 'numMois' => '10' ) )
+     * @assert ('a131') != Array ( 0 => Array ( 'mois' => '202502', 'numAnnee' => '2025', 'numMois' => '02' ), 1 => Array ( 'mois' => '201710', 'numAnnee' => '2017', 'numMois' => '10' ) )
      * @assert ('a131') != array()
      * 
      */
@@ -1016,7 +1027,7 @@ class PdoGsb
     
     
     /**
-     * Retourne les le montant total des frais forfaitaires et hors forfait d'un visiteur pour un
+     * Retourne le montant total des frais forfaitaires et hors forfait d'un visiteur pour un
      * mois donné et met à jour le montant validé d'un fiche de frais
      *
      * @param String $idVisiteur ID du visiteur
@@ -1097,7 +1108,7 @@ class PdoGsb
     {
         
         $req = 'UPDATE fichefrais SET idetat = :unEtat, datemodif = now() ';
-           if($nbJustificatif){
+           if ($nbJustificatif) {
                 $req .=  ', nbjustificatifs = :unNbJustificatifs ';
             }
             $req .= 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
@@ -1169,7 +1180,12 @@ class PdoGsb
           $requetePrepare->bindParam(':unId', $id, PDO::PARAM_STR);
           $requetePrepare->execute();
           $laLigne = $requetePrepare->fetch();
+          
+          $libelle = $laLigne['libelle'];
+          $laLigne['libelle'] = Utils::filtrerChainePourVue($libelle);
+         
           return $laLigne;
+          
     }
 
     
@@ -1203,6 +1219,10 @@ class PdoGsb
           $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
           $requetePrepare->execute();
           $laLigne = $requetePrepare->fetch();
+          
+          $libelle = $laLigne['libelle'];
+          $laLigne['libelle'] = Utils::filtrerChainePourVue($libelle);
+          
           return $laLigne;
     }
 
@@ -1213,7 +1233,7 @@ class PdoGsb
     /**
      * Fonction pour tests unitaires
      * 
-     * Met à jour d'une ligneFraisHorsForfait dont l'id est passé en paramètre avec le nouveau libelle non introduit par 'REFUSE-'  
+     * Met à jour un frais de ligneFraisHorsForfait dont l'id est passé en paramètre avec le nouveau libelle non introduit par 'REFUSE-'  
      * et le champ refuse changé à false
      *
      * @param String $id ID du frais hors forfait
@@ -1224,6 +1244,8 @@ class PdoGsb
     public function accepterUnFraisHorsForfait($id, $libelle)
     {
        
+        $libelleFiltre = Utils::filtrerChainePourBD($libelle);
+        
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'UPDATE lignefraishorsforfait '
             . 'SET lignefraishorsforfait.libelle = :unLibelle, '
@@ -1231,7 +1253,7 @@ class PdoGsb
             . 'WHERE lignefraishorsforfait.id = :unId '
 
         );
-        $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unLibelle', $libelleFiltre, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
         

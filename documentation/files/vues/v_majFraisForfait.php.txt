@@ -44,12 +44,7 @@
             <td>
 
                 <?php
-                
-                //echo $idEtat;
-                
-                if($idEtat == 'CL'){
-                
-                    
+                if ($idEtat == 'CL') {
                 ?>
                     
                 <div class="form-group">
@@ -82,7 +77,7 @@
              
         </tr>
             <?php   
-            if($idEtat == 'CL'){
+            if ($idEtat == 'CL') {
             ?>
         <tr>
             <td class="text-center" colspan="4">

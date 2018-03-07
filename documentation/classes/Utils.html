@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">79</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">81</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">29</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">31</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-689403288"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-634873190"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-689403288" class="accordion-body collapse in">
+            <div id="namespace-634873190" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -193,6 +193,8 @@ Les fonctions sont toutes statiques,</p>
                                                                     <a href="../classes/Utils.html#method_estVisiteur" class="">estVisiteur()</a><br />
                                                                     <a href="../classes/Utils.html#method_connecter" class="">connecter()</a><br />
                                                                     <a href="../classes/Utils.html#method_deconnecter" class="">deconnecter()</a><br />
+                                                                    <a href="../classes/Utils.html#method_filtrerChainePourBD" class="">filtrerChainePourBD()</a><br />
+                                                                    <a href="../classes/Utils.html#method_filtrerChainePourVue" class="">filtrerChainePourVue()</a><br />
                                                                     <a href="../classes/Utils.html#method_dateFrancaisVersAnglais" class="">dateFrancaisVersAnglais()</a><br />
                                                                     <a href="../classes/Utils.html#method_dateAnglaisVersFrancais" class="">dateAnglaisVersFrancais()</a><br />
                                                                     <a href="../classes/Utils.html#method_getMois" class="">getMois()</a><br />
@@ -512,6 +514,84 @@ Les fonctions sont toutes statiques,</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_filtrerChainePourBD" name="method_filtrerChainePourBD" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filtrerChainePourBD()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filtrerChainePourBD(string  <span class="argument">$str</span>) : string</pre>
+                <p><em>Echappe les caractères spéciaux d&#039;une chaîne.</em></p>
+                <p>Envoie la chaîne $str échappée, càd avec les caractères considérés
+spéciaux par MySql (tq la quote simple) précédés d'un \, ce qui annule
+leur effet spécial</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$str </td>
+                                <td><p>chaîne à échapper</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filtrerChainePourVue" name="method_filtrerChainePourVue" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filtrerChainePourVue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filtrerChainePourVue(string  <span class="argument">$str</span>) : string</pre>
+                <p><em>Retire les échappements d&#039;une chaîne.</em></p>
+                <p>Envoie la chaîne $str non échappée, càd avec les caractères considérés
+spéciaux par MySql (tq la quote simple) non précédé d'un \, ce qui valide
+leur effet spécial</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$str </td>
+                                <td><p>chaîne échappée</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_dateFrancaisVersAnglais" name="method_dateFrancaisVersAnglais" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">dateFrancaisVersAnglais()</h3>
@@ -651,7 +731,7 @@ français jj/mm/aaaa</em></p>
                 <h3 class="public ">getMoisPrecedent()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getMoisPrecedent(String  <span class="argument">$date</span>) : String</pre>
-                <p><em>Retourne l&#039;avant dernier mois au format aaaamm selon le jour dans le mois</em></p>
+                <p><em>Retourne le précédent mois au format aaaamm selon une date</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -697,7 +777,7 @@ français jj/mm/aaaa</em></p>
                 <h3 class="public ">getMoisSuivant()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getMoisSuivant(String  <span class="argument">$dateMois</span>) : String</pre>
-                <p><em>Retourne le prochain mois au format aaaamm selon le jour dans le mois</em></p>
+                <p><em>Retourne le prochain mois au format aaaamm selon une date</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1214,8 +1294,8 @@ et le montant</em></p>
                 <h3 class="public ">mentionRefuse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">mentionRefuse(  <span class="argument">$string</span>) : String</pre>
-                <p><em>Retourne la chaine passé en paramètre avec la mention REFUSE- au début
-tronque la chaîne à partir de la fin si elle est d&#039;une longueur supérieure à 100</em></p>
+                <p><em>Retourne la chaine passé en paramètre avec la mention REFUSE- au début,
+ tronque la chaîne si elle est d&#039;une longueur supérieure à 100</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1304,7 +1384,7 @@ tronque la chaîne à partir de la fin si elle est d&#039;une longueur supérieu
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on March 7th, 2018 at 13:35.
+                    on March 7th, 2018 at 20:10.
                 </section>
             </section>
         </section>

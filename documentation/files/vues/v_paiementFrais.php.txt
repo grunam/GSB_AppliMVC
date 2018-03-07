@@ -19,9 +19,9 @@
     <div class="panel panel-info">
         <div class="panel-heading" class="text-center">
         <?php
-        if($idEtat == 'VA'){
+        if ($idEtat == 'VA') {
             echo 'Mettre en paiement la fiche';
-        } else if($idEtat == 'MP'){ 
+        } else if ($idEtat == 'MP') { 
             echo 'Rembourser la fiche';
         }    
         ?>    
@@ -37,9 +37,9 @@
                     <td class="text-center">
                         <button class="btn btn-success" type="submit">
                         <?php
-                        if($idEtat == 'VA'){
+                        if ($idEtat == 'VA') {
                             echo 'Mettre en paiement';
-                        } else if($idEtat == 'MP'){ 
+                        } else if ($idEtat == 'MP') { 
                             echo 'Rembourser';
                         }    
                         ?>

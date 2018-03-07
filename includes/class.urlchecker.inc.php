@@ -84,28 +84,28 @@ class Urlchecker
 
         $errorUrl = false;
 
-         if(!empty($params)){
+         if (!empty($params)) {
 
-             $i0=0;
-             $vi0=0;
+             $i0 = 0;
+             $vi0 = 0;
 
-             $i1=0;
-             $vi1=0;
+             $i1 = 0;
+             $vi1 = 0;
 
-             $i2=0;
-             $vi2=0;
+             $i2 = 0;
+             $vi2 = 0;
 
-             $i3=0;
-             $vi3=0;
+             $i3 = 0;
+             $vi3 = 0;
 
-             $i4=0;
-             $vi4=0;
+             $i4 = 0;
+             $vi4 = 0;
 
 
             foreach ($datas as $kUc => $vUc) {
 
               $i0++;
-              if(key($params) == $kUc){
+              if (key($params) == $kUc) {
 
                  $vi0 = 1; 
 
@@ -114,12 +114,12 @@ class Urlchecker
 
 
                       $i1++;
-                      if(current($params) == $kCt){
+                      if (current($params) == $kCt) {
 
                          $vi1 = 1;
                          //echo current($params);
 
-                         if($datas[$kUc][$kCt]){ 
+                         if ($datas[$kUc][$kCt]) { 
 
                              next($params);
 
@@ -127,13 +127,13 @@ class Urlchecker
 
 
                                  $i2++;   
-                                 if(key($params) == $kAc){
+                                 if (key($params) == $kAc) {
 
                                     $vi2 = 1;
 
                                      //echo key($params);
 
-                                    if($datas[$kUc][$kCt][$kAc]){ 
+                                    if ($datas[$kUc][$kCt][$kAc]) { 
 
                                         foreach ($datas[$kUc][$kCt][$kAc] as $kLac => $vLac) {
 
@@ -147,18 +147,18 @@ class Urlchecker
                                              echo "<br>";
                                              */
 
-                                             if(current($params) == $kLac){
+                                             if (current($params) == $kLac) {
 
                                                  $vi3 = 1;
                                                  //echo current($params);
 
-                                                 if($datas[$kUc][$kCt][$kAc][$kLac]){
+                                                 if ($datas[$kUc][$kCt][$kAc][$kLac]) {
                                                      next($params);
 
                                                      foreach ($datas[$kUc][$kCt][$kAc][$kLac] as $kId => $vId) {
 
 
-                                                         if(is_array($datas[$kUc][$kCt][$kAc][$kLac])){
+                                                         if (is_array($datas[$kUc][$kCt][$kAc][$kLac])) {
 
 
                                                             $i4++;
@@ -166,19 +166,19 @@ class Urlchecker
 
                                                                 $vi4 = 1;
 
-                                                                if(key($params) == 'idFrais' && !$pdo->estUnFraisHorsForfait(current($params), $idVisiteur, Utils::getMois(date('d/m/Y')))){
+                                                                if (key($params) == 'idFrais' && !$pdo->estUnFraisHorsForfait(current($params), $idVisiteur, Utils::getMois(date('d/m/Y')))) {
 
                                                                      $errorUrl = true;  
 
                                                                 }
 
-                                                                if(key($params) == 'idLstVisiteur' && !$pdo->estUnVisiteur(current($params))){
+                                                                if (key($params) == 'idLstVisiteur' && !$pdo->estUnVisiteur(current($params))) {
 
                                                                      $errorUrl = true;  
 
                                                                 }
 
-                                                            }else if($i4 == count($datas[$kUc][$kCt][$kAc][$kLac]) &&  $vi4 == 0) {
+                                                            }else if ($i4 == count($datas[$kUc][$kCt][$kAc][$kLac]) &&  $vi4 == 0) {
 
 
                                                                 $errorUrl = true;     

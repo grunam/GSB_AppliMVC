@@ -34,7 +34,7 @@
             <th class="libelle">Libellé</th>
             <th class="montant">Montant</th>
              <?php   
-             if($idEtat == 'CL'){
+             if ($idEtat == 'CL') {
              ?>
             <th>Sélection</th>
             <?php   
@@ -45,7 +45,6 @@
         
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
             
-           
             $date = date($unFraisHorsForfait['date']);
             
             $libelle = $unFraisHorsForfait['libelle'];
@@ -55,8 +54,7 @@
             ?>
             <tr>
                 <?php   
-                if($idEtat == 'CL' && $refus == 0){
-                    //mb_convert_encoding($libelle, 'latin1_swedish_ci', 'UTF-8')
+                if ($idEtat == 'CL' && $refus == 0) {
                 ?>
                 
                 <td>
@@ -90,13 +88,11 @@
                 <?php 
                   } 
                  
-                if($idEtat == 'CL'){
-                    //mb_convert_encoding($libelle, 'latin1_swedish_ci', 'UTF-8')
+                if ($idEtat == 'CL') {
                 ?>
                 <td>
                 <?php   
-                  if(!$refus){
-                      
+                  if (!$refus) {
                 ?>
                     <input type="checkbox" name="lesFraisHorsForfait[]" value="<?php echo $idFrais ?>">
                 <?php 
@@ -112,7 +108,7 @@
             <?php
         }
         
-        if($nbFraisHorsForfait > 0 && $idEtat == 'CL') {
+        if ($nbFraisHorsForfait > 0 && $idEtat == 'CL') {
            
         ?>
       
