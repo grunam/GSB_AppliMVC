@@ -13,7 +13,6 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
-
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = Utils::getMois(date('d/m/Y'));
 $numAnnee = substr($mois, 0, 4);
@@ -26,71 +25,55 @@ case 'saisirFrais':
     }
     break;
 case 'validerMajFraisForfait':
-    $lesFrais
-        = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
-    
-    try {    
-    
+    $lesFrais = filter_input(INPUT_POST, 'txtLesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+    try {
         if (Utils::lesQteFraisValides($lesFrais)) {
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
             Utils::ajouterSucces('Mise à jour des frais forfaitaires effectuée.');
             include 'vues/v_succes.php';
-
         } else {
             Utils::ajouterErreur('Les valeurs des frais doivent être numériques');
             include 'vues/v_erreurs.php';
         }
-    
-    } catch(Exception $e) {
-        
+    } catch(Exception $e) { 
         Utils::ajouterErreur($e->getMessage());
         include 'vues/v_erreurs.php';   
     }
-    
     break;
 case 'validerCreationFrais':
-    
-    $dateFrais = Utils::dateAnglaisVersFrancais($_POST['dateFrais']); 
-    $libelle = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
-    $montant = filter_input(INPUT_POST, 'montant', FILTER_VALIDATE_FLOAT);
-   
-   
+    $dateFrais = filter_input(INPUT_POST, 'txtDateHF', FILTER_SANITIZE_STRING);//Utils::dateAnglaisVersFrancais($_POST['dateFrais']); 
+    $libelle = filter_input(INPUT_POST, 'txtLibelleHF', FILTER_SANITIZE_STRING);
+    $montant = filter_input(INPUT_POST, 'txtMontantHF', FILTER_VALIDATE_FLOAT);
     Utils::valideInfosFrais($dateFrais, $libelle, $montant);
-    
-    try {
-        
+    try { 
         if (Utils::nbErreurs() != 0) {
-            
             include 'vues/v_erreurs.php';
-            
         } else {
-            
             $pdo->creeNouveauFraisHorsForfait(
                 $idVisiteur,
                 $mois,
                 $libelle,
                 $dateFrais,
                 $montant
-            );
-                
-            Utils::ajouterSucces('Validetion de la fiche de frais effectuée.');
+            );   
+            Utils::ajouterSucces('Validation de la fiche de frais effectuée.');
             include 'vues/v_succes.php';
-        
         }
-        
-    } catch(Exception $e) {
-        
+    } catch(Exception $e) { 
         Utils::ajouterErreur($e->getMessage());
         include 'vues/v_erreurs.php';   
     }
-    
-    
-    
-    
     break;
 case 'supprimerFrais':
     $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_STRING);
-    $pdo->supprimerFraisHorsForfait($idFrais);
+    try {
+        $pdo->supprimerFraisHorsForfait($idFrais);
+        Utils::ajouterSucces('Création du frais hors forfait effectuée.');
+        include 'vues/v_succes.php';
+    } catch (Exception $ex) {
+        Utils::ajouterErreur($e->getMessage());
+        include 'vues/v_erreurs.php'; 
+    }
     break;
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);

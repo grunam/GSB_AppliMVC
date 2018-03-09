@@ -24,8 +24,8 @@ case 'demandeConnexion':
     include 'vues/v_connexion.php';
     break;
 case 'valideConnexion':
-    $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-    $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
+    $login = filter_input(INPUT_POST, 'txtLogin', FILTER_SANITIZE_STRING);
+    $mdp = filter_input(INPUT_POST, 'txtMdp', FILTER_SANITIZE_STRING);
     $visiteur = $pdo->getInfosVisiteur($login, $mdp);
     
     if (!is_array($visiteur)) {

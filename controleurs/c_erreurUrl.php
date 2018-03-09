@@ -13,10 +13,6 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
-
-
 Utils::ajouterErreur('Une erreur est survenue, la chaîne de paramètres passés dans l\'url est incorrecte !');
 include 'vues/v_erreurs.php';
-
-
 ?>

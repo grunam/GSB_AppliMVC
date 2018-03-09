@@ -14,8 +14,6 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-
-   
     <div class="panel panel-info">
         <div class="panel-heading" class="text-center">
         <?php
@@ -27,11 +25,9 @@
         ?>    
         </div>
              <form method="post" action="index.php?uc=paiementFrais&action=paiementFrais" role="form">
-                <input type="hidden" name="leVisiteur" value="<?php echo $idVisiteur ?>">
-                <input type="hidden" name="leMois" value="<?php echo $moisASelectionner ?>">
-                <input type="hidden" name="etat" value="<?php echo $idEtat ?>">
-                
-               
+                <input type="hidden" name="hdLeVisiteur" value="<?php echo $idVisiteur ?>">
+                <input type="hidden" name="hdLeMois" value="<?php echo $moisASelectionner ?>">
+                <input type="hidden" name="hdEtat" value="<?php echo $idEtat ?>">
                 <table class="table table-bordered table-responsive">
                 <tr>
                     <td class="text-center">

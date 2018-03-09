@@ -27,12 +27,12 @@
                 <?php
                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];
-                    $libelle = $unFrais['libelle'];
+                    $libelle = htmlspecialchars($unFrais['libelle'], ENT_QUOTES);
                     $quantite = $unFrais['quantite']; ?>
                     <div class="form-group">
                         <label for="idFrais"><?php echo $libelle ?></label>
                         <input type="number" id="idFrais" 
-                               name="lesFrais[<?php echo $idFrais ?>]"
+                               name="txtLesFrais[<?php echo $idFrais ?>]"
                                size="10" maxlength="5" 
                                value="<?php echo $quantite ?>" 
                                class="form-control" required>

@@ -30,7 +30,7 @@
             <tbody>
             <?php
             foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-                $libelle =  $unFraisHorsForfait['libelle'];
+                $libelle =  htmlspecialchars($unFraisHorsForfait['libelle'], ENT_QUOTES);
                 $date = $unFraisHorsForfait['date'];
                 $montant = $unFraisHorsForfait['montant'];
                 $id = $unFraisHorsForfait['id']; ?>           
@@ -55,19 +55,19 @@
               method="post" role="form">
             <div class="form-group">
                 <label for="txtDateHF">Date (jj/mm/aaaa): </label>
-                <input type="date" id="txtDateHF" name="dateFrais" 
+                <input type="date" id="txtDateHF" name="txtDateHF" 
                        class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="txtLibelleHF">Libellé</label>             
-                <input type="text" id="txtLibelleHF" name="libelle" 
+                <input type="text" id="txtLibelleHF" name="txtLibelleHF" 
                        class="form-control" required>
             </div> 
             <div class="form-group">
                 <label for="txtMontantHF">Montant : </label>
                 <div class="input-group">
                     <span class="input-group-addon">€</span>
-                    <input type="number" step="0.05" id="txtMontantHF" name="montant" 
+                    <input type="number" min="0" step="0.05" id="txtMontantHF" name="txtMontantHF" 
                            class="form-control" value="" required>
                 </div>
             </div>
