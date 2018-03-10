@@ -205,9 +205,9 @@ $pdo = PdoGsb::getPdoGsb();
                             foreach($lesFraisForfait as $leFraisForfait){    
                                 foreach($leFraisForfait as $k => $v){
                                     if (!is_int($k)) {
-                                            $str .= 'un attribut <b>'.$k;
-                                            $str .= '</b> de valeur <b>'.$v;
-                                            $str .= '</b><br>';
+                                        $str .= 'un attribut <b>'.$k;
+                                        $str .= '</b> de valeur <b>'.$v;
+                                        $str .= '</b><br>';
                                     }   
                                 }
                                 $str .= '<br>';

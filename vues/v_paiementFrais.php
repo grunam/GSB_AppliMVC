@@ -19,9 +19,9 @@
     <?php
     if ($idEtat == 'VA') {
         echo 'Mettre en paiement la fiche';
-    } else if ($idEtat == 'MP') { 
+    } elseif ($idEtat == 'MP') {
         echo 'Rembourser la fiche';
-    }    
+    }
     ?>    
     </div>
     <form method="post" action="index.php?uc=paiementFrais&action=paiementFrais">
@@ -35,9 +35,9 @@
                 <?php
                 if ($idEtat == 'VA') {
                     echo 'Mettre en paiement';
-                } else if ($idEtat == 'MP') { 
+                } elseif ($idEtat == 'MP') {
                     echo 'Rembourser';
-                }    
+                }
                 ?>
                 </button>
             </td>
@@ -45,5 +45,3 @@
         </table>
     </form>
 </div>
-   
-

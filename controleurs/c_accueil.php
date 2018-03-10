@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestion de l'accueil
  *
@@ -18,7 +19,7 @@ if ($estConnecte) {
         include 'vues/v_accueilComptables.php';
     } else {
         include 'vues/v_accueilVisiteursMedicaux.php';
-    }   
+    }
 } else {
     include 'vues/v_connexion.php';
 }

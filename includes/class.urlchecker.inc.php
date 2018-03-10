@@ -3,7 +3,7 @@
  * Classe de vérification de l'url.
  * pour l'application GSB
  * Les fonctions sont toutes statiques
- * 
+ *
  *
  * PHP Version 7
  *
@@ -15,7 +15,7 @@
  * @version   Release: 1.0
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
-class Urlchecker
+class Urlchecker 
 {
 /**
  * Vérifie si les paramètres passés en url sont correctes, c'est à dire
@@ -52,16 +52,16 @@ class Urlchecker
         $datas['uc']['validerFrais']['action']['selectionnerVisiteursMois'] = '';
         $datas['uc']['paiementFrais']['action']['selectionnerVisiteur'] = array();
         $datas['uc']['validerFrais']['action']['selectionnerVisiteur']['idLstVisiteur'] = '';
-        $datas['uc']['validerFrais']['action']['consulterFrais'] = '';  
-        $datas['uc']['validerFrais']['action']['validerMajFraisForfait'] = '';    
-        $datas['uc']['validerFrais']['action']['modifierFraisHorsForfait'] = '';  
+        $datas['uc']['validerFrais']['action']['consulterFrais'] = '';
+        $datas['uc']['validerFrais']['action']['validerMajFraisForfait'] = '';
+        $datas['uc']['validerFrais']['action']['modifierFraisHorsForfait'] = '';
         $datas['uc']['validerFrais']['action']['validerFrais'] = '';
         $datas['uc']['paiementFrais'] = array();
         $datas['uc']['paiementFrais']['action'] = array();
         $datas['uc']['paiementFrais']['action']['selectionnerVisiteursMois'] = array();
         $datas['uc']['paiementFrais']['action']['selectionnerVisiteur'] = array();
         $datas['uc']['paiementFrais']['action']['selectionnerVisiteur']['idLstVisiteur'] = '';
-        $datas['uc']['paiementFrais']['action']['consulterFrais'] = ''; 
+        $datas['uc']['paiementFrais']['action']['consulterFrais'] = '';
         $datas['uc']['paiementFrais']['action']['paiementFrais'] = '';
         $params = null;
         $requestUri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
@@ -81,20 +81,20 @@ class Urlchecker
             foreach ($datas as $kUc => $vUc) {
                 $i0++;
                 if (key($params) == $kUc) {
-                    $vi0 = 1; 
+                    $vi0 = 1;
                     foreach ($datas[$kUc] as $kCt => $vCt) {
                         $i1++;
                         if (current($params) == $kCt) {
                             $vi1 = 1;
-                             if ($datas[$kUc][$kCt]) {
+                            if ($datas[$kUc][$kCt]) {
                                 next($params);
                                 foreach ($datas[$kUc][$kCt] as $kAc => $vAc) {
-                                    $i2++;   
+                                    $i2++;
                                     if (key($params) == $kAc) {
                                         $vi2 = 1;
-                                        if ($datas[$kUc][$kCt][$kAc]) { 
+                                        if ($datas[$kUc][$kCt][$kAc]) {
                                             foreach ($datas[$kUc][$kCt][$kAc] as $kLac => $vLac) {
-                                                $i3++;   
+                                                $i3++;
                                                 if (current($params) == $kLac) {
                                                     $vi3 = 1;
                                                     if ($datas[$kUc][$kCt][$kAc][$kLac]) {
@@ -102,40 +102,42 @@ class Urlchecker
                                                         foreach ($datas[$kUc][$kCt][$kAc][$kLac] as $kId => $vId) {
                                                             if (is_array($datas[$kUc][$kCt][$kAc][$kLac])) {
                                                                 $i4++;
-                                                                if(key($params) == $kId){
+                                                                if (key($params) == $kId) {
                                                                     $vi4 = 1;
-                                                                    if (key($params) == 'idFrais' && !$pdo->estUnFraisHorsForfait(current($params), $idVisiteur, Utils::getMois(date('d/m/Y')))) {
-                                                                        $errorUrl = true;  
+                                                                    if (key($params) == 'idFrais' && 
+                                                                            !$pdo->estUnFraisHorsForfait(current($params), $idVisiteur, Utils::getMois(date('d/m/Y')))) {
+                                                                        $errorUrl = true;
                                                                     }
-                                                                    if (key($params) == 'idLstVisiteur' && !$pdo->estUnVisiteur(current($params))) {
-                                                                         $errorUrl = true;  
+                                                                    if (key($params) == 'idLstVisiteur' &&
+                                                                            !$pdo->estUnVisiteur(current($params))) {
+                                                                         $errorUrl = true;
                                                                     }
-                                                                }else if ($i4 == count($datas[$kUc][$kCt][$kAc][$kLac]) &&  $vi4 == 0) {
-                                                                    $errorUrl = true;     
+                                                                } elseif ($i4 == count($datas[$kUc][$kCt][$kAc][$kLac]) &&
+                                                                        $vi4 == 0) {
+                                                                    $errorUrl = true;
                                                                 }
-                                                            }   
+                                                            }
                                                         }
-                                                    }     
-                                                }else if($i3 == count($datas[$kUc][$kCt][$kAc]) &&  $vi3 == 0) {
+                                                    }
+                                                } elseif ($i3 == count($datas[$kUc][$kCt][$kAc]) &&  $vi3 == 0) {
                                                     $errorUrl = true;
                                                 }
                                             }
                                         }
-                                    }else if($i2 == count($datas[$kUc][$kCt]) &&  $vi2 == 0) {
+                                    } elseif ($i2 == count($datas[$kUc][$kCt]) &&  $vi2 == 0) {
                                         $errorUrl = true;
-                                    }   
+                                    }
                                 }
-                            }     
-                        }else if($i1 == count($datas[$kUc]) &&  $vi1 == 0) {
+                            }
+                        } elseif ($i1 == count($datas[$kUc]) &&  $vi1 == 0) {
                              $errorUrl = true;
                         }
-                    }  
-                } else if($i0 == count($datas) && $vi0 == 0) {
+                    }
+                } elseif ($i0 == count($datas) && $vi0 == 0) {
                     $errorUrl = true;
-                }  
+                }
             }
         }
             return $errorUrl;
     }
 }
-?>

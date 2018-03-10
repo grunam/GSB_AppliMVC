@@ -33,5 +33,3 @@
                      alt="Laboratoire Galaxy-Swiss Bourdin"
                      title="Laboratoire Galaxy-Swiss Bourdin">
             </h1>
-            
-            

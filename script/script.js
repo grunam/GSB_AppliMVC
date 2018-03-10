@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-$(document).ready(function() {         
+$(document).ready(function() {
     
     var $lesVisiteurs = $('#lstVisiteurs');
     var $lesMois = $('#lstMois');
@@ -60,7 +60,5 @@ $(document).ready(function() {
             alert('Veuillez sélectionner au moins un frais hors forfait.');
          }  
     });  
-    
+
 });
-     
- 

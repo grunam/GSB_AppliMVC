@@ -23,7 +23,7 @@
             <tr>
                 <?php
                 foreach ($lesFraisForfait as $unFraisForfait) {
-                    $libelle =  htmlspecialchars($unFraisForfait['libelle'], ENT_QUOTES); 
+                    $libelle =  htmlspecialchars($unFraisForfait['libelle'], ENT_QUOTES);
                 ?>
                     <th> <?php echo $libelle ?></th>
                 <?php
@@ -48,18 +48,18 @@
                                class="form-control" required>
                     </div>
                     <?php
-                    } else { 
+                    } else {
                     ?>
-                       <?php echo $quantite ?>
-                    <?php   
+                    <?php echo $quantite ?>
+                    <?php
                     }
                     ?>
                  </td>
-                <?php   
+                <?php
                 }
                 ?>
             </tr>
-                <?php   
+                <?php
                 if ($idEtat == 'CL') {
                 ?>
             <tr>
@@ -68,11 +68,9 @@
                     <button class="btn btn-danger" type="reset">Effacer</button>
                 </td>
             </tr>
-                <?php   
+                <?php
                 }
                 ?>
         </table>  
     </form>
 </div>
-
-

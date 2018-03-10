@@ -3,7 +3,7 @@
  * Classe d'utilitaires.
  * pour l'application GSB
  * Les fonctions sont toutes statiques,
- * 
+ *
  *
  * PHP Version 7
  *
@@ -37,19 +37,19 @@ class Utils
      * @return vrai ou faux
      */
     public static function estComptable()
-    {   
-       return $_SESSION['comptable'] == 1;  
+    {
+        return $_SESSION['comptable'] == 1;
     }
 
     /**
-     * Teste si un quelconque identifiant passé en paramètre est compris 
+     * Teste si un quelconque identifiant passé en paramètre est compris
      * dans la liste des visiteurs passés en paramètres
      *
      * @param String $idVisiteur ID du visiteur
      * @param String $nom        Nom du visiteur
      * @param String $prenom     Prénom du visiteur
-     * @param Boolean $comptable Etat comptable 
-     * 
+     * @param Boolean $comptable Etat comptable
+     *
      * @return vrai ou faux
      *
      * @assert ('toto', array(array('id'=>'toto'))) == true
@@ -58,13 +58,13 @@ class Utils
      * @assert ("toto", array(array('id'=>3))) == false
     */
     public static function estVisiteur($val, $lesVisiteurs)
-    {   
-       foreach ($lesVisiteurs as $unVisiteur) {
+    {
+        foreach ($lesVisiteurs as $unVisiteur) {
             if ($unVisiteur["id"] == $val) {
-                return true; 
-            }    
-       } 
-       return false;
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -73,7 +73,7 @@ class Utils
      * @param String $idVisiteur ID du visiteur
      * @param String $nom        Nom du visiteur
      * @param String $prenom     Prénom du visiteur
-     * @param Boolean $comptable Etat comptable 
+     * @param Boolean $comptable Etat comptable
      *
      * @return null
      */
@@ -104,37 +104,37 @@ class Utils
 
      * @param string $str chaîne à échapper
      *
-     * @return string 
-     * 
+     * @return string
+     *
      * @assert ('&quot;le meilleur&quot; film') == '\"le meilleur\" film'
-     */    
-    public static function filtrerChainePourBdd($str) 
+     */
+    public static function filtrerChainePourBdd($str)
     {
-      if (!get_magic_quotes_gpc()) { 
-          $str = addslashes(htmlspecialchars_decode($str, ENT_QUOTES));
-      }
-      return $str;
+        if (!get_magic_quotes_gpc()) {
+            $str = addslashes(htmlspecialchars_decode($str, ENT_QUOTES));
+        }
+        return $str;
     }
 
     /**
      * Retire les échappements d'une chaîne.
 
      * Envoie la chaîne $str non échappée, càd avec les caractères considérés 
-     * spéciaux par MySql (tq la quote simple) non précédé d'un \, ce qui valide  
+     * spéciaux par MySql (tq la quote simple) non précédé d'un \, ce qui valide 
      * leur effet spécial
 
      * @param string $str chaîne échappée
      *
      * @return string
-     * 
+     *
      * @assert ('le meilleur \" film') == 'le meilleur " film'
-     */    
-    public static function filtrerChainePourVue($str) 
+     */
+    public static function filtrerChainePourVue($str)
     {
-      if (!get_magic_quotes_gpc()) { 
-          $str = stripslashes($str);
-      }
-      return $str;
+        if (!get_magic_quotes_gpc()) {
+            $str = stripslashes($str);
+        }
+        return $str;
     }
      
     /**
@@ -144,7 +144,7 @@ class Utils
      * @param String $maDate au format  jj/mm/aaaa
      *
      * @return Date au format anglais aaaa-mm-jj
-     * 
+     *
      * @assert ('26/02/2018') == '2018-02-26'
      * @assert ('09/11/1999') == '1999-11-09'
      */
@@ -161,18 +161,18 @@ class Utils
      * @param String $maDate au format  aaaa-mm-jj
      *
      * @return Date au format format français jj/mm/aaaa
-     * 
-     * 
+     *
+     *
      * @assert ('2018-02-26') == '26/02/2018'
      * @assert ('1999-11-09') == '09/11/1999'
      * @assert ('1999') == '//1999'
-     * @assert (02) == '//2' 
+     * @assert (02) == '//2'
     */
     public static function dateAnglaisVersFrancais($maDate)
     {
         @list($annee, $mois, $jour) = explode('-', $maDate);
         $date = $jour . '/' . $mois . '/' . $annee;
-        return $date; 
+        return $date;
     }
 
     /**
@@ -181,9 +181,9 @@ class Utils
      * @param String $date au format  aaaamm
      *
      * @return String Mois au format aaaamm
-     * 
+     *
      * @assert ('26/02/2018') == '201802'
-     * @assert ('09/11/1999') == '199911' 
+     * @assert ('09/11/1999') == '199911'
      */
     public static function getMois($date)
     {
@@ -201,14 +201,14 @@ class Utils
      * @param String $date au format  jj/mm/aaaa
      *
      * @return String Mois au format aaaamm
-     * 
+     *
      * @assert ('200701') == '200612'
-     * @assert ('201712') == '201711'   
+     * @assert ('201712') == '201711'
      */
     public static function getMoisPrecedent($dateMois)
     {
         $annee = substr($dateMois, 0, 4);
-        $mois = substr($dateMois, 4, 2);  
+        $mois = substr($dateMois, 4, 2);
         if ($mois == '01') {
             $mois = '12';
             $annee--;
@@ -227,14 +227,14 @@ class Utils
      * @param String $dateMois au format aaaamm
      *
      * @return String Mois au format aaaamm
-     * 
+     *
      * @assert ('200701') == '200702'
      * @assert ('200712') == '200801'
      */
     public static function getMoisSuivant($dateMois)
     {
         $annee = substr($dateMois, 0, 4);
-        $mois = substr($dateMois, 4, 2);   
+        $mois = substr($dateMois, 4, 2);
         if ($mois == '12') {
             $mois = '01';
             $annee++;
@@ -254,7 +254,7 @@ class Utils
      * @param Integer $valeur Valeur
      *
      * @return Boolean vrai ou faux
-     * 
+     *
      * @assert (14.123) == false
      * @assert (1554) == true
      * @assert (-5) == false
@@ -272,7 +272,7 @@ class Utils
      * @param Array $tabEntiers Un tableau d'entier
      *
      * @return Boolean vrai ou faux
-     * 
+     *
      * @assert (array(0, 4, 2, 486, 5164)) == true
      * @assert (array(0, 4, 2, 486, -465)) == false
      * @assert (array(875, 4, 3.45, 4, 1221)) == false
@@ -290,14 +290,14 @@ class Utils
     }
 
     /**
-     * Vérifie si le jour de la date donnée en paramètre est entre les bornes données en parmètre 
+     * Vérifie si le jour de la date donnée en paramètre est entre les bornes données en parmètres.
      *
      * @param String $dateTestee Date à tester au format  jj/mm/aaaa
-     * @param Integeer $jourMin Borne inférieur de l'intervalle pour le jour de dateTestee 
+     * @param Integeer $jourMin Borne inférieur de l'intervalle pour le jour de dateTestee
      * @param Integeer $jourMax Borne maximum de l'intervalle pour le jour de dateTestee
-     * 
+     *
      * @return Boolean vrai ou faux
-     * 
+     *
      * @assert ('18/04/2016', 10, 20) == true
      * @assert ('14/08/2017', 15, 20) == false
      * @assert ('20/12/2015', 10, 20) == true
@@ -317,8 +317,8 @@ class Utils
      * @param String $dateTestee Date à tester au format  jj/mm/aaaa
      *
      * @return Boolean vrai ou faux
-     * 
-     * 
+     *
+     *
      * @assert ('2017-01-18') == true
      * @assert ('2017-02-02') == true
      * @assert ('2017-10-30') == false
@@ -340,13 +340,13 @@ class Utils
      * @param String $date Date à tester
      *
      * @return Boolean vrai ou faux
-     *  
+     *
      * @assert ('2017-10-02') == true
      * @assert ('2015-06-2') == true
      * @assert ('2017/10/30') == false
      * @assert ('2001-4.5-10') == false
      * @assert ('-04-12-20') == false
-     * @assert ('zeze-08-02') == false 
+     * @assert ('zeze-08-02') == false
      */
     public static function estDateValide($date)
     {
@@ -373,7 +373,7 @@ class Utils
      * @param Array $lesFrais Tableau d'entier
      *
      * @return Boolean vrai ou faux
-     * 
+     *
      * @assert (array(155, 887, 65, 12, 01)) == true
      * @assert (array('zeze', 887, 65, 12, 01)) == false
      * @assert (array(1, 2, 3.5, 6, 88)) == false
@@ -395,7 +395,7 @@ class Utils
      * @param Float  $montant   Montant des frais
      *
      * @return null
-     * 
+     *
      *  @backupGlobals enabled
      */
     public static function valideInfosFrais($dateFrais, $libelle, $montant)
@@ -427,14 +427,14 @@ class Utils
      * Retoune le nombre de lignes du tableau des frais hors forfait
      *
      *  @param Array  $lesFrais   tableau associatif des frais hors forfait
-     *                           
-     * @return Integer le nombre de frais 
-     * 
+     *        
+     * @return Integer le nombre de frais
+     *
      * @assert (array(array('refuse'=>1), array('refuse'=>0), array('refuse'=>0), array('refuse'=>1), array('refuse'=>0))) == 3
      * @assert (array(array('refuse'=>0), array('refuse'=>0), array('refuse'=>0), array('refuse'=>0), array('refuse'=>0))) == 5
-     * @assert (array(array('refuse'=>1), array('refuse'=>1), array('refuse'=>1), array('refuse'=>1), array('refuse'=>1))) == 0     
+     * @assert (array(array('refuse'=>1), array('refuse'=>1), array('refuse'=>1), array('refuse'=>1), array('refuse'=>1))) == 0
      */
-    public static function nbFraisHorsForfait($lesFraisHorsForfait) 
+    public static function nbFraisHorsForfait($lesFraisHorsForfait)
     {
         $nbFraisHorsForfait = 0;
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
@@ -452,7 +452,7 @@ class Utils
      * @param String $msg Libellé de l'erreur
      *
      * @return null
-     * 
+     *
      * @backupGlobals enabled
      */
     public static function ajouterErreur($msg)
@@ -469,7 +469,7 @@ class Utils
      * @param String $msg Libellé du succès
      *
      * @return null
-     * 
+     *
      * @backupGlobals enabled
      */
     public static function ajouterSucces($msg)
@@ -484,7 +484,7 @@ class Utils
      * Retoune le nombre de lignes du tableau des erreurs
      *
      * @return Integer le nombre d'erreurs
-     * 
+     *
      *  @backupGlobals enabled
      */
     public static function nbErreurs()
@@ -501,7 +501,7 @@ class Utils
      * Retoune le nombre de lignes du tableau des succès
      *
      * @return Integer le nombre de succès
-     * 
+     *
      *  @backupGlobals enabled
      */
     public static function nbSucces()
@@ -516,24 +516,23 @@ class Utils
     /**
      * Retourne la chaine passé en paramètre avec la mention "REFUSE-" au début,
      *  tronque la chaîne si elle est d'une longueur supérieure à 100
-     * 
-     * @param String $str Libellé du frais hors forfait
-     * 
-     * @return String la chaîne limitée a 100 caractères avec la mention "REFUSE-" 
-     * 
-     * 
+     *
+     * @param String $string Libellé du frais hors forfait
+     *
+     * @return String la chaîne limitée a 100 caractères avec la mention "REFUSE-"
+     *
+     *
      * @assert ('Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo') == 'REFUSE-Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Const'
      * @assert ('Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica') == 'REFUSE-Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica'
      * @assert ('On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Telle pourrait être la devise du pouvoir exécutif. Déterminé à engager une réforme en profondeur de la SNCF, il procède comme il l’a fait à l’automne 2017 sur le dossier réputé hautement inflammable du droit du travail,') == 'REFUSE-On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Tell'
      */
 
-    public static function mentionRefuse($string){
+    public static function mentionRefuse($string)
+    {
         $str = "REFUSE-".self::filtrerChainePourVue($string);
-        if (mb_strlen($str) > 100){
-          $str = mb_substr($str, 0, 100);
-        }  
+        if (mb_strlen($str) > 100) {
+            $str = mb_substr($str, 0, 100);
+        }
         return self::filtrerChainePourBdd($str);
     }
-    
-} 
-
+}

@@ -17,7 +17,8 @@
 <div class="panel panel-info">
     <div class="panel-heading">Descriptif des éléments hors forfait - 
         <?php echo $nbJustificatifs ?> justificatifs reçus</div>
-    <form id="frmFraisHorsForfait" method="post" action="index.php?uc=<?php echo $monControleur ?>&action=modifierFraisHorsForfait">
+    <form id="frmFraisHorsForfait" method="post" 
+          action="index.php?uc=<?php echo $monControleur ?>&action=modifierFraisHorsForfait">
         <input type="hidden" name="hdLeVisiteur" value="<?php echo $idVisiteur ?>">
         <input type="hidden" name="hdLeMois" value="<?php echo $moisASelectionner ?>">
         <input id="hdValModFraisHorsForfait" type="hidden" name="hdValModFraisHorsForfait" value="">
@@ -27,11 +28,11 @@
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
                 <th class="montant">Montant</th>
-                <?php   
+                <?php
                 if ($idEtat == 'CL') {
                 ?>
-                <th>Sélection</th>
-                <?php   
+                    <th>Sélection</th>
+                <?php
                 }
                 ?>
             </tr>
@@ -44,7 +45,7 @@
                 $refus = $unFraisHorsForfait['refuse'];
                 ?>
                 <tr>
-                    <?php   
+                    <?php
                     if ($idEtat == 'CL' && $refus == 0) {
                     ?>
                     <td>
@@ -55,46 +56,52 @@
                                    class="form-control" lang="fr" data-date-format="yyyy-mm-dd" required>
                     </td>
                     <td>
-                        <input type="text" id="txtLibelleHF<?php echo $idFrais ?>" name="txtLibelleHF<?php echo $idFrais ?>" 
+                        <input type="text" 
+                               id="txtLibelleHF<?php echo $idFrais ?>" 
+                               name="txtLibelleHF<?php echo $idFrais ?>" 
                            class="form-control" value="<?php echo $libelle ?>" required>
                     </td>
                     <td>
-                        <input id="txtMontantHF<?php echo $idFrais ?>" type="number" step="0.01" name="txtMontantHF<?php echo $idFrais ?>" 
+                        <input id="txtMontantHF<?php echo $idFrais ?>" type="number" step="0.01" 
+                               name="txtMontantHF<?php echo $idFrais ?>" 
                                class="form-control" value="<?php echo $montant ?>" required>    
 
                     </td>
-                    <?php 
+                    <?php
                     } else {
                     ?> 
-                    <td><?php echo $date ?></td>
-                    <td><?php echo $libelle ?></td>
-                    <td><?php echo $montant ?></td>
-                    <?php 
+                        <td><?php echo $date ?></td>
+                        <td><?php echo $libelle ?></td>
+                        <td><?php echo $montant ?></td>
+                    <?php
                     }
                     if ($idEtat == 'CL') {
                     ?>
-                    <td>
-                        <?php   
+                        <td>
+                        <?php
                         if (!$refus) {
                         ?>
                         <input type="checkbox" name="chkLesFraisHorsForfait[]" value="<?php echo $idFrais ?>">
-                        <?php 
-                        } 
+                        <?php
+                        }
                         ?>  
-                    </td>
-                    <?php   
+                        </td>
+                    <?php
                     }
                     ?>
                 </tr>
                 <?php
             }
-            if ($nbFraisHorsForfait > 0 && $idEtat == 'CL') {   
+            if ($nbFraisHorsForfait > 0 && $idEtat == 'CL') {
             ?>
                 <tr>
                     <td class="text-center" colspan="4">
-                        <button id="cmdModifierFraisHorsForfait" class="btn btn-success" type="submit">Modifier</button>
-                        <button id="cmdReporterFraisHorsForfait" class="btn btn-success" type="submit">Reporter</button>    
-                        <button id="cmdSupprimerFraisHorsForfait" class="btn btn-success" type="submit">Supprimer</button>
+                        <button id="cmdModifierFraisHorsForfait" 
+                                class="btn btn-success" type="submit">Modifier</button>
+                        <button id="cmdReporterFraisHorsForfait" 
+                                class="btn btn-success" type="submit">Reporter</button>    
+                        <button id="cmdSupprimerFraisHorsForfait" 
+                                class="btn btn-success" type="submit">Supprimer</button>
                         <button class="btn btn-danger" type="reset">Effacer</button>
                     </td>
                 </tr>

@@ -24,5 +24,3 @@
         <strong><u>Montant validé :</u></strong> <?php echo $montantValide.' €' ?>
     </div>
 </div>
-
-

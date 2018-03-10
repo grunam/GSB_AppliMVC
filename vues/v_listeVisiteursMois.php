@@ -18,11 +18,11 @@
 <script src="./script/script.js"></script>
 <script src="./node_modules/date-input-polyfill/date-input-polyfill.dist"></script>
 <h2>
-    <?php    
+    <?php
     if ($monControleur == 'validerFrais') {
-        echo 'Valider une fiche de frais'; 
-    } else if ($monControleur == 'paiementFrais') {
-        echo 'Suivre le paiement des fiches de frais'; 
+        echo 'Valider une fiche de frais';
+    } elseif ($monControleur == 'paiementFrais') {
+        echo 'Suivre le paiement des fiches de frais';
     }
     ?>
 </h2>
@@ -37,27 +37,29 @@
                 <input type="hidden" id="hdMonControleur" name="hdMonControleur" value="<?php echo $monControleur ?>">
                 <label for="lstVisiteurs" accesskey="n">Visiteurs médical : </label>
                 <select id="lstVisiteurs" name="lstVisiteurs" class="form-control"> 
-                   <?php
-                   foreach ($lesVisiteurs as $unVisiteur) {
-                        $nomVisiteur = $unVisiteur['nom'];
-                        $prenomVisiteur = $unVisiteur['prenom'];
-                        $adresseVisiteur = $unVisiteur['adresse'];
-                        $villeVisiteur = $unVisiteur['ville'];
-                        $cpVisiteur = $unVisiteur['cp'];
-                        $LigneVisiteurMedical = $unVisiteur['nom']." ".$unVisiteur['prenom']." ".$unVisiteur['adresse']." ".$unVisiteur['cp']." ".$unVisiteur['ville'];
-                        if ($unVisiteur["id"] == $visiteurASelectionner) {
-                             ?>
-                            <option selected value="<?php echo $unVisiteur["id"] ?>">
-                                <?php echo $LigneVisiteurMedical ?> </option>
-                            <?php
-                        } else {
-                            ?>
-                            <option value="<?php echo $unVisiteur["id"] ?>">
-                                <?php echo $LigneVisiteurMedical ?> </option>
-                            <?php
-                        }
+                <?php
+                foreach ($lesVisiteurs as $unVisiteur) {
+                    $nomVisiteur = $unVisiteur['nom'];
+                    $prenomVisiteur = $unVisiteur['prenom'];
+                    $adresseVisiteur = $unVisiteur['adresse'];
+                    $villeVisiteur = $unVisiteur['ville'];
+                    $cpVisiteur = $unVisiteur['cp'];
+                    $LigneVisiteurMedical = $unVisiteur['nom']
+                            ." ".$unVisiteur['prenom']." ".$unVisiteur['adresse']
+                            ." ".$unVisiteur['cp']." ".$unVisiteur['ville'];
+                    if ($unVisiteur["id"] == $visiteurASelectionner) {
+                    ?>
+                        <option selected value="<?php echo $unVisiteur["id"] ?>">
+                        <?php echo $LigneVisiteurMedical ?> </option>
+                        <?php
+                    } else {
+                        ?>
+                        <option value="<?php echo $unVisiteur["id"] ?>">
+                            <?php echo $LigneVisiteurMedical ?> </option>
+                        <?php
                     }
-                    ?>          
+                }
+                ?>          
                 </select>
             </div>
             <div class="form-group">

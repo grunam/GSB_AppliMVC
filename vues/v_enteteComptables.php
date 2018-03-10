@@ -41,34 +41,53 @@
                     </div>
                     <div class="col-md-8">
                         <ul class="nav nav-pills pull-right">
-                            <li <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
-                                <a href="index.php">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                    Accueil
-                                </a>
-                            </li>
-                            <li <?php if ($uc == 'validerFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=validerFrais&action=selectionnerVisiteursMois">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    Valider la fiche de frais
-                                </a>
-                            </li>
-                            <li <?php if ($uc == 'paiementFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=paiementFrais&action=selectionnerVisiteursMois">
-                                    <span class="glyphicon glyphicon-euro"></span>
-                                    Suivre le paiement des fiches de frais
-                                </a>
+                            <li <?php
+                            if (!$uc || $uc == 'accueil') {
+                                ?>class="active"
+                            <?php
+                            }
+                            ?>>
+                            <a href="index.php">
+                                <span class="glyphicon glyphicon-home"></span>
+                                Accueil
+                            </a>
                             </li>
                             <li 
-                            <?php if ($uc == 'deconnexion') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=deconnexion&action=demandeDeconnexion">
-                                    <span class="glyphicon glyphicon-log-out"></span>
-                                    Déconnexion
-                                </a>
+                            <?php
+                            if ($uc == 'validerFrais') {
+                                ?>class="active"
+                            <?php
+                            }
+                            ?>>
+                            <a href="index.php?uc=validerFrais&action=selectionnerVisiteursMois">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Valider la fiche de frais
+                            </a>
+                            </li>
+                            <li <?php
+                            if ($uc == 'paiementFrais') {
+                                ?>class="active"
+                            <?php
+                            }
+                            ?>>
+                            <a href="index.php?uc=paiementFrais&action=selectionnerVisiteursMois">
+                                <span class="glyphicon glyphicon-euro"></span>
+                                Suivre le paiement des fiches de frais
+                            </a>
+                            </li>
+                            <li 
+                            <?php
+                            if ($uc == 'deconnexion') {
+                                ?>class="active"
+                            <?php
+                            }
+                            ?>>
+                            <a href="index.php?uc=deconnexion&action=demandeDeconnexion">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                Déconnexion
+                            </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <?php
-          
