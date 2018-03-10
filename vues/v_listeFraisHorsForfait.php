@@ -52,11 +52,11 @@
     <h3>Nouvel élément hors forfait</h3>
     <div class="col-md-4">
         <form action="index.php?uc=gererFrais&action=validerCreationFrais" 
-              method="post" role="form">
+              method="post">
             <div class="form-group">
                 <label for="txtDateHF">Date (jj/mm/aaaa): </label>
                 <input type="date" id="txtDateHF" name="txtDateHF" 
-                       class="form-control" required>
+                       class="form-control" lang="fr" data-date-format="yyyy-mm-dd" required>
             </div>
             <div class="form-group">
                 <label for="txtLibelleHF">Libellé</label>             
@@ -65,11 +65,11 @@
             </div> 
             <div class="form-group">
                 <label for="txtMontantHF">Montant : </label>
-                <div class="input-group">
-                    <span class="input-group-addon">€</span>
+                <!--<div class="input-group">
+                    <span class="input-group-addon">€</span>-->
                     <input type="number" min="0" step="0.05" id="txtMontantHF" name="txtMontantHF" 
-                           class="form-control" value="" required>
-                </div>
+                           class="form-control" required>
+                <!--</div>-->
             </div>
             <button class="btn btn-success" type="submit">Ajouter</button>
             <button class="btn btn-danger" type="reset">Effacer</button>

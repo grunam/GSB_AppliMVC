@@ -178,7 +178,7 @@ class Utils
     /**
      * Retourne le mois au format aaaamm selon le jour dans le mois
      *
-     * @param String $date au format  jj/mm/aaaa
+     * @param String $date au format  aaaamm
      *
      * @return String Mois au format aaaamm
      * 
@@ -202,15 +202,15 @@ class Utils
      *
      * @return String Mois au format aaaamm
      * 
-     * @assert ('18/01/2007') == '200612'
-     * @assert ('20/12/2017') == '201711'   
+     * @assert ('200701') == '200612'
+     * @assert ('201712') == '201711'   
      */
-    public static function getMoisPrecedent($date)
+    public static function getMoisPrecedent($dateMois)
     {
-        @list($jour, $mois, $annee) = explode('/', $date);
-        unset($jour);
-        if ($mois == 1) {
-            $mois = 12;
+        $annee = substr($dateMois, 0, 4);
+        $mois = substr($dateMois, 4, 2);  
+        if ($mois == '01') {
+            $mois = '12';
             $annee--;
         } else {
             $mois--;
@@ -233,10 +233,10 @@ class Utils
      */
     public static function getMoisSuivant($dateMois)
     {
-        $newMois = substr($dateMois, 0, 4).'/'.substr($dateMois, 4, 2);
-        @list($annee, $mois) = explode('/', $newMois);
-        if ($mois == 12) {
-            $mois = 1;
+        $annee = substr($dateMois, 0, 4);
+        $mois = substr($dateMois, 4, 2);   
+        if ($mois == '12') {
+            $mois = '01';
             $annee++;
         } else {
             $mois++;
@@ -401,25 +401,25 @@ class Utils
     public static function valideInfosFrais($dateFrais, $libelle, $montant)
     {
         if ($dateFrais == '') {
-            self::ajouterErreur('Le champ date ne doit pas être vide');
+            self::ajouterErreur('Le champ date ne doit pas être vide.');
         } else {
             if (!self::estDatevalide($dateFrais)) {
-                self::ajouterErreur('Date invalide');
+                self::ajouterErreur('Date invalide.');
             } else {
                 if (self::estDateDepassee($dateFrais)) {
                     self::ajouterErreur(
-                        "date d'enregistrement du frais dépassé, plus de 1 an"
+                        "Date d'enregistrement du frais dépassé, plus de 1 an."
                     );
                 }
             }
         }
         if ($libelle == '') {
-            self::ajouterErreur('Le champ description ne peut pas être vide');
+            self::ajouterErreur('Le champ description ne peut pas être vide.');
         }
         if ($montant == '') {
-            self::ajouterErreur('Le champ montant ne peut pas être vide');
+            self::ajouterErreur('Le champ montant ne peut pas être vide.');
         } elseif (!is_numeric($montant)) {
-            self::ajouterErreur('Le champ montant doit être numérique');
+            self::ajouterErreur('Le champ montant doit être numérique.');
         }
     }
  

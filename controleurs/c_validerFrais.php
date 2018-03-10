@@ -19,7 +19,7 @@ switch ($action) {
 case 'selectionnerVisiteursMois':    
     if (Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {   
         try {   
-            $mois = Utils::getMoisPrecedent(date('d/m/Y'));
+            $mois = Utils::getMoisPrecedent(Utils::getMois(date('d/m/Y')));
             $pdo->cloturerFichesFrais($mois);
             $numAnneePrecedente = substr($mois, 0, 4);
             $numMoisPrecedent = substr($mois, 4, 2);
@@ -70,18 +70,22 @@ case 'selectionnerVisiteur':
 case 'consulterFrais':
     $visiteurASelectionner = filter_input(INPUT_POST, 'lstVisiteurs', FILTER_SANITIZE_STRING);
     $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+    /*
+    $visiteurASelectionner = 'a17';
+    $leMois = '201802';
+    */
     $lesVisiteurs = $pdo->getLesVisiteursValidationFichesFrais();
     $idVisiteur = $visiteurASelectionner; 
     $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
     $moisASelectionner = $leMois;
     include 'vues/v_listeVisiteursMois.php';
     if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {   
-            Utils::ajouterErreur(
-                'La campagne de validation doit être réalisée'
-                . ' entre le 10 et le 20 du mois suivant '
-                . 'la saisie par les visiteurs !'
-            );
-            include 'vues/v_erreurs.php';  
+        Utils::ajouterErreur(
+            'La campagne de validation doit être réalisée'
+            . ' entre le 10 et le 20 du mois suivant '
+            . 'la saisie par les visiteurs !'
+        );
+        include 'vues/v_erreurs.php';  
     }
     $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
     $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);

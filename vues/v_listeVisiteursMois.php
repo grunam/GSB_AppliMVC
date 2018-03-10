@@ -14,8 +14,9 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-<script src="./script/jquery-3.3.1.min.js" type="text/javascript"></script>
-<script src="./script/script.js" type="text/javascript"></script>
+<script src="./script/jquery-3.3.1.min.js"></script>
+<script src="./script/script.js"></script>
+<script src="./node_modules/date-input-polyfill/date-input-polyfill.dist"></script>
 <h2>
     <?php    
     if ($monControleur == 'validerFrais') {
@@ -31,7 +32,7 @@
     </div>
     <div class="col-md-4">
         <form id="frmListeVisiteursMois" action="index.php?uc=<?php echo $monControleur ?>&action=consulterFrais" 
-              method="post" role="form">
+              method="post">
           <div class="form-group">
                 <input type="hidden" id="hdMonControleur" name="hdMonControleur" value="<?php echo $monControleur ?>">
                 <label for="lstVisiteurs" accesskey="n">Visiteurs médical : </label>
@@ -82,10 +83,8 @@
                     ?>    
                 </select>
             </div>
-            <input id="cmdOkVisiteursMois" type="submit" value="Consulter" class="btn btn-success" 
-                   role="button">
-            <input id="brAnnulerVisiteursMois" type="reset" value="Effacer" class="btn btn-danger" 
-                   role="button">
+            <input id="cmdOkVisiteursMois" type="submit" value="Consulter" class="btn btn-success">
+            <input id="brAnnulerVisiteursMois" type="reset" value="Effacer" class="btn btn-danger">
             <br><br>
         </form>
     </div>

@@ -36,6 +36,10 @@ case 'selectionnerVisiteur':
 case 'consulterFrais':
     $visiteurASelectionner = filter_input(INPUT_POST, 'lstVisiteurs', FILTER_SANITIZE_STRING);
     $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+    /*
+    $visiteurASelectionner = 'a17';
+    $leMois = '201712';
+    */
     $lesVisiteurs = $pdo->getLesVisiteursPaiementFichesFrais();
     $idVisiteur = $visiteurASelectionner; 
     $lesMois = $pdo->getLesMoisDisponiblesPaiementFichesFrais($idVisiteur);

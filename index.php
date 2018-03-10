@@ -13,18 +13,26 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
-
 require_once 'includes/class.utils.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
 session_start();
 $pdo = PdoGsb::getPdoGsb();
-
-
+/*
+ $login = 'piepont';
+ $mdp = 'zaza99';
+ //$login = 'dandre';
+ //$mdp = 'oppg5';
+ $visiteur = $pdo->getInfosVisiteur($login, $mdp);
+ $id = $visiteur['id'];
+ $nom = $visiteur['nom'];
+ $prenom = $visiteur['prenom'];
+ $comptable = $visiteur['comptable'];
+ Utils::connecter($id, $nom, $prenom, $comptable); 
+ */
 $estConnecte = Utils::estConnecte();
 if ($estConnecte) {
     $estComptable = Utils::estComptable();
 }
-
 if ($estConnecte) {
     if ($estComptable) {
         require 'vues/v_enteteComptables.php';    
@@ -34,16 +42,12 @@ if ($estConnecte) {
 } else {
     require 'vues/v_enteteConnexion.php';
 }    
-
 require_once 'includes/class.urlchecker.inc.php';
-
 $errorUrl = false;
 if (isset($_SESSION['idVisiteur'])){
     $errorUrl = Urlchecker::paramChecker($_SESSION['idVisiteur'], $pdo);
 }
-
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
-
 if ($uc && !$estConnecte) {
     $uc = 'connexion';
 } elseif($errorUrl) {

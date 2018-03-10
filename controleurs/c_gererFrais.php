@@ -56,7 +56,7 @@ case 'validerCreationFrais':
                 $dateFrais,
                 $montant
             );   
-            Utils::ajouterSucces('Validation de la fiche de frais effectuée.');
+            Utils::ajouterSucces('Création de frais hors forfait effectuée.');
             include 'vues/v_succes.php';
         }
     } catch(Exception $e) { 

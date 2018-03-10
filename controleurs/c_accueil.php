@@ -13,14 +13,12 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
-
 if ($estConnecte) {
     if ($estComptable) {
         include 'vues/v_accueilComptables.php';
     } else {
         include 'vues/v_accueilVisiteursMedicaux.php';
-    }
-    
+    }   
 } else {
     include 'vues/v_connexion.php';
 }
