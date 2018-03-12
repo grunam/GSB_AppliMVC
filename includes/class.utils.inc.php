@@ -24,7 +24,7 @@ class Utils
     /**
      * Teste si un quelconque visiteur est connecté
      *
-     * @return vrai ou faux
+     * @return Boolean vrai ou faux
      */
     public static function estConnecte()
     {
@@ -34,7 +34,7 @@ class Utils
     /**
      * Teste si un quelconque visiteur est un comptable
      *
-     * @return vrai ou faux
+     * @return Boolean vrai ou faux
      */
     public static function estComptable()
     {
@@ -45,22 +45,20 @@ class Utils
      * Teste si un quelconque identifiant passé en paramètre est compris
      * dans la liste des visiteurs passés en paramètres
      *
-     * @param String $idVisiteur ID du visiteur
-     * @param String $nom        Nom du visiteur
-     * @param String $prenom     Prénom du visiteur
-     * @param Boolean $comptable Etat comptable
+     * @param String $id          id du visiteur
+     * @param Array $lesVisiteurs liste des visiteurs
      *
-     * @return vrai ou faux
+     * @return Boolean vrai ou faux
      *
      * @assert ('toto', array(array('id'=>'toto'))) == true
      * @assert ("coco", array(array('id'=>'toto'))) == false
      * @assert (2, array(array('id'=>'toto'))) == false
      * @assert ("toto", array(array('id'=>3))) == false
     */
-    public static function estVisiteur($val, $lesVisiteurs)
+    public static function estVisiteur($id, $lesVisiteurs)
     {
         foreach ($lesVisiteurs as $unVisiteur) {
-            if ($unVisiteur["id"] == $val) {
+            if ($unVisiteur["id"] == $id) {
                 return true;
             }
         }
@@ -70,10 +68,10 @@ class Utils
     /**
      * Enregistre dans une variable session les infos d'un visiteur
      *
-     * @param String $idVisiteur ID du visiteur
-     * @param String $nom        Nom du visiteur
-     * @param String $prenom     Prénom du visiteur
-     * @param Boolean $comptable Etat comptable
+     * @param String $idVisiteur id du visiteur
+     * @param String $nom        nom du visiteur
+     * @param String $prenom     prénom du visiteur
+     * @param Boolean $comptable état comptable
      *
      * @return null
      */
@@ -102,9 +100,9 @@ class Utils
      * spéciaux par MySql (tq la quote simple) précédés d'un \, ce qui annule 
      * leur effet spécial
 
-     * @param string $str chaîne à échapper
+     * @param String $str chaîne à échapper
      *
-     * @return string
+     * @return String chaîne avec les antislashes
      *
      * @assert ('&quot;le meilleur&quot; film') == '\"le meilleur\" film'
      */
@@ -123,9 +121,9 @@ class Utils
      * spéciaux par MySql (tq la quote simple) non précédé d'un \, ce qui valide 
      * leur effet spécial
 
-     * @param string $str chaîne échappée
+     * @param String $str chaîne échappée
      *
-     * @return string
+     * @return String chaîne sans les antislashes
      *
      * @assert ('le meilleur \" film') == 'le meilleur " film'
      */
@@ -141,9 +139,9 @@ class Utils
      * Transforme une date au format français jj/mm/aaaa vers le format anglais
      * aaaa-mm-jj
      *
-     * @param String $maDate au format  jj/mm/aaaa
+     * @param String $maDate date au format  jj/mm/aaaa
      *
-     * @return Date au format anglais aaaa-mm-jj
+     * @return Date date au format anglais aaaa-mm-jj
      *
      * @assert ('26/02/2018') == '2018-02-26'
      * @assert ('09/11/1999') == '1999-11-09'
@@ -158,9 +156,9 @@ class Utils
      * Transforme une date au format format anglais aaaa-mm-jj vers le format
      * français jj/mm/aaaa
      *
-     * @param String $maDate au format  aaaa-mm-jj
+     * @param String $maDate date au format  aaaa-mm-jj
      *
-     * @return Date au format format français jj/mm/aaaa
+     * @return Date date au format format français jj/mm/aaaa
      *
      *
      * @assert ('2018-02-26') == '26/02/2018'
@@ -178,9 +176,9 @@ class Utils
     /**
      * Retourne le mois au format aaaamm selon le jour dans le mois
      *
-     * @param String $date au format  aaaamm
+     * @param String $date date au format  aaaamm
      *
-     * @return String Mois au format aaaamm
+     * @return String mois au format aaaamm
      *
      * @assert ('26/02/2018') == '201802'
      * @assert ('09/11/1999') == '199911'
@@ -198,9 +196,9 @@ class Utils
     /**
      * Retourne le précédent mois au format aaaamm selon une date
      *
-     * @param String $date au format  jj/mm/aaaa
+     * @param String $date date au format  jj/mm/aaaa
      *
-     * @return String Mois au format aaaamm
+     * @return String mois au format aaaamm
      *
      * @assert ('200701') == '200612'
      * @assert ('201712') == '201711'
@@ -224,9 +222,9 @@ class Utils
     /**
      * Retourne le prochain mois au format aaaamm selon un mois
      *
-     * @param String $dateMois au format aaaamm
+     * @param String $dateMois mois au format aaaamm
      *
-     * @return String Mois au format aaaamm
+     * @return String mois au format aaaamm
      *
      * @assert ('200701') == '200702'
      * @assert ('200712') == '200801'
@@ -251,7 +249,7 @@ class Utils
     /**
      * Indique si la valeur est un entier positif ou nul
      *
-     * @param Integer $valeur Valeur
+     * @param Integer $valeur valeur
      *
      * @return Boolean vrai ou faux
      *
@@ -269,7 +267,7 @@ class Utils
     /**
      * Indique si un tableau de valeurs est constitué d'entiers positifs ou nuls
      *
-     * @param Array $tabEntiers Un tableau d'entier
+     * @param Array $tabEntiers un tableau d'entier
      *
      * @return Boolean vrai ou faux
      *
@@ -292,9 +290,9 @@ class Utils
     /**
      * Vérifie si le jour de la date donnée en paramètre est entre les bornes données en parmètres.
      *
-     * @param String $dateTestee Date à tester au format  jj/mm/aaaa
-     * @param Integeer $jourMin Borne inférieur de l'intervalle pour le jour de dateTestee
-     * @param Integeer $jourMax Borne maximum de l'intervalle pour le jour de dateTestee
+     * @param String $dateTestee date à tester au format  jj/mm/aaaa
+     * @param Integeer $jourMin borne inférieur de l'intervalle pour le jour de dateTestee
+     * @param Integeer $jourMax borne maximum de l'intervalle pour le jour de dateTestee
      *
      * @return Boolean vrai ou faux
      *
@@ -314,7 +312,7 @@ class Utils
     /**
      * Vérifie si une date est inférieure d'un an à la date actuelle
      *
-     * @param String $dateTestee Date à tester au format  jj/mm/aaaa
+     * @param String $dateTestee date à tester au format  jj/mm/aaaa
      *
      * @return Boolean vrai ou faux
      *
@@ -337,7 +335,7 @@ class Utils
     /**
      * Vérifie la validité du format d'une date anglaise aaaa-mm-jj
      *
-     * @param String $date Date à tester
+     * @param String $date date à tester
      *
      * @return Boolean vrai ou faux
      *
@@ -370,7 +368,7 @@ class Utils
     /**
      * Vérifie que le tableau de frais ne contient que des valeurs numériques
      *
-     * @param Array $lesFrais Tableau d'entier
+     * @param Array $lesFrais tableau d'entier
      *
      * @return Boolean vrai ou faux
      *
@@ -390,9 +388,9 @@ class Utils
      *
      * Des message d'erreurs sont ajoutés au tableau des erreurs
      *
-     * @param String $dateFrais Date des frais
-     * @param String $libelle   Libellé des frais
-     * @param Float  $montant   Montant des frais
+     * @param String $dateFrais date des frais
+     * @param String $libelle   libellé des frais
+     * @param Float  $montant   montant des frais
      *
      * @return null
      *
@@ -426,7 +424,7 @@ class Utils
     /**
      * Retoune le nombre de lignes du tableau des frais hors forfait
      *
-     *  @param Array  $lesFrais   tableau associatif des frais hors forfait
+     * @param Array $lesFrais tableau associatif des frais hors forfait
      *        
      * @return Integer le nombre de frais
      *
@@ -449,7 +447,7 @@ class Utils
     /**
      * Ajoute le libellé d'une erreur au tableau des erreurs
      *
-     * @param String $msg Libellé de l'erreur
+     * @param String $msg libellé de l'erreur
      *
      * @return null
      *
@@ -466,7 +464,7 @@ class Utils
     /**
      * Ajoute le libellé d'un succès au tableau des succès
      *
-     * @param String $msg Libellé du succès
+     * @param String $msg libellé du succès
      *
      * @return null
      *
@@ -485,7 +483,7 @@ class Utils
      *
      * @return Integer le nombre d'erreurs
      *
-     *  @backupGlobals enabled
+     * @backupGlobals enabled
      */
     public static function nbErreurs()
     {
@@ -502,7 +500,7 @@ class Utils
      *
      * @return Integer le nombre de succès
      *
-     *  @backupGlobals enabled
+     * @backupGlobals enabled
      */
     public static function nbSucces()
     {
@@ -514,13 +512,12 @@ class Utils
     }
 
     /**
-     * Retourne la chaine passé en paramètre avec la mention "REFUSE-" au début,
-     *  tronque la chaîne si elle est d'une longueur supérieure à 100
+     * Retourne la chaine passé en paramètre avec la mention "REFUSE-" au début, 
+     * tronque la chaîne si elle est d'une longueur supérieure à 100
      *
-     * @param String $string Libellé du frais hors forfait
+     * @param String $string libellé du frais hors forfait
      *
-     * @return String la chaîne limitée a 100 caractères avec la mention "REFUSE-"
-     *
+     * @return String la chaîne limitée a 100 caractères avec la mention "REFUSE-" au début
      *
      * @assert ('Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo') == 'REFUSE-Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Const'
      * @assert ('Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica') == 'REFUSE-Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica'

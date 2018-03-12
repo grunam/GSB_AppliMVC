@@ -14,7 +14,7 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-danger">
     <?php
     foreach ($_REQUEST['erreurs'] as $erreur) {
         echo '<p>' . htmlspecialchars($erreur) . '</p>';

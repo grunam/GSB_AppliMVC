@@ -14,57 +14,44 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
+<div class="panel panel-info">
+    <div class="panel-heading">Valider la fiche</div>
+    <form method="post" action="index.php?uc=validerFrais&action=validerFrais">
+        <input type="hidden" name="hdLeVisiteur" value="<?php echo $idVisiteur ?>">
+        <input type="hidden" name="hdLeMois" value="<?php echo $moisASelectionner ?>">
+        <input type="hidden" name="hdLeNbFraisHorsForfait" value="<?php echo $nbFraisHorsForfait ?>">
+        <table class="table table-bordered table-responsive">
+        <?php
+        if ($nbFraisHorsForfait > 0) {
+        ?>   
+        <tr>
+            <th class="col-sm-1">Nombre de justificatifs des frais hors forfaits reçus</th>
+            <th class="col-sm-1"></th>
+            <th class="col-sm-1"></th>
+            <th class="col-sm-1"></th>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" id="idNbJustificatif" 
+                       name="txtNbJustificatif" min="0" step="1"
+                       size="10" 
+                       value="" 
+                       class="form-control">
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <?php
+        }
+        ?>
+        <tr>
+            <td colspan="4" class="text-center">
+                <button class="btn btn-success" type="submit">Valider</button>
 
-   
-    <div class="panel panel-info">
-        <div class="panel-heading" class="text-center">Valider la fiche</div>
-             <form method="post" action="index.php?uc=validerFrais&action=validerFrais" role="form">
-                <input type="hidden" name="leVisiteur" value="<?php echo $idVisiteur ?>">
-                <input type="hidden" name="leMois" value="<?php echo $moisASelectionner ?>">
-                <input type="hidden" name="leNbFraisHorsForfait" value="<?php echo $nbFraisHorsForfait ?>">
-    
-                <table class="table table-bordered table-responsive">
-                
-                <?php
-                if ($nbFraisHorsForfait > 0) {
-                ?>
-                    
-                <tr>
-                    <th class="col-sm-1">Nombre de justificatifs des frais hors forfaits reçus</th>
-                    <th class="col-sm-1"></th>
-                    <th class="col-sm-1"></th>
-                    <th class="col-sm-1"></th>
-                </tr>
-                
-                <tr>
-                    <td> 
-                
-                        <input type="number" id="idNbJustificatif" 
-                               name="nbJustificatif" min="0" step="1"
-                               size="10" maxlength="5" 
-                               value="" 
-                               class="form-control">
-                  
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                
-                </tr>
-                
-                <?php
-                }
-                ?>
-            
-                <tr>
-                    <td colspan="4" class="text-center">
-                        <button class="btn btn-success" type="submit">Valider</button>
-                         
-                    </td>
-                </tr>
-                </table>
-             </form>
-        </div>
-    </div>   
-
+            </td>
+        </tr>
+        </table>
+    </form>
+</div>
 

@@ -17,12 +17,16 @@
  */
 class Urlchecker 
 {
-/**
- * Vérifie si les paramètres passés en url sont correctes, c'est à dire
- * qu'ils correspondent à ceux enregistrés dans un tableau multidimensionnel.
- *
- * @return vrai ou faux
- */
+    
+    /**
+     * Vérifie si les paramètres passés en url sont correctes, c'est à dire
+     * vérifie si ils correspondent à ceux enregistrés dans un tableau multidimensionnel.
+     *
+     * @param String $idVisiteur id du visiteur
+     * @param Object $pdo        instance de la classe PdoGsb
+     * 
+     * @return Boolean vrai ou faux
+     */
     public static function paramChecker($idVisiteur, $pdo)
     {
         $datas = array();
