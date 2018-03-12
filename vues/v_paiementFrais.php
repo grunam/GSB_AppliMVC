@@ -15,7 +15,7 @@
  */
 ?>
 <div class="panel panel-info">
-    <div class="panel-heading text-center">
+    <div class="panel-heading">
     <?php
     if ($idEtat == 'VA') {
         echo 'Mettre en paiement la fiche';

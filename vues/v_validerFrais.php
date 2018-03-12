@@ -15,7 +15,7 @@
  */
 ?>
 <div class="panel panel-info">
-    <div class="panel-heading text-center">Valider la fiche</div>
+    <div class="panel-heading">Valider la fiche</div>
     <form method="post" action="index.php?uc=validerFrais&action=validerFrais">
         <input type="hidden" name="hdLeVisiteur" value="<?php echo $idVisiteur ?>">
         <input type="hidden" name="hdLeMois" value="<?php echo $moisASelectionner ?>">
