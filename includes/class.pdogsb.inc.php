@@ -70,7 +70,7 @@ class PdoGsb
      * Fonction statique qui crée l'unique instance de la classe
      * Appel : $instancePdoGsb = PdoGsb::getPdoGsb();
      *
-     * @return l'unique objet de la classe PdoGsb
+     * @return PdoGsb instance de la classe PdoGsb
      */
     public static function getPdoGsb()
     {
