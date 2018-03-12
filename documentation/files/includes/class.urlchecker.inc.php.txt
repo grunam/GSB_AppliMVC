@@ -23,7 +23,7 @@ class Urlchecker
      * vérifie si ils correspondent à ceux enregistrés dans un tableau multidimensionnel.
      *
      * @param String $idVisiteur id du visiteur
-     * @param Object $pdo        instance de la classe PdoGsb
+     * @param PdoGsb $pdo        instance de la classe PdoGsb
      * 
      * @return Boolean vrai ou faux
      */
