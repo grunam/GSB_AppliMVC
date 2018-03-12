@@ -31,11 +31,12 @@ class PdoGsbTest extends TestCase
 class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
-    
+   
     private static $bdd = 'dbname=gsb_frais';
     private static $user = 'userGsb';
     private static $mdp = 'secret';
-   
+ 
+    
     /*
     private static $bdd = 'dbname=wh1l2sdy_gsb_frais';
     private static $user = 'wh1l2sdy_grunam';
@@ -88,7 +89,8 @@ class PdoGsb
      * @param String $login login du visiteur
      * @param String $mdp   mot de passe du visiteur
      *
-     * @return l'id, le nom et le prénom sous la forme d'un tableau associatif
+     * @return Array l'id, le nom et le prénom sous la forme d'un tableau associatif
+     * 
      * @assert ('dandre', 'oppg5') == array('id'=>'a17', 'nom'=>'Andre', 'prenom'=>'David', 'comptable'=>'0', 0=>'a17', 1=>'Andre', 2=>'David', 3=>'0')
      * @assert ('cbedos', 'gmhxd') != array('id'=>'a55', 'nom'=>'Bedos', 'prenom'=>'Christian', 'comptable'=>'0', 0=>'a55', 1=>'Bedos', 2=>'Christian', 3=>'1')
      * @assert ('cbedos', 'gmhxd') != array('id'=>'a55', 'nom'=>'Bedos', 'prenom'=>'Christian', 'comptable'=>'0', 0=>'a55', 1=>'Bedos', 2=>'ZOZO', 3=>'0')

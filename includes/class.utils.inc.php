@@ -196,7 +196,7 @@ class Utils
     /**
      * Retourne le précédent mois au format aaaamm selon une date
      *
-     * @param String $dateMois date au format jj/mm/aaaa
+     * @param String $dateMois mois au format aaaamm
      *
      * @return String mois au format aaaamm
      *
