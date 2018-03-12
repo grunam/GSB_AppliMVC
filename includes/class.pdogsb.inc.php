@@ -979,7 +979,7 @@ class PdoGsb
      * @param String  $idVisiteur      id du visiteur
      * @param String  $mois            mois sous la forme aaaamm
      * @param String  $etat            nouvel état de la fiche de frais
-     * @param Boolean $nbJustificatif  paramètre optionnel nombrre de justificatifs
+     * @param Boolean $nbJustificatif  paramètre optionnel nombre de justificatifs
      * 
      * @return null
      */
