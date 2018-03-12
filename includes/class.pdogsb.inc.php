@@ -35,7 +35,7 @@ class PdoGsb
     private static $bdd = 'dbname=gsb_frais';
     private static $user = 'userGsb';
     private static $mdp = 'secret';
- 
+    
     
     /*
     private static $bdd = 'dbname=wh1l2sdy_gsb_frais';

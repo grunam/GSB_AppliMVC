@@ -97,7 +97,7 @@ class Utils
      * Echappe les caractères spéciaux d'une chaîne.
 
      * Envoie la chaîne $str échappée, càd avec les caractères considérés 
-     * spéciaux par MySql (tq la quote simple) précédés d'un \, ce qui annule 
+     * spéciaux par MySql précédés d'un \, ce qui annule 
      * leur effet spécial
 
      * @param String $str chaîne à échapper
@@ -118,7 +118,7 @@ class Utils
      * Retire les échappements d'une chaîne.
 
      * Envoie la chaîne $str non échappée, càd avec les caractères considérés 
-     * spéciaux par MySql (tq la quote simple) non précédé d'un \, ce qui valide 
+     * spéciaux par MySql non précédé d'un \, ce qui valide 
      * leur effet spécial
 
      * @param String $str chaîne échappée
@@ -194,7 +194,7 @@ class Utils
     }
 
     /**
-     * Retourne le précédent mois au format aaaamm selon une date
+     * Retourne le précédent mois au format aaaamm selon un mois
      *
      * @param String $dateMois mois au format aaaamm
      *
