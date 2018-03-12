@@ -438,7 +438,7 @@ class PdoGsb
      * @param String $idVisiteur id du visiteur
      * @param String $mois       mois sous la forme aaaamm
      *
-     * @return vrai ou faux
+     * @return Boolean vrai ou faux
      *
      * @assert ('a131', '202501') == true
      * @assert ('a131', '201612') == false
@@ -469,7 +469,7 @@ class PdoGsb
      *
      * @param String $idVisiteur id du visiteur
      *
-     * @return le mois sous la forme aaaamm
+     * @return String le mois sous la forme aaaamm
      *
      * @asset ('f21') == '201710'
      * @asset ('a131') != '201710'
