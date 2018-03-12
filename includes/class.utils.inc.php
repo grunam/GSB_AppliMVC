@@ -196,7 +196,7 @@ class Utils
     /**
      * Retourne le précédent mois au format aaaamm selon une date
      *
-     * @param String $date date au format  jj/mm/aaaa
+     * @param String $dateMois date au format jj/mm/aaaa
      *
      * @return String mois au format aaaamm
      *
@@ -424,7 +424,7 @@ class Utils
     /**
      * Retoune le nombre de lignes du tableau des frais hors forfait
      *
-     * @param Array $lesFrais tableau associatif des frais hors forfait
+     * @param Array $lesFraisHorsForfait tableau associatif des frais hors forfait
      *        
      * @return Integer le nombre de frais
      *
