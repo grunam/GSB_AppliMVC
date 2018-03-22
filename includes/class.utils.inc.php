@@ -158,7 +158,7 @@ class Utils
      *
      * @param String $maDate date au format  aaaa-mm-jj
      *
-     * @return Date date au format format français jj/mm/aaaa
+     * @return String date au format format français jj/mm/aaaa
      *
      *
      * @assert ('2018-02-26') == '26/02/2018'
