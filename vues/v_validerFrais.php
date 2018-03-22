@@ -48,7 +48,6 @@
         <tr>
             <td colspan="4" class="text-center">
                 <button class="btn btn-success" type="submit">Valider</button>
-
             </td>
         </tr>
         </table>
