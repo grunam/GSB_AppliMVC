@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Gestion de la déconnexion
  *

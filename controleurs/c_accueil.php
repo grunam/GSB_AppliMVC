@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Gestion de l'accueil
  *

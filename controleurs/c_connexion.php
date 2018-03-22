@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Gestion de la connexion
  *
@@ -14,12 +13,10 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
-
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 if (!$uc) {
     $uc = 'demandeconnexion';
 }
-
 switch ($action) {
     case 'demandeConnexion':
         include 'vues/v_connexion.php';
