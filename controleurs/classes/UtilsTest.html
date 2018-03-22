@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>GSB_AppliMVC</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">GSB_AppliMVC</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">66</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">29</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1447704023"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1447704023" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/PdoGsb.html">PdoGsb</a></li>
+                                                    <li class="class"><a href="../classes/PdoGsbTest.html">PdoGsbTest</a></li>
+                                                    <li class="class"><a href="../classes/Urlchecker.html">Urlchecker</a></li>
+                                                    <li class="class"><a href="../classes/Utils.html">Utils</a></li>
+                                                    <li class="class"><a href="../classes/UtilsTest.html">UtilsTest</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>UtilsTest</h1>
+                    <p><em></em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/UtilsTest.html#method_setUpBeforeClass" class="">setUpBeforeClass()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstVisiteur" class="">testEstVisiteur()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstVisiteur2" class="">testEstVisiteur2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstVisiteur3" class="">testEstVisiteur3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstVisiteur4" class="">testEstVisiteur4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testFiltrerChainePourBdd" class="">testFiltrerChainePourBdd()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testFiltrerChainePourVue" class="">testFiltrerChainePourVue()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testDateFrancaisVersAnglais" class="">testDateFrancaisVersAnglais()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testDateFrancaisVersAnglais2" class="">testDateFrancaisVersAnglais2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testDateAnglaisVersFrancais" class="">testDateAnglaisVersFrancais()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testDateAnglaisVersFrancais2" class="">testDateAnglaisVersFrancais2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testDateAnglaisVersFrancais3" class="">testDateAnglaisVersFrancais3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testDateAnglaisVersFrancais4" class="">testDateAnglaisVersFrancais4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testGetMois" class="">testGetMois()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testGetMois2" class="">testGetMois2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testGetMoisPrecedent" class="">testGetMoisPrecedent()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testGetMoisPrecedent2" class="">testGetMoisPrecedent2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testGetMoisSuivant" class="">testGetMoisSuivant()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testGetMoisSuivant2" class="">testGetMoisSuivant2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstEntierPositif" class="">testEstEntierPositif()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstEntierPositif2" class="">testEstEntierPositif2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstEntierPositif3" class="">testEstEntierPositif3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstEntierPositif4" class="">testEstEntierPositif4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstEntierPositif5" class="">testEstEntierPositif5()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstTableauEntiers" class="">testEstTableauEntiers()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstTableauEntiers2" class="">testEstTableauEntiers2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstTableauEntiers3" class="">testEstTableauEntiers3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstTableauEntiers4" class="">testEstTableauEntiers4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstJourComprisDansIntervalle" class="">testEstJourComprisDansIntervalle()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstJourComprisDansIntervalle2" class="">testEstJourComprisDansIntervalle2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstJourComprisDansIntervalle3" class="">testEstJourComprisDansIntervalle3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstJourComprisDansIntervalle4" class="">testEstJourComprisDansIntervalle4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstJourComprisDansIntervalle5" class="">testEstJourComprisDansIntervalle5()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstJourComprisDansIntervalle6" class="">testEstJourComprisDansIntervalle6()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateDepassee" class="">testEstDateDepassee()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateDepassee2" class="">testEstDateDepassee2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateDepassee3" class="">testEstDateDepassee3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateDepassee4" class="">testEstDateDepassee4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateValide" class="">testEstDateValide()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateValide2" class="">testEstDateValide2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateValide3" class="">testEstDateValide3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateValide4" class="">testEstDateValide4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateValide5" class="">testEstDateValide5()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstDateValide6" class="">testEstDateValide6()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testLesQteFraisValides" class="">testLesQteFraisValides()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testLesQteFraisValides2" class="">testLesQteFraisValides2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testLesQteFraisValides3" class="">testLesQteFraisValides3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testLesQteFraisValides4" class="">testLesQteFraisValides4()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testNbFraisHorsForfait" class="">testNbFraisHorsForfait()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testNbFraisHorsForfait2" class="">testNbFraisHorsForfait2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testNbFraisHorsForfait3" class="">testNbFraisHorsForfait3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testMentionRefuse" class="">testMentionRefuse()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testMentionRefuse2" class="">testMentionRefuse2()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testMentionRefuse3" class="">testMentionRefuse3()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstConnecte" class="">testEstConnecte()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testEstComptable" class="">testEstComptable()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testConnecter" class="">testConnecter()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testDeconnecter" class="">testDeconnecter()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testValideInfosFrais" class="">testValideInfosFrais()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testAjouterErreur" class="">testAjouterErreur()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testAjouterSucces" class="">testAjouterSucces()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testNbErreurs" class="">testNbErreurs()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_testNbSucces" class="">testNbSucces()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/UtilsTest.html#method_setUp" class="">setUp()</a><br />
+                                                                    <a href="../classes/UtilsTest.html#method_tearDown" class="">tearDown()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/UtilsTest.html#property_object" class="">$object</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/test_unitaires.includes.class.utils.incTest.html"><div class="path-wrapper">test_unitaires\includes\class.utils.incTest.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\PHPUnit\Framework\TestCase</div>
+                                                                                                    <div class="namespace-wrapper">\UtilsTest</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_object" name="property_object" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$object</h3>
+                <pre class="signature">$object : \Utils</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Utils.html">\Utils</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setUpBeforeClass" name="method_setUpBeforeClass" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setUpBeforeClass()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setUpBeforeClass() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstVisiteur" name="method_testEstVisiteur" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstVisiteur()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstVisiteur() </pre>
+                <p><em>Generated from @assert (&#039;toto&#039;, array(array(&#039;id&#039;=&gt;&#039;toto&#039;))) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstVisiteur2" name="method_testEstVisiteur2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstVisiteur2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstVisiteur2() </pre>
+                <p><em>Generated from @assert (&quot;coco&quot;, array(array(&#039;id&#039;=&gt;&#039;toto&#039;))) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstVisiteur3" name="method_testEstVisiteur3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstVisiteur3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstVisiteur3() </pre>
+                <p><em>Generated from @assert (2, array(array(&#039;id&#039;=&gt;&#039;toto&#039;))) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstVisiteur4" name="method_testEstVisiteur4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstVisiteur4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstVisiteur4() </pre>
+                <p><em>Generated from @assert (&quot;toto&quot;, array(array(&#039;id&#039;=&gt;3))) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testFiltrerChainePourBdd" name="method_testFiltrerChainePourBdd" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testFiltrerChainePourBdd()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testFiltrerChainePourBdd() </pre>
+                <p><em>Generated from @assert (&#039;&amp;quot;le meilleur&amp;quot; film&#039;) == &#039;\&quot;le meilleur\&quot; film&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testFiltrerChainePourVue" name="method_testFiltrerChainePourVue" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testFiltrerChainePourVue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testFiltrerChainePourVue() </pre>
+                <p><em>Generated from @assert (&#039;le meilleur \&quot; film&#039;) == &#039;le meilleur &quot; film&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testDateFrancaisVersAnglais" name="method_testDateFrancaisVersAnglais" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testDateFrancaisVersAnglais()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testDateFrancaisVersAnglais() </pre>
+                <p><em>Generated from @assert (&#039;26/02/2018&#039;) == &#039;2018-02-26&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testDateFrancaisVersAnglais2" name="method_testDateFrancaisVersAnglais2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testDateFrancaisVersAnglais2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testDateFrancaisVersAnglais2() </pre>
+                <p><em>Generated from @assert (&#039;09/11/1999&#039;) == &#039;1999-11-09&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testDateAnglaisVersFrancais" name="method_testDateAnglaisVersFrancais" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testDateAnglaisVersFrancais()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testDateAnglaisVersFrancais() </pre>
+                <p><em>Generated from @assert (&#039;2018-02-26&#039;) == &#039;26/02/2018&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testDateAnglaisVersFrancais2" name="method_testDateAnglaisVersFrancais2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testDateAnglaisVersFrancais2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testDateAnglaisVersFrancais2() </pre>
+                <p><em>Generated from @assert (&#039;1999-11-09&#039;) == &#039;09/11/1999&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testDateAnglaisVersFrancais3" name="method_testDateAnglaisVersFrancais3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testDateAnglaisVersFrancais3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testDateAnglaisVersFrancais3() </pre>
+                <p><em>Generated from @assert (&#039;1999&#039;) == &#039;//1999&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testDateAnglaisVersFrancais4" name="method_testDateAnglaisVersFrancais4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testDateAnglaisVersFrancais4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testDateAnglaisVersFrancais4() </pre>
+                <p><em>Generated from @assert (02) == &#039;//2&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testGetMois" name="method_testGetMois" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testGetMois()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testGetMois() </pre>
+                <p><em>Generated from @assert (&#039;26/02/2018&#039;) == &#039;201802&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testGetMois2" name="method_testGetMois2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testGetMois2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testGetMois2() </pre>
+                <p><em>Generated from @assert (&#039;09/11/1999&#039;) == &#039;199911&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testGetMoisPrecedent" name="method_testGetMoisPrecedent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testGetMoisPrecedent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testGetMoisPrecedent() </pre>
+                <p><em>Generated from @assert (&#039;200701&#039;) == &#039;200612&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testGetMoisPrecedent2" name="method_testGetMoisPrecedent2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testGetMoisPrecedent2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testGetMoisPrecedent2() </pre>
+                <p><em>Generated from @assert (&#039;201712&#039;) == &#039;201711&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testGetMoisSuivant" name="method_testGetMoisSuivant" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testGetMoisSuivant()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testGetMoisSuivant() </pre>
+                <p><em>Generated from @assert (&#039;200701&#039;) == &#039;200702&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testGetMoisSuivant2" name="method_testGetMoisSuivant2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testGetMoisSuivant2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testGetMoisSuivant2() </pre>
+                <p><em>Generated from @assert (&#039;200712&#039;) == &#039;200801&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstEntierPositif" name="method_testEstEntierPositif" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstEntierPositif()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstEntierPositif() </pre>
+                <p><em>Generated from @assert (14.123) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstEntierPositif2" name="method_testEstEntierPositif2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstEntierPositif2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstEntierPositif2() </pre>
+                <p><em>Generated from @assert (1554) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstEntierPositif3" name="method_testEstEntierPositif3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstEntierPositif3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstEntierPositif3() </pre>
+                <p><em>Generated from @assert (-5) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstEntierPositif4" name="method_testEstEntierPositif4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstEntierPositif4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstEntierPositif4() </pre>
+                <p><em>Generated from @assert (-554.544) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstEntierPositif5" name="method_testEstEntierPositif5" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstEntierPositif5()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstEntierPositif5() </pre>
+                <p><em>Generated from @assert (0) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstTableauEntiers" name="method_testEstTableauEntiers" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstTableauEntiers()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstTableauEntiers() </pre>
+                <p><em>Generated from @assert (array(0, 4, 2, 486, 5164)) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstTableauEntiers2" name="method_testEstTableauEntiers2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstTableauEntiers2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstTableauEntiers2() </pre>
+                <p><em>Generated from @assert (array(0, 4, 2, 486, -465)) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstTableauEntiers3" name="method_testEstTableauEntiers3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstTableauEntiers3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstTableauEntiers3() </pre>
+                <p><em>Generated from @assert (array(875, 4, 3.45, 4, 1221)) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstTableauEntiers4" name="method_testEstTableauEntiers4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstTableauEntiers4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstTableauEntiers4() </pre>
+                <p><em>Generated from @assert (array(0, 4, 2, -54,87, 154)) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstJourComprisDansIntervalle" name="method_testEstJourComprisDansIntervalle" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstJourComprisDansIntervalle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstJourComprisDansIntervalle() </pre>
+                <p><em>Generated from @assert (&#039;18/04/2016&#039;, 10, 20) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstJourComprisDansIntervalle2" name="method_testEstJourComprisDansIntervalle2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstJourComprisDansIntervalle2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstJourComprisDansIntervalle2() </pre>
+                <p><em>Generated from @assert (&#039;14/08/2017&#039;, 15, 20) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstJourComprisDansIntervalle3" name="method_testEstJourComprisDansIntervalle3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstJourComprisDansIntervalle3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstJourComprisDansIntervalle3() </pre>
+                <p><em>Generated from @assert (&#039;20/12/2015&#039;, 10, 20) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstJourComprisDansIntervalle4" name="method_testEstJourComprisDansIntervalle4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstJourComprisDansIntervalle4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstJourComprisDansIntervalle4() </pre>
+                <p><em>Generated from @assert (&#039;10/09/2013&#039;, 10, 20) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstJourComprisDansIntervalle5" name="method_testEstJourComprisDansIntervalle5" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstJourComprisDansIntervalle5()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstJourComprisDansIntervalle5() </pre>
+                <p><em>Generated from @assert (&#039;21/07/2006&#039;, 10, 20) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstJourComprisDansIntervalle6" name="method_testEstJourComprisDansIntervalle6" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstJourComprisDansIntervalle6()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstJourComprisDansIntervalle6() </pre>
+                <p><em>Generated from @assert (&#039;09/06/2011&#039;, 10, 20) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateDepassee" name="method_testEstDateDepassee" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateDepassee()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateDepassee() </pre>
+                <p><em>Generated from @assert (&#039;2017-01-18&#039;) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateDepassee2" name="method_testEstDateDepassee2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateDepassee2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateDepassee2() </pre>
+                <p><em>Generated from @assert (&#039;2017-02-02&#039;) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateDepassee3" name="method_testEstDateDepassee3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateDepassee3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateDepassee3() </pre>
+                <p><em>Generated from @assert (&#039;2017-10-30&#039;) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateDepassee4" name="method_testEstDateDepassee4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateDepassee4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateDepassee4() </pre>
+                <p><em>Generated from @assert (&#039;2018-12-18&#039;) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateValide" name="method_testEstDateValide" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateValide()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateValide() </pre>
+                <p><em>Generated from @assert (&#039;2017-10-02&#039;) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateValide2" name="method_testEstDateValide2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateValide2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateValide2() </pre>
+                <p><em>Generated from @assert (&#039;2015-06-2&#039;) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateValide3" name="method_testEstDateValide3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateValide3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateValide3() </pre>
+                <p><em>Generated from @assert (&#039;2017/10/30&#039;) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateValide4" name="method_testEstDateValide4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateValide4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateValide4() </pre>
+                <p><em>Generated from @assert (&#039;2001-4.5-10&#039;) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateValide5" name="method_testEstDateValide5" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateValide5()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateValide5() </pre>
+                <p><em>Generated from @assert (&#039;-04-12-20&#039;) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstDateValide6" name="method_testEstDateValide6" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstDateValide6()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstDateValide6() </pre>
+                <p><em>Generated from @assert (&#039;zeze-08-02&#039;) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testLesQteFraisValides" name="method_testLesQteFraisValides" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testLesQteFraisValides()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testLesQteFraisValides() </pre>
+                <p><em>Generated from @assert (array(155, 887, 65, 12, 01)) == true.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testLesQteFraisValides2" name="method_testLesQteFraisValides2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testLesQteFraisValides2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testLesQteFraisValides2() </pre>
+                <p><em>Generated from @assert (array(&#039;zeze&#039;, 887, 65, 12, 01)) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testLesQteFraisValides3" name="method_testLesQteFraisValides3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testLesQteFraisValides3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testLesQteFraisValides3() </pre>
+                <p><em>Generated from @assert (array(1, 2, 3.5, 6, 88)) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testLesQteFraisValides4" name="method_testLesQteFraisValides4" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testLesQteFraisValides4()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testLesQteFraisValides4() </pre>
+                <p><em>Generated from @assert (array(-4, 2, 18, 21, 13)) == false.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testNbFraisHorsForfait" name="method_testNbFraisHorsForfait" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testNbFraisHorsForfait()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testNbFraisHorsForfait() </pre>
+                <p><em>Generated from @assert (array(array(&#039;refuse&#039;=&gt;1), array(&#039;refuse&#039;=&gt;0), array(&#039;refuse&#039;=&gt;0), array(&#039;refuse&#039;=&gt;1), array(&#039;refuse&#039;=&gt;0))) == 3.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testNbFraisHorsForfait2" name="method_testNbFraisHorsForfait2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testNbFraisHorsForfait2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testNbFraisHorsForfait2() </pre>
+                <p><em>Generated from @assert (array(array(&#039;refuse&#039;=&gt;0), array(&#039;refuse&#039;=&gt;0), array(&#039;refuse&#039;=&gt;0), array(&#039;refuse&#039;=&gt;0), array(&#039;refuse&#039;=&gt;0))) == 5.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testNbFraisHorsForfait3" name="method_testNbFraisHorsForfait3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testNbFraisHorsForfait3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testNbFraisHorsForfait3() </pre>
+                <p><em>Generated from @assert (array(array(&#039;refuse&#039;=&gt;1), array(&#039;refuse&#039;=&gt;1), array(&#039;refuse&#039;=&gt;1), array(&#039;refuse&#039;=&gt;1), array(&#039;refuse&#039;=&gt;1))) == 0.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testMentionRefuse" name="method_testMentionRefuse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testMentionRefuse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testMentionRefuse() </pre>
+                <p><em>Generated from @assert (&#039;Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo&#039;) == &#039;REFUSE-Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Const&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testMentionRefuse2" name="method_testMentionRefuse2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testMentionRefuse2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testMentionRefuse2() </pre>
+                <p><em>Generated from @assert (&#039;Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica&#039;) == &#039;REFUSE-Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testMentionRefuse3" name="method_testMentionRefuse3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testMentionRefuse3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testMentionRefuse3() </pre>
+                <p><em>Generated from @assert (&#039;On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Telle pourrait être la devise du pouvoir exécutif. Déterminé à engager une réforme en profondeur de la SNCF, il procède comme il l’a fait à l’automne 2017 sur le dossier réputé hautement inflammable du droit du travail,&#039;) == &#039;REFUSE-On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Tell&#039;.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstConnecte" name="method_testEstConnecte" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstConnecte()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstConnecte() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testEstConnecte().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testEstComptable" name="method_testEstComptable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testEstComptable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testEstComptable() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testEstComptable().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testConnecter" name="method_testConnecter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testConnecter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testConnecter() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testConnecter().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testDeconnecter" name="method_testDeconnecter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testDeconnecter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testDeconnecter() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testDeconnecter().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testValideInfosFrais" name="method_testValideInfosFrais" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testValideInfosFrais()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testValideInfosFrais() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testValideInfosFrais().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testAjouterErreur" name="method_testAjouterErreur" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testAjouterErreur()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testAjouterErreur() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testAjouterErreur().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testAjouterSucces" name="method_testAjouterSucces" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testAjouterSucces()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testAjouterSucces() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testAjouterSucces().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testNbErreurs" name="method_testNbErreurs" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testNbErreurs()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testNbErreurs() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testNbErreurs().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testNbSucces" name="method_testNbSucces" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testNbSucces()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testNbSucces() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            covers
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>Implement testNbSucces().</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setUp" name="method_setUp" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">setUp()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setUp() </pre>
+                <p><em>Sets up the fixture, for example, opens a network connection.</em></p>
+                <p>This method is called before a test is executed.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_tearDown" name="method_tearDown" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">tearDown()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">tearDown() </pre>
+                <p><em>Tears down the fixture, for example, closes a network connection.</em></p>
+                <p>This method is called after a test is executed.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">class.utils.incTest.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/test_unitaires\includes\class.utils.incTest.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on March 22nd, 2018 at 15:29.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

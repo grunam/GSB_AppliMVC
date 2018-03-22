@@ -107,6 +107,8 @@ function getMoisSuivant($mois)
  * @param String $mois Contient le mois à utiliser
  *
  * @return String le mois d'avant
+ * @assert (197901) == 197812
+ * @assert (201711) == 201710
  */
 function getMoisPrecedent($mois)
 {

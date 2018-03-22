@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>GSB_AppliMVC</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">GSB_AppliMVC</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">66</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">29</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-884895343"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-884895343" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/PdoGsb.html">PdoGsb</a></li>
+                                                    <li class="class"><a href="../classes/PdoGsbTest.html">PdoGsbTest</a></li>
+                                                    <li class="class"><a href="../classes/Urlchecker.html">Urlchecker</a></li>
+                                                    <li class="class"><a href="../classes/Utils.html">Utils</a></li>
+                                                    <li class="class"><a href="../classes/UtilsTest.html">UtilsTest</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>Utils</h1>
+                    <p><em>Classe d&#039;utilitaires.</em></p>
+                    <p>pour l'application GSB
+Les fonctions sont toutes statiques,</p>
+<p>PHP Version 7</p>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Utils.html#method_estConnecte" class="">estConnecte()</a><br />
+                                                                    <a href="../classes/Utils.html#method_estComptable" class="">estComptable()</a><br />
+                                                                    <a href="../classes/Utils.html#method_estVisiteur" class="">estVisiteur()</a><br />
+                                                                    <a href="../classes/Utils.html#method_connecter" class="">connecter()</a><br />
+                                                                    <a href="../classes/Utils.html#method_deconnecter" class="">deconnecter()</a><br />
+                                                                    <a href="../classes/Utils.html#method_filtrerChainePourBdd" class="">filtrerChainePourBdd()</a><br />
+                                                                    <a href="../classes/Utils.html#method_filtrerChainePourVue" class="">filtrerChainePourVue()</a><br />
+                                                                    <a href="../classes/Utils.html#method_dateFrancaisVersAnglais" class="">dateFrancaisVersAnglais()</a><br />
+                                                                    <a href="../classes/Utils.html#method_dateAnglaisVersFrancais" class="">dateAnglaisVersFrancais()</a><br />
+                                                                    <a href="../classes/Utils.html#method_getMois" class="">getMois()</a><br />
+                                                                    <a href="../classes/Utils.html#method_getMoisPrecedent" class="">getMoisPrecedent()</a><br />
+                                                                    <a href="../classes/Utils.html#method_getMoisSuivant" class="">getMoisSuivant()</a><br />
+                                                                    <a href="../classes/Utils.html#method_estEntierPositif" class="">estEntierPositif()</a><br />
+                                                                    <a href="../classes/Utils.html#method_estTableauEntiers" class="">estTableauEntiers()</a><br />
+                                                                    <a href="../classes/Utils.html#method_estJourComprisDansIntervalle" class="">estJourComprisDansIntervalle()</a><br />
+                                                                    <a href="../classes/Utils.html#method_estDateDepassee" class="">estDateDepassee()</a><br />
+                                                                    <a href="../classes/Utils.html#method_estDateValide" class="">estDateValide()</a><br />
+                                                                    <a href="../classes/Utils.html#method_lesQteFraisValides" class="">lesQteFraisValides()</a><br />
+                                                                    <a href="../classes/Utils.html#method_valideInfosFrais" class="">valideInfosFrais()</a><br />
+                                                                    <a href="../classes/Utils.html#method_nbFraisHorsForfait" class="">nbFraisHorsForfait()</a><br />
+                                                                    <a href="../classes/Utils.html#method_ajouterErreur" class="">ajouterErreur()</a><br />
+                                                                    <a href="../classes/Utils.html#method_ajouterSucces" class="">ajouterSucces()</a><br />
+                                                                    <a href="../classes/Utils.html#method_nbErreurs" class="">nbErreurs()</a><br />
+                                                                    <a href="../classes/Utils.html#method_nbSucces" class="">nbSucces()</a><br />
+                                                                    <a href="../classes/Utils.html#method_mentionRefuse" class="">mentionRefuse()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/includes.class.utils.inc.html"><div class="path-wrapper">includes\class.utils.inc.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">GSB</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Utils</div>
+                            </dd>
+
+                        
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                        <dd><a href="http://www.php.net/manual/fr/book.pdo.php"><span class="namespace-wrapper">PHP Data Objects sur php.net</span></a></dd>
+                                                    
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                category
+                            </th>
+                            <td>
+                                                                    <p>PPE</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Cheri Bibi - Réseau CERTA <a href="mailto:contact@reseaucerta.org">contact@reseaucerta.org</a></p>
+                                                                    <p>José GIL <a href="mailto:jgil@ac-nice.fr">jgil@ac-nice.fr</a></p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                copyright
+                            </th>
+                            <td>
+                                                                    <p>2017 Réseau CERTA</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                license
+                            </th>
+                            <td>
+                                                                    <p>Réseau CERTA</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                version
+                            </th>
+                            <td>
+                                                                    <p>Release: 1.0</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                        
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estConnecte" name="method_estConnecte" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estConnecte()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estConnecte() : Boolean</pre>
+                <p><em>Teste si un quelconque visiteur est connecté</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estComptable" name="method_estComptable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estComptable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estComptable() : Boolean</pre>
+                <p><em>Teste si un quelconque visiteur est un comptable</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estVisiteur" name="method_estVisiteur" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estVisiteur()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estVisiteur(String  <span class="argument">$id</span>, Array  <span class="argument">$lesVisiteurs</span>) : Boolean</pre>
+                <p><em>Teste si un quelconque identifiant passé en paramètre est compris
+dans la liste des visiteurs passés en paramètres</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$id </td>
+                                <td><p>id du visiteur</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>Array</td>
+                                <td>$lesVisiteurs </td>
+                                <td><p>liste des visiteurs</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('toto', array(array('id'=&gt;'toto'))) == true</p>
+                                                                                            <p>(&quot;coco&quot;, array(array('id'=&gt;'toto'))) == false</p>
+                                                                                            <p>(2, array(array('id'=&gt;'toto'))) == false</p>
+                                                                                            <p>(&quot;toto&quot;, array(array('id'=&gt;3))) == false</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_connecter" name="method_connecter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">connecter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">connecter(String  <span class="argument">$idVisiteur</span>, String  <span class="argument">$nom</span>, String  <span class="argument">$prenom</span>, Boolean  <span class="argument">$comptable</span>) : null</pre>
+                <p><em>Enregistre dans une variable session les infos d&#039;un visiteur</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$idVisiteur </td>
+                                <td><p>id du visiteur</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>String</td>
+                                <td>$nom </td>
+                                <td><p>nom du visiteur</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>String</td>
+                                <td>$prenom </td>
+                                <td><p>prénom du visiteur</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>Boolean</td>
+                                <td>$comptable </td>
+                                <td><p>état comptable</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    null
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deconnecter" name="method_deconnecter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deconnecter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deconnecter() : null</pre>
+                <p><em>Détruit la session active</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    null
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filtrerChainePourBdd" name="method_filtrerChainePourBdd" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filtrerChainePourBdd()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filtrerChainePourBdd(String  <span class="argument">$str</span>) : String</pre>
+                <p><em>Echappe les caractères spéciaux d&#039;une chaîne.</em></p>
+                <p>Envoie la chaîne $str échappée, càd avec les caractères considérés
+spéciaux par MySql précédés d'un \, ce qui annule
+leur effet spécial</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$str </td>
+                                <td><p>chaîne à échapper</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>chaîne avec les antislashes</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('&quot;le meilleur&quot; film') == '\&quot;le meilleur\&quot; film'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filtrerChainePourVue" name="method_filtrerChainePourVue" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filtrerChainePourVue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filtrerChainePourVue(String  <span class="argument">$str</span>) : String</pre>
+                <p><em>Retire les échappements d&#039;une chaîne.</em></p>
+                <p>Envoie la chaîne $str non échappée, càd avec les caractères considérés
+spéciaux par MySql non précédé d'un \, ce qui valide
+leur effet spécial</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$str </td>
+                                <td><p>chaîne échappée</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>chaîne sans les antislashes</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('le meilleur \&quot; film') == 'le meilleur &quot; film'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_dateFrancaisVersAnglais" name="method_dateFrancaisVersAnglais" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">dateFrancaisVersAnglais()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">dateFrancaisVersAnglais(String  <span class="argument">$maDate</span>) : \Date</pre>
+                <p><em>Transforme une date au format français jj/mm/aaaa vers le format anglais
+aaaa-mm-jj</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$maDate </td>
+                                <td><p>date au format  jj/mm/aaaa</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Date
+                                            &mdash; <p>date au format anglais aaaa-mm-jj</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('26/02/2018') == '2018-02-26'</p>
+                                                                                            <p>('09/11/1999') == '1999-11-09'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_dateAnglaisVersFrancais" name="method_dateAnglaisVersFrancais" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">dateAnglaisVersFrancais()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">dateAnglaisVersFrancais(String  <span class="argument">$maDate</span>) : String</pre>
+                <p><em>Transforme une date au format format anglais aaaa-mm-jj vers le format
+français jj/mm/aaaa</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$maDate </td>
+                                <td><p>date au format  aaaa-mm-jj</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>date au format format français jj/mm/aaaa</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('2018-02-26') == '26/02/2018'</p>
+                                                                                            <p>('1999-11-09') == '09/11/1999'</p>
+                                                                                            <p>('1999') == '//1999'</p>
+                                                                                            <p>(02) == '//2'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMois" name="method_getMois" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMois()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMois(String  <span class="argument">$date</span>) : String</pre>
+                <p><em>Retourne le mois au format aaaamm selon le jour dans le mois</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$date </td>
+                                <td><p>date au format  aaaamm</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>mois au format aaaamm</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('26/02/2018') == '201802'</p>
+                                                                                            <p>('09/11/1999') == '199911'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMoisPrecedent" name="method_getMoisPrecedent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMoisPrecedent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMoisPrecedent(String  <span class="argument">$dateMois</span>) : String</pre>
+                <p><em>Retourne le précédent mois au format aaaamm selon un mois</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$dateMois </td>
+                                <td><p>mois au format aaaamm</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>mois au format aaaamm</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('200701') == '200612'</p>
+                                                                                            <p>('201712') == '201711'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMoisSuivant" name="method_getMoisSuivant" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMoisSuivant()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMoisSuivant(String  <span class="argument">$dateMois</span>) : String</pre>
+                <p><em>Retourne le prochain mois au format aaaamm selon un mois</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$dateMois </td>
+                                <td><p>mois au format aaaamm</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>mois au format aaaamm</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('200701') == '200702'</p>
+                                                                                            <p>('200712') == '200801'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estEntierPositif" name="method_estEntierPositif" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estEntierPositif()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estEntierPositif(Integer  <span class="argument">$valeur</span>) : Boolean</pre>
+                <p><em>Indique si la valeur est un entier positif ou nul</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>Integer</td>
+                                <td>$valeur </td>
+                                <td><p>valeur</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>(14.123) == false</p>
+                                                                                            <p>(1554) == true</p>
+                                                                                            <p>(-5) == false</p>
+                                                                                            <p>(-554.544) == false</p>
+                                                                                            <p>(0) == true</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estTableauEntiers" name="method_estTableauEntiers" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estTableauEntiers()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estTableauEntiers(Array  <span class="argument">$tabEntiers</span>) : Boolean</pre>
+                <p><em>Indique si un tableau de valeurs est constitué d&#039;entiers positifs ou nuls</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>Array</td>
+                                <td>$tabEntiers </td>
+                                <td><p>un tableau d'entier</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>(array(0, 4, 2, 486, 5164)) == true</p>
+                                                                                            <p>(array(0, 4, 2, 486, -465)) == false</p>
+                                                                                            <p>(array(875, 4, 3.45, 4, 1221)) == false</p>
+                                                                                            <p>(array(0, 4, 2, -54,87, 154)) == false</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estJourComprisDansIntervalle" name="method_estJourComprisDansIntervalle" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estJourComprisDansIntervalle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estJourComprisDansIntervalle(String  <span class="argument">$dateTestee</span>, \Integeer  <span class="argument">$jourMin</span>, \Integeer  <span class="argument">$jourMax</span>) : Boolean</pre>
+                <p><em>Vérifie si le jour de la date donnée en paramètre est entre les bornes données en parmètres.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$dateTestee </td>
+                                <td><p>date à tester au format  jj/mm/aaaa</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Integeer</td>
+                                <td>$jourMin </td>
+                                <td><p>borne inférieur de l'intervalle pour le jour de dateTestee</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Integeer</td>
+                                <td>$jourMax </td>
+                                <td><p>borne maximum de l'intervalle pour le jour de dateTestee</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('18/04/2016', 10, 20) == true</p>
+                                                                                            <p>('14/08/2017', 15, 20) == false</p>
+                                                                                            <p>('20/12/2015', 10, 20) == true</p>
+                                                                                            <p>('10/09/2013', 10, 20) == true</p>
+                                                                                            <p>('21/07/2006', 10, 20) == false</p>
+                                                                                            <p>('09/06/2011', 10, 20) == false</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estDateDepassee" name="method_estDateDepassee" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estDateDepassee()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estDateDepassee(String  <span class="argument">$dateTestee</span>) : Boolean</pre>
+                <p><em>Vérifie si une date est inférieure d&#039;un an à la date actuelle</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$dateTestee </td>
+                                <td><p>date à tester au format  jj/mm/aaaa</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('2017-01-18') == true</p>
+                                                                                            <p>('2017-02-02') == true</p>
+                                                                                            <p>('2017-10-30') == false</p>
+                                                                                            <p>('2018-12-18') == false</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_estDateValide" name="method_estDateValide" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">estDateValide()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">estDateValide(String  <span class="argument">$date</span>) : Boolean</pre>
+                <p><em>Vérifie la validité du format d&#039;une date anglaise aaaa-mm-jj</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$date </td>
+                                <td><p>date à tester</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('2017-10-02') == true</p>
+                                                                                            <p>('2015-06-2') == true</p>
+                                                                                            <p>('2017/10/30') == false</p>
+                                                                                            <p>('2001-4.5-10') == false</p>
+                                                                                            <p>('-04-12-20') == false</p>
+                                                                                            <p>('zeze-08-02') == false</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_lesQteFraisValides" name="method_lesQteFraisValides" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">lesQteFraisValides()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">lesQteFraisValides(Array  <span class="argument">$lesFrais</span>) : Boolean</pre>
+                <p><em>Vérifie que le tableau de frais ne contient que des valeurs numériques</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>Array</td>
+                                <td>$lesFrais </td>
+                                <td><p>tableau d'entier</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Boolean
+                                            &mdash; <p>vrai ou faux</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>(array(155, 887, 65, 12, 01)) == true</p>
+                                                                                            <p>(array('zeze', 887, 65, 12, 01)) == false</p>
+                                                                                            <p>(array(1, 2, 3.5, 6, 88)) == false</p>
+                                                                                            <p>(array(-4, 2, 18, 21, 13)) == false</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_valideInfosFrais" name="method_valideInfosFrais" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">valideInfosFrais()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">valideInfosFrais(String  <span class="argument">$dateFrais</span>, String  <span class="argument">$libelle</span>, Float  <span class="argument">$montant</span>) : null</pre>
+                <p><em>Vérifie la validité des trois arguments : la date, le libellé du frais
+et le montant</em></p>
+                <p>Des message d'erreurs sont ajoutés au tableau des erreurs</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$dateFrais </td>
+                                <td><p>date des frais</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>String</td>
+                                <td>$libelle </td>
+                                <td><p>libellé des frais</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>Float</td>
+                                <td>$montant </td>
+                                <td><p>montant des frais</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    null
+                                            &mdash; <p>@backupGlobals enabled</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_nbFraisHorsForfait" name="method_nbFraisHorsForfait" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">nbFraisHorsForfait()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">nbFraisHorsForfait(Array  <span class="argument">$lesFraisHorsForfait</span>) : Integer</pre>
+                <p><em>Retoune le nombre de lignes du tableau des frais hors forfait</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>Array</td>
+                                <td>$lesFraisHorsForfait </td>
+                                <td><p>tableau associatif des frais hors forfait</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    Integer
+                                            &mdash; <p>le nombre de frais</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>(array(array('refuse'=&gt;1), array('refuse'=&gt;0), array('refuse'=&gt;0), array('refuse'=&gt;1), array('refuse'=&gt;0))) == 3</p>
+                                                                                            <p>(array(array('refuse'=&gt;0), array('refuse'=&gt;0), array('refuse'=&gt;0), array('refuse'=&gt;0), array('refuse'=&gt;0))) == 5</p>
+                                                                                            <p>(array(array('refuse'=&gt;1), array('refuse'=&gt;1), array('refuse'=&gt;1), array('refuse'=&gt;1), array('refuse'=&gt;1))) == 0</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_ajouterErreur" name="method_ajouterErreur" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">ajouterErreur()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">ajouterErreur(String  <span class="argument">$msg</span>) : null</pre>
+                <p><em>Ajoute le libellé d&#039;une erreur au tableau des erreurs</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$msg </td>
+                                <td><p>libellé de l'erreur</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    null
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            backupGlobals
+                        </th>
+                        <td>
+                                                                                            <p>enabled</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_ajouterSucces" name="method_ajouterSucces" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">ajouterSucces()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">ajouterSucces(String  <span class="argument">$msg</span>) : null</pre>
+                <p><em>Ajoute le libellé d&#039;un succès au tableau des succès</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$msg </td>
+                                <td><p>libellé du succès</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    null
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            backupGlobals
+                        </th>
+                        <td>
+                                                                                            <p>enabled</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_nbErreurs" name="method_nbErreurs" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">nbErreurs()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">nbErreurs() : Integer</pre>
+                <p><em>Retoune le nombre de lignes du tableau des erreurs</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    Integer
+                                            &mdash; <p>le nombre d'erreurs</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            backupGlobals
+                        </th>
+                        <td>
+                                                                                            <p>enabled</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_nbSucces" name="method_nbSucces" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">nbSucces()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">nbSucces() : Integer</pre>
+                <p><em>Retoune le nombre de lignes du tableau des succès</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    Integer
+                                            &mdash; <p>le nombre de succès</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            backupGlobals
+                        </th>
+                        <td>
+                                                                                            <p>enabled</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_mentionRefuse" name="method_mentionRefuse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">mentionRefuse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">mentionRefuse(String  <span class="argument">$string</span>) : String</pre>
+                <p><em>Retourne la chaine passé en paramètre avec la mention &quot;REFUSE-&quot; au début,
+tronque la chaîne si elle est d&#039;une longueur supérieure à 100</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$string </td>
+                                <td><p>libellé du frais hors forfait</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>la chaîne limitée a 100 caractères avec la mention &quot;REFUSE-&quot; au début</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            assert
+                        </th>
+                        <td>
+                                                                                            <p>('Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Constantius idem itinera sunt de nequo Gallus mortalem agentes in omnes futuris remoti exarsit incertus incertus nequo') == 'REFUSE-Conaretur sunt in Gallus conaretur conducentia agitare de milites modum futuris in suae Const'</p>
+                                                                                            <p>('Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica') == 'REFUSE-Itaque verae amicitiae difficillime reperiuntur in iis qui in honoribus reque publica'</p>
+                                                                                            <p>('On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Telle pourrait être la devise du pouvoir exécutif. Déterminé à engager une réforme en profondeur de la SNCF, il procède comme il l’a fait à l’automne 2017 sur le dossier réputé hautement inflammable du droit du travail,') == 'REFUSE-On ne change pas une méthode qui marche – ou, en tout cas, qui a marché jusqu’à présent. Tell'</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">class.utils.inc.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/includes\class.utils.inc.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on March 22nd, 2018 at 15:29.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
