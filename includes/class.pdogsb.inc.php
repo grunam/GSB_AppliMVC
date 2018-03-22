@@ -20,29 +20,25 @@
  * @version   Release: 1.0
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
-
 /*
  use PHPUnit\Framework\TestCase;
-
 class PdoGsbTest extends TestCase
 {
  */
-
 class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
    
     private static $bdd = 'dbname=gsb_frais';
     private static $user = 'userGsb';
-    private static $mdp = 'secret'; 
-    /*
+    private static $mdp = 'secret';
+    /* 
     private static $bdd = 'dbname=wh1l2sdy_gsb_frais';
     private static $user = 'wh1l2sdy_grunam';
     private static $mdp = 'grunam1979';
     */
     private static $monPdo;
     private static $monPdoGsb = null;
-
     /**
      * Constructeur public pour PHPUnit, crée l'instance de PDO qui sera sollicitée
      * pour toutes les méthodes de la classe
@@ -56,7 +52,6 @@ class PdoGsb
         );
         PdoGsb::$monPdo->query('SET CHARACTER SET utf8');
     }
-
     /**
      * Méthode destructeur appelée dès qu'il n'y a plus de référence sur un
      * objet donné, ou dans n'importe quel ordre pendant la séquence d'arrêt.
@@ -65,7 +60,6 @@ class PdoGsb
     {
         PdoGsb::$monPdo = null;
     }
-
     /**
      * Fonction statique qui crée l'unique instance de la classe
      * Appel : $instancePdoGsb = PdoGsb::getPdoGsb();
@@ -79,7 +73,6 @@ class PdoGsb
         }
         return PdoGsb::$monPdoGsb;
     }
-
     /**
      * Retourne les informations d'un visiteur
      *
@@ -136,7 +129,6 @@ class PdoGsb
         }
         return $boolReturn;
     }
-
     /**
      * Teste si un frais hors forfait existe pour un id,
      * un visiteur et un mois  passés en paramètres
@@ -220,7 +212,6 @@ class PdoGsb
         }
         return $lesLignes;
     }
-
     /**
      * Retourne le nombre de justificatif d'un visiteur pour un id du visiteur et un mois donnés
      *
@@ -246,7 +237,6 @@ class PdoGsb
         $laLigne = $requetePrepare->fetch();
         return $laLigne['nb'];
     }
-
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais
      * au forfait concernées par les deux paramètres
@@ -279,7 +269,6 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
     }
-
     /**
      * Retourne tous les id des frais forfaitaires
      *
@@ -297,7 +286,6 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
     }
-
     /**
      * Met à jour la table ligneFraisForfait pour un visiteur,
      * un mois et les frais donnés
@@ -328,7 +316,6 @@ class PdoGsb
             $requetePrepare->execute();
         }
     }
-
     /**
      * Met à jour la table ligneFraisHorsForfait pour les frais
      * donnés
@@ -357,7 +344,6 @@ class PdoGsb
             $requetePrepare->execute();
         }
     }
-
     /**
      * Reporte un frais de ligneFraisHorsForfait dont l'id
      * avec le mois sont  passés en paramètres
@@ -378,7 +364,6 @@ class PdoGsb
         $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
     }
-
     /**
      * Met à jour unfrais de ligneFraisHorsForfait, dont l'id
      * est passé en paramètre, avec le nouveau libelle introduit par 'REFUSE-'
@@ -430,7 +415,6 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
-
     /**
      * Teste si un visiteur possède une fiche de frais
      * pour le mois et l'id passés en paramètres
@@ -462,7 +446,6 @@ class PdoGsb
         }
         return $boolReturn;
     }
-
     /**
      * Retourne le dernier mois saisi
      * d'une fiche de frais pour un visiteur donné
@@ -540,7 +523,6 @@ class PdoGsb
             $requetePrepare->execute();
         }
     }
-
     /**
      * Crée un nouveau frais hors forfait pour un visiteur et un mois donnés
      * à partir des informations fournies en paramètres
@@ -573,7 +555,6 @@ class PdoGsb
         $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
-
     /**
      * Supprime le frais hors forfait dont l'id est passé en paramètre
      *
@@ -590,7 +571,6 @@ class PdoGsb
         $requetePrepare->bindParam(':unIdFrais', $idFrais, PDO::PARAM_INT);
         $requetePrepare->execute();
     }
-
     /**
      * Refuse un ou des frais hors forfait dont l'id est ou les ids sont passé(s) en paramètre(s)
      *
@@ -772,7 +752,6 @@ class PdoGsb
         }
         return $lesMois;
     }
-
     /**
      * Retourne les mois pour lesquel un visiteur a une fiche de frais validée 
      * ou mise en paiement
@@ -934,7 +913,6 @@ class PdoGsb
         $requetePrepare->execute();
         return $montantTotal;
     }
-
     /**
      * Retourne les informations d'une fiche de frais d'un visiteur pour un
      * mois donné
@@ -999,7 +977,6 @@ class PdoGsb
         }
         $requetePrepare->execute();
     }
-
     /**
      * Cloture les fiches de frais du mois précédent.
      * Passe le champ idEtat à CL et met la date de modif à aujourd'hui.
@@ -1019,7 +996,6 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
-
     /**
      *
      * Fonction pour test unitaire
@@ -1045,7 +1021,6 @@ class PdoGsb
         $laLigne['libelle'] = Utils::filtrerChainePourVue($libelle);
         return $laLigne;
     }
-
     /**
      *
      * Fonction pour tests unitaires
