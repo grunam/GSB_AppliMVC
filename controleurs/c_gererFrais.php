@@ -68,7 +68,7 @@ switch ($action) {
         $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_STRING);
         try {
             $pdo->supprimerFraisHorsForfait($idFrais);
-            Utils::ajouterSucces('Création du frais hors forfait effectuée.');
+            Utils::ajouterSucces('Suppression du frais hors forfait effectuée.');
             include 'vues/v_succes.php';
         } catch (Exception $ex) {
             Utils::ajouterErreur($e->getMessage());
