@@ -32,7 +32,7 @@ class PdoGsb
     private static $bdd = 'dbname=gsb_frais';
     private static $user = 'userGsb';
     private static $mdp = 'secret';
-    /* 
+    /*
     private static $bdd = 'dbname=wh1l2sdy_gsb_frais';
     private static $user = 'wh1l2sdy_grunam';
     private static $mdp = 'grunam1979';
@@ -80,7 +80,7 @@ class PdoGsb
      * @param String $mdp   mot de passe du visiteur
      *
      * @return Array l'id, le nom et le prénom sous la forme d'un tableau associatif
-     * 
+     *
      * @assert ('dandre', 'oppg5') == array('id'=>'a17', 'nom'=>'Andre', 'prenom'=>'David', 'comptable'=>'0', 0=>'a17', 1=>'Andre', 2=>'David', 3=>'0')
      * @assert ('cbedos', 'gmhxd') != array('id'=>'a55', 'nom'=>'Bedos', 'prenom'=>'Christian', 'comptable'=>'0', 0=>'a55', 1=>'Bedos', 2=>'Christian', 3=>'1')
      * @assert ('cbedos', 'gmhxd') != array('id'=>'a55', 'nom'=>'Bedos', 'prenom'=>'Christian', 'comptable'=>'0', 0=>'a55', 1=>'Bedos', 2=>'ZOZO', 3=>'0')
@@ -138,7 +138,7 @@ class PdoGsb
      * @param String $mois       mois sous la forme aaaamm
      *
      * @return Boolean vrai ou faux
-     * 
+     *
      * @assert ('1', 'a131', '201609') == true
      * @assert ('a54', 'a131', '201712') == false
      * @assert ('496', 'b50', '201609') == true
@@ -615,9 +615,9 @@ class PdoGsb
             $requetePrepare->execute();
             $laLigne = $requetePrepare->fetch();
             if ($laLigne['refuse'] != 1) {
-                if ($this->estPremierFraisMois($laLigne['idvisiteur'], $mois)) {               
+                if ($this->estPremierFraisMois($laLigne['idvisiteur'], $mois)) {            
                     $this->creeNouvellesLignesFrais($laLigne['idvisiteur'], $mois);
-                    $this->reporterUnFraisHorsForfait($laLigne['id'], $mois); 
+                    $this->reporterUnFraisHorsForfait($laLigne['id'], $mois);
                 } else {
                      $this->reporterUnFraisHorsForfait($laLigne['id'], $mois);
                 }
@@ -878,7 +878,7 @@ class PdoGsb
             . 'FROM lignefraishorsforfait '
             . 'WHERE lignefraishorsforfait.refuse IS NULL '
             . 'AND lignefraishorsforfait.idvisiteur = :unIdVisiteur '
-            . 'AND lignefraishorsforfait.mois = :unMois'     
+            . 'AND lignefraishorsforfait.mois = :unMois'  
         );
         
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
@@ -957,7 +957,7 @@ class PdoGsb
      * @param String  $mois            mois sous la forme aaaamm
      * @param String  $etat            nouvel état de la fiche de frais
      * @param Boolean $nbJustificatif  paramètre optionnel nombre de justificatifs
-     * 
+     *
      * @return null
      */
     public function majEtatFicheFrais($idVisiteur, $mois, $etat, $nbJustificatif = false)

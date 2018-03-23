@@ -15,7 +15,7 @@
  * @version   Release: 1.0
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
-class Urlchecker 
+class Urlchecker
 {
     
     /**
@@ -24,7 +24,7 @@ class Urlchecker
      *
      * @param String $idVisiteur id du visiteur
      * @param PdoGsb $pdo        instance de la classe PdoGsb
-     * 
+     *
      * @return Boolean vrai ou faux
      */
     public static function paramChecker($idVisiteur, $pdo)

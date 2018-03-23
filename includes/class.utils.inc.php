@@ -425,7 +425,7 @@ class Utils
      * Retoune le nombre de lignes du tableau des frais hors forfait
      *
      * @param Array $lesFraisHorsForfait tableau associatif des frais hors forfait
-     *        
+     *    
      * @return Integer le nombre de frais
      *
      * @assert (array(array('refuse'=>1), array('refuse'=>0), array('refuse'=>0), array('refuse'=>1), array('refuse'=>0))) == 3
