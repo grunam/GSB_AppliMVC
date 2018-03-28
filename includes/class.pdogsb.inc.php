@@ -489,12 +489,12 @@ class PdoGsb
     {
         $dernierMois = $this->dernierMoisSaisi($idVisiteur);
         $laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur, $dernierMois);
-        if ($mois > $dernierMois && $mois >= Utils::getMois(date('d/m/Y'))) {
+        if (($mois > $dernierMois) && ($mois >= Utils::getMois(date('d/m/Y')))) {
             $idEtat = 'CR';
         } else {
             $idEtat = 'CL';
         }
-        if ($laDerniereFiche['idEtat'] == 'CR' &&  $mois > $dernierMois) {
+        if (($laDerniereFiche['idEtat'] == 'CR') &&  ($mois > $dernierMois)) {
             $this->majEtatFicheFrais($idVisiteur, $dernierMois, 'CL');
         }
         $requetePrepare = PdoGsb::$monPdo->prepare(

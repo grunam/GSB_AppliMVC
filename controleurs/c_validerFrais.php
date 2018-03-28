@@ -185,8 +185,8 @@ switch ($action) {
             try {
                 $lesInfosFicheFraisMoisSuivant = 
                         $pdo->getLesInfosFicheFrais($idVisiteur, Utils::getMoisSuivant($leMois));
-                if (empty($lesInfosFicheFraisMoisSuivant['idEtat']) || $lesInfosFicheFraisMoisSuivant['idEtat']=='CR' 
-                        || $lesInfosFicheFraisMoisSuivant['idEtat']=='CL') {
+                if (empty($lesInfosFicheFraisMoisSuivant['idEtat']) || ($lesInfosFicheFraisMoisSuivant['idEtat']=='CR') 
+                        || ($lesInfosFicheFraisMoisSuivant['idEtat']=='CL')) {
                     $pdo->reporterLesFraisHorsForfait($parseFraisHorsForfait, Utils::getMoisSuivant($leMois));
                     Utils::ajouterSucces('Report '.$atc.' frais hors forfait'.$nbre.' effectuée.');
                 } else {

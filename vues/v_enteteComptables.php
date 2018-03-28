@@ -42,7 +42,7 @@
                     <div class="col-md-8">
                         <ul class="nav nav-pills pull-right">
                             <li <?php
-                            if (!$uc || $uc == 'accueil') {
+                            if (!$uc || ($uc == 'accueil')) {
                                 ?>class="active"
                             <?php
                             }

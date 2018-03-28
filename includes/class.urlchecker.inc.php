@@ -108,36 +108,36 @@ class Urlchecker
                                                                 $i4++;
                                                                 if (key($params) == $kId) {
                                                                     $vi4 = 1;
-                                                                    if (key($params) == 'idFrais' && 
+                                                                    if ((key($params) == 'idFrais') && 
                                                                             !$pdo->estUnFraisHorsForfait(current($params), $idVisiteur, Utils::getMois(date('d/m/Y')))) {
                                                                         $errorUrl = true;
                                                                     }
-                                                                    if (key($params) == 'idLstVisiteur' &&
+                                                                    if ((key($params) == 'idLstVisiteur') &&
                                                                             !$pdo->estUnVisiteur(current($params))) {
                                                                          $errorUrl = true;
                                                                     }
-                                                                } elseif ($i4 == count($datas[$kUc][$kCt][$kAc][$kLac]) &&
-                                                                        $vi4 == 0) {
+                                                                } elseif (($i4 == count($datas[$kUc][$kCt][$kAc][$kLac])) &&
+                                                                        ($vi4 == 0)) {
                                                                     $errorUrl = true;
                                                                 }
                                                             }
                                                         }
                                                     }
-                                                } elseif ($i3 == count($datas[$kUc][$kCt][$kAc]) &&  $vi3 == 0) {
+                                                } elseif (($i3 == count($datas[$kUc][$kCt][$kAc])) &&  ($vi3 == 0)) {
                                                     $errorUrl = true;
                                                 }
                                             }
                                         }
-                                    } elseif ($i2 == count($datas[$kUc][$kCt]) &&  $vi2 == 0) {
+                                    } elseif (($i2 == count($datas[$kUc][$kCt])) &&  ($vi2 == 0)) {
                                         $errorUrl = true;
                                     }
                                 }
                             }
-                        } elseif ($i1 == count($datas[$kUc]) &&  $vi1 == 0) {
+                        } elseif (($i1 == count($datas[$kUc])) &&  ($vi1 == 0)) {
                              $errorUrl = true;
                         }
                     }
-                } elseif ($i0 == count($datas) && $vi0 == 0) {
+                } elseif (($i0 == count($datas)) && ($vi0 == 0)) {
                     $errorUrl = true;
                 }
             }

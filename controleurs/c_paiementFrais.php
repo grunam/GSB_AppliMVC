@@ -84,7 +84,7 @@ switch ($action) {
         } catch (Exception $e) {
             Utils::ajouterErreur($e->getMessage());
         }
-        if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 20, 20) && $etat == 'VA') {
+        if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 20, 20) && ($etat == 'VA')) {
             Utils::ajouterErreur(
                 'La mise en paiement doit être faite au 20'
                 . ' du mois suivant la saisie par les visiteurs !'
@@ -115,7 +115,7 @@ switch ($action) {
         if (count($lesFraisHorsForfait) > 0) {
             include 'vues/v_majFraisHorsForfait.php';
         }
-        if ($idEtat == 'VA' || $idEtat == 'MP') {
+        if (($idEtat == 'VA') || ($idEtat == 'MP')) {
             include 'vues/v_paiementFrais.php';
         }
         break;

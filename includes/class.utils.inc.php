@@ -306,7 +306,7 @@ class Utils
     public static function estJourComprisDansIntervalle($dateTestee, $jourMin, $jourMax)
     {
         @list($jourTeste, $moisTeste, $anneeTeste) = explode('/', $dateTestee);
-        return ($jourMin <= $jourTeste && $jourTeste <= $jourMax);
+        return (($jourMin <= $jourTeste) && ($jourTeste <= $jourMax));
     }
 
     /**

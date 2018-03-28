@@ -46,7 +46,7 @@
                 ?>
                 <tr>
                     <?php
-                    if ($idEtat == 'CL' && $refus == 0) {
+                    if (($idEtat == 'CL') && ($refus == 0)) {
                     ?>
                     <td>
                         <input type="date" 
@@ -92,7 +92,7 @@
                 </tr>
                 <?php
             }
-            if ($nbFraisHorsForfait > 0 && $idEtat == 'CL') {
+            if (($nbFraisHorsForfait > 0) && ($idEtat == 'CL')) {
             ?>
                 <tr>
                     <td class="text-center" colspan="4">
