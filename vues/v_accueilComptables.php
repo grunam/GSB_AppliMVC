@@ -9,14 +9,14 @@
  * @author    Namik TIAB <tiabnamik@gmail.com>
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
- * @version   GIT: <0>
+ * @version   GIT: <0>e : 
+  
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
 <div id="accueil">
     <h2>
-        Gestion des frais<small> - Comptable : 
-            <?php
+        Gestion des frais<small> - Comptabl          <?php
             echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']
             ?></small>
     </h2>

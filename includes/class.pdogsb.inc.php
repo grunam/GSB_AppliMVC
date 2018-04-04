@@ -981,7 +981,7 @@ class PdoGsb
      * Cloture les fiches de frais du mois précédent.
      * Passe le champ idEtat à CL et met la date de modif à aujourd'hui.
      *
-     * @param String $mois mois sous la forme aaaammu
+     * @param String $mois mois sous la forme aaaamm
      *
      * @return null
      */
