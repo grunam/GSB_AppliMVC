@@ -1,3 +1,14 @@
+-- Script de restauration de l'application "GSB Frais"
+
+-- Administration de la base de données
+
+CREATE DATABASE gsb_frais ;
+GRANT SHOW DATABASES ON *.* TO userGsb@localhost IDENTIFIED BY 'secret';
+GRANT ALL PRIVILEGES ON `gsb_frais`.* TO userGsb@localhost;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+USE gsb_frais ;
+
+
 -- MySQL dump 10.13  Distrib 5.7.14, for Win32 (AMD64)
 --
 -- Host: localhost    Database: gsb_frais
