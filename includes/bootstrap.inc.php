@@ -19,5 +19,5 @@
  * @version   Release: 1.0
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
-require "C:\wamp\www\GSB_AppliMVC\www\includes\class.utils.inc.php";
-require "C:\wamp\www\GSB_AppliMVC\www\includes\class.pdogsb.inc.php";
+require "C:\wamp64\www\GSB_AppliMVC\www\includes\class.utils.inc.php";
+require "C:\wamp64\www\GSB_AppliMVC\www\includes\class.pdogsb.inc.php";
