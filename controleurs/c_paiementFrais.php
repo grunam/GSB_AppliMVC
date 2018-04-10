@@ -92,13 +92,13 @@ switch ($action) {
         }
         $lesMois = $pdo->getLesMoisDisponiblesPaiementFichesFrais($idVisiteur);
         $moisASelectionner = $leMois;
-        include 'vues/v_listeVisiteursMois.php';
         if (Utils::nbSucces() != 0) {
             include 'vues/v_succes.php';
         }
         if (Utils::nbErreurs() != 0) {
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteursMois.php';
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);

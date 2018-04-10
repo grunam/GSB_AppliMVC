@@ -35,7 +35,6 @@ switch ($action) {
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($visiteurASelectionner);
         $lesCles = array_keys($lesMois);
         $moisASelectionner = $lesCles[0];
-        include 'vues/v_listeVisiteursMois.php';
         if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
             Utils::ajouterErreur(
                 'La campagne de validation doit être réalisée'
@@ -49,6 +48,7 @@ switch ($action) {
         if (Utils::nbErreurs() != 0) {
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteursMois.php';
         break;
     case 'selectionnerVisiteur':
         $idLstVisiteur = filter_input(INPUT_GET, 'idLstVisiteur', FILTER_SANITIZE_STRING);
@@ -57,7 +57,6 @@ switch ($action) {
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($visiteurASelectionner);
         $lesCles = array_keys($lesMois);
         $moisASelectionner = $lesCles[0];
-        include 'vues/v_listeVisiteursMois.php';
         if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
             Utils::ajouterErreur(
                 'La campagne de validation doit être réalisée'
@@ -66,6 +65,7 @@ switch ($action) {
             );
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteursMois.php';
         break;
     case 'consulterFrais':
         $visiteurASelectionner = filter_input(INPUT_POST, 'lstVisiteurs', FILTER_SANITIZE_STRING);
@@ -78,7 +78,6 @@ switch ($action) {
         $idVisiteur = $visiteurASelectionner;
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
         $moisASelectionner = $leMois;
-        include 'vues/v_listeVisiteursMois.php';
         if (!Utils::estJourComprisDansIntervalle(date('d/m/Y'), 10, 20)) {
             Utils::ajouterErreur(
                 'La campagne de validation doit être réalisée'
@@ -87,6 +86,7 @@ switch ($action) {
             );
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteursMois.php';
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
@@ -115,7 +115,6 @@ switch ($action) {
         $idVisiteur = $visiteurASelectionner;
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
         $moisASelectionner = $leMois;
-        include 'vues/v_listeVisiteursMois.php';
         try {
             if (Utils::lesQteFraisValides($lesFrais)) {
                 $pdo->majFraisForfait($visiteurASelectionner, $leMois, $lesFrais);
@@ -139,6 +138,7 @@ switch ($action) {
         if (Utils::nbErreurs() != 0) {
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteursMois.php';
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
@@ -213,13 +213,13 @@ switch ($action) {
         }
         $lesVisiteurs = $pdo->getLesVisiteursValidationFichesFrais();
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
-        include 'vues/v_listeVisiteursMois.php';
         if (Utils::nbSucces() != 0) {
             include 'vues/v_succes.php';
         }
         if (Utils::nbErreurs() != 0) {
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteursMois.php';
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
@@ -276,13 +276,13 @@ switch ($action) {
         }
         $lesMois = $pdo->getLesMoisDisponiblesValidationFichesFrais($idVisiteur);
         $moisASelectionner = $leMois;
-        include 'vues/v_listeVisiteursMois.php';
         if (Utils::nbSucces() != 0) {
             include 'vues/v_succes.php';
         }
         if (Utils::nbErreurs() != 0) {
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteursMois.php';
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois, 0);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
